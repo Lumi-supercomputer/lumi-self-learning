@@ -1,2 +1,5 @@
-# lumi-env-eff
-LUMI Computing Environment self-learning materials
+# LUMI Computing Environment
+
+:construction: Work in progress :construction:
+
+This is the _source_ repository for training material for the LUMI Computing Environment -course. We welcome contributions!
