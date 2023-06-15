@@ -1,20 +1,28 @@
----
-title: "Connecting to a remote HPC system"
-teaching: 25
-exercises: 10
-questions:
-- "How do I log in to a remote HPC system?"
-objectives:
-- "Configure secure access to a remote HPC system."
-- "Connect to a remote HPC system."
-keypoints:
-- "An HPC system is a set of networked machines."
-- "HPC systems typically provide login nodes and a set of worker nodes."
-- "The resources found on independent (worker) nodes can vary in volume and
+# Connecting to a remote HPC system
+
+```{instructor-note}
+- teaching: 25
+- exercises: 10
+```
+
+```{questions}
+- How do I log in to a remote HPC system?
+```
+
+```{objectives}
+- Configure secure access to a remote HPC system.
+- Connect to a remote HPC system.
+```
+
+```{keypoints
+- An HPC system is a set of networked machines.
+- HPC systems typically provide login nodes and a set of worker nodes.
+- The resources found on independent (worker) nodes can vary in volume and
   type (amount of RAM, processor architecture, availability of network mounted
-  filesystems, etc.)."
-- "Files saved on one node are available on all nodes."
----
+  filesystems, etc.).
+- Files saved on one node are available on all nodes.
+```
+
 
 ## Secure Connections
 
@@ -39,9 +47,10 @@ back. We will use the Secure SHell protocol (or SSH) to open an encrypted
 network connection between two machines, allowing you to send & receive text
 and data without having to worry about prying eyes.
 
-{% include figure.html url="" max-width="50%"
-   file="/fig/connect-to-remote.svg"
-   alt="Connect to cluster" caption="" %}
+```{figure} /fig/connect-to-remote.svg
+:width: 50%
+:alt: Connect to cluster" 
+```
 
 SSH clients are usually command-line tools, where you provide the remote
 machine address as the only required argument. If your username on the remote
@@ -80,46 +89,44 @@ In this section you will create a pair of SSH keys:
 * a private key which you keep on your own computer, and
 * a public key which can be placed on any remote system you will access.
 
-> ## Private keys are your secure digital passport
->
-> A private key that is visible to anyone but you should be considered
-> compromised, and must be destroyed. This includes having improper permissions
-> on the directory it (or a copy) is stored in, traversing any network that is
-> not secure (encrypted), attachment on unencrypted email, and even displaying
-> the key on your terminal window.
->
-> Protect this key as if it unlocks your front door. In many ways, it does.
-{: .caution}
+```{caution} 
+### Private keys are your secure digital passport
+
+A private key that is visible to anyone but you should be considered
+compromised, and must be destroyed. This includes having improper permissions
+on the directory it (or a copy) is stored in, traversing any network that is
+not secure (encrypted), attachment on unencrypted email, and even displaying
+the key on your terminal window.
+Protect this key as if it unlocks your front door. In many ways, it does.
+```
 
 Regardless of the software or operating system you use, _please_ choose a
 strong password or passphrase to act as another layer of protection for your
 private SSH key.
 
-> ## Considerations for SSH Key Passwords
->
-> When prompted, enter a strong password that you will remember. There are two
-> common approaches to this:
->
-> 1. Create a memorable passphrase with some punctuation and number-for-letter
->    substitutions, 32 characters or longer. Street addresses work well; just
->    be careful of social engineering or public records attacks.
-> 2. Use a password manager and its built-in password generator with all
->    character classes, 25 characters or longer. [KeePass][keepass] and
->    [BitWarden][bitwarden] are two good options.
-> 3. Nothing is _less_ secure than a private key with no password. If you
->    skipped password entry by accident, go back and generate a new key pair
->    _with_ a strong password.
-{: .callout}
+```{callout} Considerations for SSH Key Passwords
+
+When prompted, enter a strong password that you will remember. There are two
+common approaches to this:
+1. Create a memorable passphrase with some punctuation and number-for-letter
+   substitutions, 32 characters or longer. Street addresses work well; just
+   be careful of social engineering or public records attacks.
+2. Use a password manager and its built-in password generator with all
+   character classes, 25 characters or longer. [KeePass][keepass] and
+   [BitWarden][bitwarden] are two good options.
+3. Nothing is _less_ secure than a private key with no password. If you
+   skipped password entry by accident, go back and generate a new key pair
+   _with_ a strong password.
+```
 
 #### SSH Keys on Linux, Mac, MobaXterm, and Windows Subsystem for Linux
 
 Once you have opened a terminal, check for existing SSH keys and filenames
 since existing SSH keys are overwritten.
 
+```console
+$ ls ~/.ssh/
 ```
-{{ site.local.prompt }} ls ~/.ssh/
-```
-{: .language-bash}
 
 If `~/.ssh/id_ed25519` already exists, you will need to specify
 a different name for the new key-pair.
@@ -136,10 +143,9 @@ produce a stronger key than the `ssh-keygen` default by invoking these flags:
   private key. The public key filename will be identical, with a `.pub`
   extension added.
 
+```console
+$ ssh-keygen -a 100 -f ~/.ssh/id_ed25519 -t ed25519
 ```
-{{ site.local.prompt }} ssh-keygen -a 100 -f ~/.ssh/id_ed25519 -t ed25519
-```
-{: .language-bash}
 
 When prompted, enter a strong password with the
 [above considerations in mind](#considerations-for-ssh-key-passwords).
@@ -154,40 +160,31 @@ Take a look in `~/.ssh` (use `ls ~/.ssh`). You should see two new files:
   asks for a key, this is the one to send. It is also safe to upload to
   websites such as GitHub: it is meant to be seen.
 
-> ## Use RSA for Older Systems
->
-> If key generation failed because ed25519 is not available, try using the older
-> (but still strong and trustworthy) [RSA][wiki-rsa] cryptosystem. Again, first
-> check for an existing key:
->
-> ```
-> {{ site.local.prompt }} ls ~/.ssh/
-> ```
-> {: .language-bash}
->
-> If `~/.ssh/id_rsa` already exists, you will need to specify choose a different
-> name for the new key-pair. Generate it as above, with the following extra flags:
->
-> * `-b` sets the number of bits in the key. The default is 2048.
->   EdDSA uses a fixed key length, so this flag would have no effect.
-> * `-o` (no default): use the OpenSSH key format,
->   rather than PEM.
->
-> ```
-> {{ site.local.prompt }} ssh-keygen -a 100 -b 4096 -f ~/.ssh/id_rsa -o -t rsa
-> ```
-> {: .language-bash}
->
-> When prompted, enter a strong password with the
-> [above considerations in mind](#considerations-for-ssh-key-passwords).
->
-> Take a look in `~/.ssh` (use `ls ~/.ssh`). You should see two new files:
->
-> * your private key (`~/.ssh/id_rsa`): _do not share with anyone!_
-> * the shareable public key (`~/.ssh/id_rsa.pub`): if a system administrator
->   asks for a key, this is the one to send. It is also safe to upload to
->   websites such as GitHub: it is meant to be seen.
-{: .callout}
+````{callout} Use RSA for Older Systems
+If key generation failed because ed25519 is not available, try using the older
+(but still strong and trustworthy) [RSA][wiki-rsa] cryptosystem. Again, first
+check for an existing key:
+```console
+$ ls ~/.ssh/
+```
+If `~/.ssh/id_rsa` already exists, you will need to specify choose a different
+name for the new key-pair. Generate it as above, with the following extra flags:
+* `-b` sets the number of bits in the key. The default is 2048.
+  EdDSA uses a fixed key length, so this flag would have no effect.
+* `-o` (no default): use the OpenSSH key format,
+  rather than PEM.
+```console
+$ ssh-keygen -a 100 -b 4096 -f ~/.ssh/id_rsa -o -t rsa
+```
+
+When prompted, enter a strong password with the
+[above considerations in mind](#considerations-for-ssh-key-passwords).
+Take a look in `~/.ssh` (use `ls ~/.ssh`). You should see two new files:
+* your private key (`~/.ssh/id_rsa`): _do not share with anyone!_
+* the shareable public key (`~/.ssh/id_rsa.pub`): if a system administrator
+  asks for a key, this is the one to send. It is also safe to upload to
+  websites such as GitHub: it is meant to be seen.
+````
 
 #### SSH Keys on PuTTY
 
@@ -228,66 +225,59 @@ type it in again.
 
 Open your terminal application and check if an agent is running:
 
+```console
+$ ssh-add -l
 ```
-{{ site.local.prompt }} ssh-add -l
-```
-{: .language-bash}
 
 * If you get an error like this one,
 
-  ```
+  ```console
   Error connecting to agent: No such file or directory
   ```
-  {: .error}
 
   ... then you need to launch the agent as follows:
 
+  ```console
+  $ eval $(ssh-agent)
   ```
-  {{ site.local.prompt }} eval $(ssh-agent)
-  ```
-  {: .language-bash}
   
-  > ## What's in a `$(...)`?
-  >
-  > The syntax of this SSH Agent command is unusual, based on what we've seen
-  > in the UNIX Shell lesson. This is because the `ssh-agent` command creates
-  > opens a connection that only you have access to, and prints a series of
-  > shell commands that can be used to reach it -- but _does not execute them!_
-  >
-  > ```
-  > {{ site.local.prompt }} ssh-agent
-  > ```
-  > {: .language-bash}
-  > ```
-  > SSH_AUTH_SOCK=/tmp/ssh-Zvvga2Y8kQZN/agent.131521;
-  > export SSH_AUTH_SOCK;
-  > SSH_AGENT_PID=131522;
-  > export SSH_AGENT_PID;
-  > echo Agent pid 131522;
-  > ```
-  > {: .output}
-  >
-  > The `eval` command interprets this text output as commands and allows you
-  > to access the SSH Agent connection you just created.
-  >
-  > You could run each line of the `ssh-agent` output yourself, and
-  > achieve the same result. Using `eval` just makes this easier.
-  {: .callout}
+  ````{callout} What's in a $(...)?
+  
+  The syntax of this SSH Agent command is unusual, based on what we've seen
+  in the UNIX Shell lesson. This is because the `ssh-agent` command creates
+  opens a connection that only you have access to, and prints a series of
+  shell commands that can be used to reach it -- but _does not execute them!_
+  ```console
+  $ ssh-agent
+  ```
+
+  ```output
+  SSH_AUTH_SOCK=/tmp/ssh-Zvvga2Y8kQZN/agent.131521;
+  export SSH_AUTH_SOCK;
+  SSH_AGENT_PID=131522;
+  export SSH_AGENT_PID;
+  echo Agent pid 131522;
+  ```
+
+  The `eval` command interprets this text output as commands and allows you
+  to access the SSH Agent connection you just created.
+  You could run each line of the `ssh-agent` output yourself, and
+  achieve the same result. Using `eval` just makes this easier.
+  ````
 
 * Otherwise, your agent is already running: don't mess with it.
 
 Add your key to the agent, with session expiration after 8 hours:
 
+```console
+$ ssh-add -t 8h ~/.ssh/id_ed25519
 ```
-{{ site.local.prompt }} ssh-add -t 8h ~/.ssh/id_ed25519
-```
-{: .language-bash}
-```
+
+```output
 Enter passphrase for .ssh/id_ed25519: 
 Identity added: .ssh/id_ed25519
 Lifetime set to 86400 seconds
 ```
-{: .output}
 
 For the duration (8 hours), whenever you use that key, the SSH Agent will
 provide the key on your behalf without you having to type a single keystroke.
@@ -299,16 +289,16 @@ See the [PuTTY documentation][putty-agent].
 
 ### Transfer Your Public Key
 
+FIXME BEGIN
 {% if site.remote.portal %}
 Visit {{ site.remote.portal }} to upload your SSH public key.
 {% else %}
 Use the **s**ecure **c**o**p**y tool to send your public key to the cluster.
 
+```console
+$ scp ~/.ssh/id_ed25519.pub {{ site.remote.user }}@{{ site.remote.login }}:~/
 ```
-{{ site.local.prompt }} scp ~/.ssh/id_ed25519.pub {{ site.remote.user }}@{{ site.remote.login }}:~/
-```
-{: .language-bash}
-{% endif %}
+FIXME END
 
 ## Log In to the Cluster
 
@@ -316,10 +306,9 @@ Go ahead and open your terminal or graphical SSH client, then log in to the
 cluster. Replace `{{ site.remote.user }}` with your username or the one
 supplied by the instructors.
 
+```console
+$ ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-```
-{: .language-bash}
 
 You may be asked for your password. Watch out: the characters you type after
 the password prompt are not displayed on the screen. Normal output will resume
@@ -351,28 +340,24 @@ really happening? What computer have we logged on to? The name of the current
 computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
+```console
+$ hostname
 ```
-{{ site.remote.prompt }} hostname
-```
-{: .language-bash}
 
+```output
+uan01
 ```
-{{ site.remote.host }}
-```
-{: .output}
 
 So, we're definitely on the remote machine. Next, let's find out where we are
 by running `pwd` to **p**rint the **w**orking **d**irectory.
 
+```console
+$ pwd
 ```
-{{ site.remote.prompt }} pwd
-```
-{: .language-bash}
 
+```output
+/users/USERNAME
 ```
-{{ site.remote.homedir }}/{{ site.remote.user }}
-```
-{: .output}
 
 Great, we know where we are! Let's see what's in our current directory:
 
@@ -408,13 +393,13 @@ keys and a record of authorized connections.
 
 ### Install Your SSH Key
 
-> ## There May Be a Better Way
->
-> Policies and practices for handling SSH keys vary between HPC clusters:
-> follow any guidance provided by the cluster administrators or
-> documentation. In particular, if there is an online portal for managing SSH
-> keys, use that instead of the directions outlined here.
-{: .callout}
+```{callout} There May Be a Better Way
+
+Policies and practices for handling SSH keys vary between HPC clusters:
+follow any guidance provided by the cluster administrators or
+documentation. In particular, if there is an online portal for managing SSH
+keys, use that instead of the directions outlined here.
+```
 
 If you transferred your SSH public key with `scp`, you should see
 `id_ed25519.pub` in your home directory. To "install" this key, it must be
@@ -423,42 +408,38 @@ listed in a file named `authorized_keys` under the `.ssh` folder.
 If the `.ssh` folder was not listed above, then it does not yet
 exist: create it.
 
+```console
+$ mkdir ~/.ssh
 ```
-{{ site.remote.prompt }} mkdir ~/.ssh
-```
-{: .language-bash}
 
 Now, use `cat` to print your public key, but redirect the output, appending it
 to the `authorized_keys` file:
 
+```console
+$ cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
-{{ site.remote.prompt }} cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
-```
-{: .language-bash}
 
 That's all! Disconnect, then try to log back into the remote: if your key and
 agent have been configured correctly, you should not be prompted for the
 password for your SSH key.
 
+```console
+$ logout
 ```
-{{ site.remote.prompt }} logout
-```
-{: .language-bash}
 
+```console
+$ ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-```
-{: .language-bash}
 
-{% include links.md %}
+## See also
 
-[bitwarden]: https://bitwarden.com
-[fshs]: https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
-[gh-ssh]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
-[keepass]: https://keepass.info
-[putty-gen]: https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter8.html#pubkey-puttygen
-[putty-agent]: https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter9.html#pageant
-[ssh-agent]: https://www.ssh.com/academy/ssh/agent
-[ssh-flags]: https://stribika.github.io/2015/01/04/secure-secure-shell.html
-[wiki-rsa]: https://en.wikipedia.org/wiki/RSA_(cryptosystem)
-[wiki-dsa]: https://en.wikipedia.org/wiki/EdDSA
+- [bitwarden](https://bitwarden.com)
+- [fshs](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
+- [gh-ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+- [keepass](https://keepass.info)
+- [putty-gen](https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter8.html#pubkey-puttygen)
+- [putty-agent](https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter9.html#pageant)
+- [ssh-agent](https://www.ssh.com/academy/ssh/agent)
+- [ssh-flags](https://stribika.github.io/2015/01/04/secure-secure-shell.html)
+- [wiki-rsa](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
+- [wiki-dsa](https://en.wikipedia.org/wiki/EdDSA)
