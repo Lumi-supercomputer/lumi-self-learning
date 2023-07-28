@@ -1,26 +1,20 @@
 Introduction to LUMI
 ====================
 
-Intro
+Welcome to the *Introduction to LUMI* self-learning course!
 
+.. warning::
 
+   This material is in development. Stay tuned!
 
 .. prereq::
 
-   prerequisites
-
-
-
-.. csv-table::
-   :widths: auto
-   :delim: ;
-
-   20 min ; :doc:`filename`
-
+   It is expected that you know the basics of Linux and how to work in a
+   command-line interface (CLI).
 
 .. toctree::
    :maxdepth: 1
-   :caption: The lesson
+   :caption: The contents
 
    10-hpc-intro
    11-connecting
@@ -39,34 +33,38 @@ Intro
    quick-reference
    guide
 
-
-
-.. _learner-personas:
-
-Who is the course for?
-----------------------
-
-
-
-
-
 About the course
 ----------------
 
+This self-learning course is intended for anyone interested in using the LUMI
+supercomputer. The course consists of N sections focusing on how to use the LUMI
+computing environment. The material is organized by topics of increasing complexity
+-- feel free to jump if you know the basics already. In each section, read the
+text and complete the tutorial(s) to make sure you've understood the content.
 
-
-
-
+After completing the course, you should possess the necessary knowledge of how
+to use the LUMI computing environment efficiently in different phases of your
+research and/or development projects and where to look for more information.
 
 See also
 --------
 
-
-
-
+`LUMI Documentation <https://docs.lumi-supercomputer.eu/>`__
 
 Credits
 -------
+
+.. |logo1| image:: img/eurocc.png
+   :scale: 10 %
+.. |logo2| image:: img/coderefinery.png
+   :scale: 50 %
+
++---------+---------+
+| |logo1| | |logo2| |
++---------+---------+
+
+This project has received funding from the European High-Performance Computing
+Joint Undertaking (JU) under grant agreement No 101101903.
 
 The lesson file structure and browsing layout is inspired by and derived from
 `work <https://github.com/coderefinery/sphinx-lesson>`__ by `CodeRefinery
@@ -90,9 +88,7 @@ You are free to:
 
 The licensor cannot revoke these freedoms as long as you follow these license terms:
 
-- **Attribution** - You must give appropriate credit (mentioning that your work
-  is derived from work that is Copyright (c) ENCCS and individual contributors and, where practical, linking
-  to `<https://enccs.github.io/sphinx-lesson-template>`_), provide a `link to the license
+- **Attribution** - You must give appropriate credit, provide a `link to the license
   <https://creativecommons.org/licenses/by/4.0/>`__, and indicate if changes were
   made. You may do so in any reasonable manner, but not in any way that suggests
   the licensor endorses you or your use.
@@ -108,7 +104,6 @@ With the understanding that:
 - No warranties are given. The license may not give you all of the permissions
   necessary for your intended use. For example, other rights such as
   publicity, privacy, or moral rights may limit how you use the material.
-
 
 Software
 ^^^^^^^^
