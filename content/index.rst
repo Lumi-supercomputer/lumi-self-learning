@@ -7,6 +7,19 @@ Welcome to the *Introduction to LUMI* self-learning course!
 
    This material is in development. Stay tuned!
 
+About the course
+----------------
+
+This self-learning course is intended for anyone interested in using the LUMI
+supercomputer. The course consists of N sections focusing on how to use the LUMI
+computing environment. The material is organized by topics of increasing complexity
+-- feel free to jump if you know the basics already. In each section, read the
+text and complete the tutorial(s) to make sure you've understood the content.
+
+After completing the course, you should possess the necessary skills to use the
+LUMI computing environment efficiently in different phases of your research
+and/or development projects and know where to look for more information.
+
 .. prereq::
 
    It is expected that you know the basics of Linux and how to work in a
@@ -14,7 +27,7 @@ Welcome to the *Introduction to LUMI* self-learning course!
 
 .. toctree::
    :maxdepth: 1
-   :caption: The contents
+   :caption: Contents
 
    10-hpc-intro
    11-connecting
@@ -32,19 +45,6 @@ Welcome to the *Introduction to LUMI* self-learning course!
 
    quick-reference
    guide
-
-About the course
-----------------
-
-This self-learning course is intended for anyone interested in using the LUMI
-supercomputer. The course consists of N sections focusing on how to use the LUMI
-computing environment. The material is organized by topics of increasing complexity
--- feel free to jump if you know the basics already. In each section, read the
-text and complete the tutorial(s) to make sure you've understood the content.
-
-After completing the course, you should possess the necessary knowledge of how
-to use the LUMI computing environment efficiently in different phases of your
-research and/or development projects and where to look for more information.
 
 See also
 --------
