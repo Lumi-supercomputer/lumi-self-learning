@@ -1,4 +1,4 @@
-# Why use a Cluster?
+# Introduction to supercomputing and LUMI
 
 ```{instructor-note}
 - teaching: 15
