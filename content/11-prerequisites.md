@@ -1,4 +1,4 @@
-# Connecting to a remote HPC system
+# Prerequisites (accounts, projects and connecting)
 
 ```{instructor-note}
 - teaching: 25
