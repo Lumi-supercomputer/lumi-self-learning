@@ -29,7 +29,7 @@ and/or development projects and know where to look for more information.
    :maxdepth: 1
    :caption: Contents
 
-   10-hpc-intro
+   10-Introduction-to-supercomputing-and-LUMI
    11-connecting
    12-cluster
    13-scheduler
