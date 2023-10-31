@@ -1,4 +1,7 @@
----
+
+This LUMI-self-learning chapter to be about transferring files, where to put your data on LUMI and the storage options, including LUMI-O.
+
+<!---
 title: "Transferring files with remote computers"
 teaching: 15
 exercises: 15
@@ -10,7 +13,7 @@ keypoints:
 - "`wget` and `curl -O` download a file from the internet."
 - "`scp` and `rsync` transfer files to and from your computer."
 - "You can use an SFTP client like FileZilla to transfer files through a GUI."
----
+-->
 
 Performing work on a remote computer is not very useful if we cannot get files
 to or from the cluster. There are several options for transferring data between
