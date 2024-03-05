@@ -29,22 +29,21 @@ and/or development projects and know where to look for more information.
    :maxdepth: 1
    :caption: Contents
 
-   10-Introduction-to-supercomputing-and-LUMI
-   11-connecting
-   12-cluster
-   13-scheduler
-   14-modules
-   15-transferring-files
-   16-parallel
-   17-resources
-   18-responsibility
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Reference
-
-   quick-reference
-   guide
+   10-introduction-to-supercomputing-and-lumi.md
+   11-prerequisites.md
+   12-lumi-environment.md
+   13a-exploring-remote-resources.md
+   13-lumi-disk-areas.md
+   14-modules-and-software-stacks.md
+   15-software-on-lumi.md
+   16-scheduler-and-batch-jobs.md
+   17-parallel.md
+   18-using-resources-efficiently.md
+   19-managing-data.md
+   20-responsibility.md
+   21-installing-own-applications.md
+   22-working-with-containers.md
+   23-advanced-topics.md
 
 See also
 --------
