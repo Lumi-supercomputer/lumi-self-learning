@@ -1,24 +1,30 @@
----
-title: "Using shared resources responsibly"
-teaching: 15
-exercises: 5
-questions:
-- "How can I be a responsible user?"
-- "How can I protect my data?"
-- "How can I best get large amounts of data off an HPC system?"
-objectives:
-- "Describe how the actions of a single user can affect the experience of others on a shared system."
-- "Discuss the behaviour of a considerate shared system citizen."
-- "Explain the importance of backing up critical data."
-- "Describe the challenges with transferring large amounts of data off HPC systems."
-- "Convert many files to a single archive file using tar."
-keypoints:
-- "Be careful how you use the login node."
-- "Your data on the system is your responsibility."
-- "Plan and test large data transfers."
-- "It is often best to convert many files to a single archive file before
-  transferring."
----
+# Responsibility
+
+```{instructor-note}
+- teaching: 45
+- exercises: 30
+```
+
+```{questions}
+- How can I be a responsible user?
+- How can I protect my data?
+- How can I best get large amounts of data off an HPC system?
+```
+
+```{objectives}
+- Describe how the actions of a single user can affect the experience of others on a shared system.
+- Discuss the behaviour of a considerate shared system citizen.
+- Explain the importance of backing up critical data.
+- Describe the challenges with transferring large amounts of data off HPC systems.
+- Convert many files to a single archive file using tar.
+```
+
+```{keypoints
+- Be careful how you use the login node.
+- Your data on the system is your responsibility.
+- Plan and test large data transfers.
+- It is often best to convert many files to a single archive file before transferring.
+```
 
 One of the major differences between using remote HPC resources and your own
 system (e.g. your laptop) is that remote resources are shared. How many users
