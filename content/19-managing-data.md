@@ -1,3 +1,23 @@
+# Managing data
+
+```{instructor-note}
+- teaching: 15
+- exercises: 15
+```
+
+```{questions}
+- How do I transfer files to (and from) the cluster?
+```
+
+```{objectives}
+- Transfer files to and from a computing cluster.
+```
+
+```{keypoints
+- `wget` and `curl -O` download a file from the internet.
+- `scp` and `rsync` transfer files to and from your computer.
+- You can use an SFTP client like FileZilla to transfer files through a GUI.
+```
 
 This LUMI-self-learning chapter to be about transferring files, where to put your data on LUMI and the storage options, including LUMI-O.
 
