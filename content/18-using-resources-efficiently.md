@@ -1,17 +1,23 @@
----
-title: "Using resources effectively"
-teaching: 10
-exercises: 20
-questions:
-- "How can I review past jobs?"
-- "How can I use this knowledge to create a more accurate submission script?"
-objectives:
-- "Look up job statistics."
-- "Make more accurate resource requests in job scripts based on data describing past performance."
-keypoints:
-- "Accurate job scripts help the queuing system efficiently allocate
-  shared resources."
----
+# Using resources efficiently
+
+```{instructor-note}
+- teaching: 45
+- exercises: 30
+```
+
+```{questions}
+- How can I review past jobs?
+- How can I use this knowledge to create a more accurate submission script?
+```
+
+```{objectives}
+- Look up job statistics.
+- Make more accurate resource requests in job scripts based on data describing past performance.
+```
+
+```{keypoints
+- Accurate job scripts help the queuing system efficiently allocate shared resources.
+```
 
 We've touched on all the skills you need to interact with an HPC cluster:
 logging in over SSH, loading software modules, submitting parallel jobs, and

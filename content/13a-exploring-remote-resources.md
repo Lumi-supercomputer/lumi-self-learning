@@ -1,27 +1,33 @@
----
-title: "Exploring Remote Resources"
-teaching: 25
-exercises: 10
-questions:
-- "How does my local computer compare to the remote systems?"
-- "How does the login node compare to the compute nodes?"
-- "Are all compute nodes alike?"
-objectives:
-- "Survey system resources using `nproc`, `free`, and the queuing system"
-- "Compare & contrast resources on the local machine, login node, and worker
-nodes"
-- "Learn about the various filesystems on the cluster using `df`"
-- "Find out `who` else is logged in"
-- "Assess the number of idle and occupied nodes"
-keypoints:
-- "An HPC system is a set of networked machines."
-- "HPC systems typically provide login nodes and a set of compute nodes."
-- "The resources found on independent (worker) nodes can vary in volume and
+# Exploring Remote Resources
+
+```{instructor-note}
+- teaching: 30
+- exercises: 15
+```
+
+```{questions}
+- How does my local computer compare to the remote systems?
+- How does the login node compare to the compute nodes?
+- Are all compute nodes alike?
+```
+
+```{objectives}
+- Survey system resources using `nproc`, `free`, and the queuing system
+- Compare & contrast resources on the local machine, login node, and worker nodes
+- Learn about the various filesystems on the cluster using `df`
+- Find out `who` else is logged in
+- Assess the number of idle and occupied nodes
+```
+
+```{keypoints
+- An HPC system is a set of networked machines.
+- HPC systems typically provide login nodes and a set of compute nodes.
+- The resources found on independent (worker) nodes can vary in volume and
   type (amount of RAM, processor architecture, availability of network mounted
-  filesystems, etc.)."
-- "Files saved on shared storage are available on all nodes."
-- "The login node is a shared machine: be considerate of other users."
----
+  filesystems, etc.).
+- Files saved on shared storage are available on all nodes.
+- The login node is a shared machine: be considerate of other users.
+```
 
 ## Look Around the Remote System
 

@@ -1,23 +1,29 @@
----
-title: "Running a parallel job"
-teaching: 30
-exercises: 60
-questions:
-- "How do we execute a task in parallel?"
-- "What benefits arise from parallel execution?"
-- "What are the limits of gains from execution in parallel?"
-objectives:
-- "Install a Python package using `pip`"
-- "Prepare a job submission script for the parallel executable."
-- "Launch jobs with parallel execution."
-- "Record and summarize the timing and accuracy of jobs."
-- "Describe the relationship between job parallelism and performance."
-keypoints:
-- "Parallel programming allows applications to take advantage of
-  parallel hardware."
-- "The queuing system facilitates executing parallel tasks."
-- "Performance improvements from parallel execution do not scale linearly."
----
+# Parallel
+
+```{instructor-note}
+- teaching: 45
+- exercises: 30
+```
+
+```{questions}
+- How do we execute a task in parallel?
+- What benefits arise from parallel execution?
+- What are the limits of gains from execution in parallel?
+```
+
+```{objectives}
+- Install a Python package using `pip`
+- Prepare a job submission script for the parallel executable.
+- Launch jobs with parallel execution.
+- Record and summarize the timing and accuracy of jobs.
+- Describe the relationship between job parallelism and performance.
+```
+
+```{keypoints
+- Parallel programming allows applications to take advantage of parallel hardware.
+- The queuing system facilitates executing parallel tasks.
+- Performance improvements from parallel execution do not scale linearly.
+```
 
 We now have the tools we need to run a multi-processor job. This is a very
 important aspect of HPC systems, as parallelism is one of the primary tools

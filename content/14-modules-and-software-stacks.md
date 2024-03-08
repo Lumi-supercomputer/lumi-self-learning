@@ -1,18 +1,24 @@
----
-title: "Accessing software via Modules"
-teaching: 30
-exercises: 15
-questions:
-- "How do we load and unload software packages?"
-objectives:
-- "Load and use a software package."
-- "Explain how the shell environment changes when the module mechanism loads or unloads packages."
-keypoints:
-- "Load software with `module load softwareName`."
-- "Unload software with `module unload`"
-- "The module system handles software versioning and package conflicts for you
-  automatically."
----
+# Modules and software stacks
+
+```{instructor-note}
+- teaching: 30
+- exercises: 15
+```
+
+```{questions}
+- How do we load and unload software packages?
+```
+
+```{objectives}
+- Load and use a software package.
+- Explain how the shell environment changes when the module mechanism loads or unloads packages.
+```
+
+```{keypoints
+- Load software with `module load softwareName`.
+- Unload software with `module unload`
+- The module system handles software versioning and package conflicts for you automatically
+```
 
 On a high-performance computing system, it is seldom the case that the software
 we want to use is available when we log in. It is installed, but we will need
