@@ -21,7 +21,7 @@ project = "Introduction to LUMI"
 copyright = "2023, The contributors"
 author = "The contributors"
 github_user = "Lumi-supercomputer"
-github_repo_name = ""  # auto-detected from dirname if blank
+github_repo_name = "lumi-self-learning"  # auto-detected from dirname if blank
 github_version = "main"
 conf_py_path = "/content/"  # with leading and trailing slash
 
