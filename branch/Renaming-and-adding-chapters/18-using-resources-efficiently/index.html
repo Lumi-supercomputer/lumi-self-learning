@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estimating Required Resources Using the Scheduler &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Estimating Required Resources Using the Scheduler</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/content/blob/main/content/18-using-resources-efficiently.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>We’ve touched on all the skills you need to interact with an HPC cluster:
+logging in over SSH, loading software modules, submitting parallel jobs, and
+finding the output. Let’s learn about estimating resource usage and why it
+might matter.</p>
+<section id="estimating-required-resources-using-the-scheduler">
+<h1>Estimating Required Resources Using the Scheduler<a class="headerlink" href="#estimating-required-resources-using-the-scheduler" title="Permalink to this heading"></a></h1>
+<p>Although we covered requesting resources from the scheduler earlier with the
+π code, how do we know what type of resources the software will need in
+the first place, and its demand for each? In general, unless the software
+documentation or user testimonials provide some idea, we won’t know how much
+memory or compute time a program will need.</p>
+<div class="admonition-read-the-documentation callout admonition" id="callout-0">
+<p class="admonition-title">Read the Documentation</p>
+<p>Most HPC facilities maintain documentation as a wiki, a website, or a
+document sent along when you register for an account. Take a look at these
+resources, and search for the software you plan to use: somebody might have
+written up guidance for getting the most out of it.</p>
+</div>
+<p>A convenient way of figuring out the resources required for a job to run
+successfully is to submit a test job, and then ask the scheduler about its
+impact using <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.hist</span> <span class="pre">}}</span></code>. You can use this knowledge to set up the
+next job with a closer estimate of its load on the system. A good general rule
+is to ask the scheduler for 20% to 30% more time and memory than you expect the
+job to need. This ensures that minor fluctuations in run time or memory use
+will not result in your job being cancelled by the scheduler. Keep in mind that
+if you ask for too much, your job may not run even though enough resources are
+available, because the scheduler will be waiting for other people’s jobs to
+finish and free up the resources needed to match what you asked for.</p>
+</section>
+<section id="stats">
+<h1>Stats<a class="headerlink" href="#stats" title="Permalink to this heading"></a></h1>
+<p>Since we already submitted <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> to run on the cluster, we can query the
+scheduler to see how long our job took and what resources were used. We will
+use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.hist</span> <span class="pre">}}</span></code> to get statistics about <code class="docutils literal notranslate"><span class="pre">parallel-job.sh</span></code>.</p>
+<p>{% include {{ site.snippets }}/resources/account-history.snip %}</p>
+<p>This shows all the jobs we ran today (note that there are multiple entries per
+job).
+To get info about a specific job (for example, 347087), we change command
+slightly.</p>
+<p>It will show a lot of info; in fact, every single piece of info collected on
+your job by the scheduler will show up here. It may be useful to redirect this
+information to <code class="docutils literal notranslate"><span class="pre">less</span></code> to make it easier to view (use the left and right arrow
+keys to scroll through fields).</p>
+<div class="admonition-discussion discussion important admonition" id="discussion-0">
+<p class="admonition-title">Discussion</p>
+<p>This view can help compare the amount of time requested and actually
+used, duration of residence in the queue before launching, and memory
+footprint on the compute node(s).</p>
+<p>How accurate were our estimates?</p>
+</div>
+</section>
+<section id="improving-resource-requests">
+<h1>Improving Resource Requests<a class="headerlink" href="#improving-resource-requests" title="Permalink to this heading"></a></h1>
+<p>From the job history, we see that <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> jobs finished executing in
+at most a few minutes, once dispatched. The time estimate we provided
+in the job script was far too long! This makes it harder for the
+queuing system to accurately estimate when resources will become free
+for other jobs. Practically, this means that the queuing system waits
+to dispatch our <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> job until the full requested time slot opens,
+instead of “sneaking it in” a much shorter window where the job could
+actually finish. Specifying the expected runtime in the submission
+script more accurately will help alleviate cluster congestion and may
+get your job dispatched earlier.</p>
+<div class="admonition-narrow-the-time-estimate exercise important admonition" id="exercise-0">
+<p class="admonition-title">Narrow the Time Estimate</p>
+<p>Edit <code class="docutils literal notranslate"><span class="pre">parallel_job.sh</span></code> to set a better time estimate. How close can
+you get?</p>
+<p>Hint: use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.flag.time</span> <span class="pre">}}</span></code>.</p>
+<blockquote>
+<div><p class="rubric">Solution</p>
+<p>The following line tells {{ site.sched.name }} that our job should
+finish within 2 minutes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">comment</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">time</span> <span class="p">}}{</span><span class="o">%</span> <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Slurm&quot;</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span><span class="o">=</span><span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span><span class="mi">00</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>{: .language-bash}
+{: .solution}</p>
+</div></blockquote>
+</div>
+<p>{% include links.md %}</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

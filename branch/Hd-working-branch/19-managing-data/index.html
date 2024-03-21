@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Lesson Files From the Internet &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Download Lesson Files From the Internet</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/content/blob/main/content/19-managing-data.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>This LUMI-self-learning chapter to be about transferring files, where to put your data on LUMI and the storage options, including LUMI-O.</p>
+<!---
+title: "Transferring files with remote computers"
+teaching: 15
+exercises: 15
+questions:
+- "How do I transfer files to (and from) the cluster?"
+objectives:
+- "Transfer files to and from a computing cluster."
+keypoints:
+- "`wget` and `curl -O` download a file from the internet."
+- "`scp` and `rsync` transfer files to and from your computer."
+- "You can use an SFTP client like FileZilla to transfer files through a GUI."
+-->
+<p>Performing work on a remote computer is not very useful if we cannot get files
+to or from the cluster. There are several options for transferring data between
+computing resources using CLI and GUI utilities, a few of which we will cover.</p>
+<section id="download-lesson-files-from-the-internet">
+<h1>Download Lesson Files From the Internet<a class="headerlink" href="#download-lesson-files-from-the-internet" title="Permalink to this heading"></a></h1>
+<p>One of the most straightforward ways to download files is to use either <code class="docutils literal notranslate"><span class="pre">curl</span></code>
+or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. One of these is usually installed in most Linux shells, on Mac OS
+terminal and in GitBash. Any file that can be downloaded in your web browser
+through a direct link can be downloaded using <code class="docutils literal notranslate"><span class="pre">curl</span></code> or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. This is a
+quick way to download datasets or source code. The syntax for these commands is</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">[-O</span> <span class="pre">new_name]</span> <span class="pre">https://some/link/to/a/file</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">[-o</span> <span class="pre">new_name]</span> <span class="pre">https://some/link/to/a/file</span></code></p></li>
+</ul>
+<p>Try it out by downloading some material we’ll use later on, from a terminal on
+your local machine, using the URL of the current codebase:</p>
+<p><a class="reference external" href="https://github.com/hpc-carpentry/amdahl/tarball/main">https://github.com/hpc-carpentry/amdahl/tarball/main</a></p>
+<div class="admonition-download-the-tarball exercise important admonition" id="exercise-0">
+<p class="admonition-title">Download the “Tarball”</p>
+<p>The word “tarball” in the above URL refers to a compressed archive format
+commonly used on Linux, which is the operating system the majority of HPC
+cluster machines run.
+A tarball is a lot like a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file.
+The actual file extension is <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, which reflects the two-stage process
+used to create the file:
+the files or folders are merged into a single file using <code class="docutils literal notranslate"><span class="pre">tar</span></code>, which is then
+compressed using <code class="docutils literal notranslate"><span class="pre">gzip</span></code>, so the file extension is “tar-dot-g-z.”
+That’s a mouthful, so people often say “the <em>xyz</em> tarball” instead.</p>
+<p>You may also see the extension <code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, which is just an abbreviation of
+<code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">curl</span></code> and <code class="docutils literal notranslate"><span class="pre">wget</span></code> download files to the same name as the URL:
+in this case, <code class="docutils literal notranslate"><span class="pre">main</span></code>.
+Use one of the above commands to save the tarball as <code class="docutils literal notranslate"><span class="pre">amdahl.tar.gz</span></code>.</p>
+<blockquote>
+<div><p class="rubric"><code class="docutils literal notranslate"><span class="pre">wget</span></code> and <code class="docutils literal notranslate"><span class="pre">curl</span></code> Commands</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">amdahl</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hpc</span><span class="o">-</span><span class="n">carpentry</span><span class="o">/</span><span class="n">amdahl</span><span class="o">/</span><span class="n">tarball</span><span class="o">/</span><span class="n">main</span>
+<span class="c1"># or</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">curl</span> <span class="o">-</span><span class="n">o</span> <span class="n">amdahl</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hpc</span><span class="o">-</span><span class="n">carpentry</span><span class="o">/</span><span class="n">amdahl</span><span class="o">/</span><span class="n">tarball</span><span class="o">/</span><span class="n">main</span>
+</pre></div>
+</div>
+<p>{: .language-bash}
+{: .solution}</p>
+</div></blockquote>
+</div>
+<p>After downloading the file, use <code class="docutils literal notranslate"><span class="pre">ls</span></code> to see it in your working directory:</p>
+</section>
+<section id="archiving-files">
+<h1>Archiving Files<a class="headerlink" href="#archiving-files" title="Permalink to this heading"></a></h1>
+<p>One of the biggest challenges we often face when transferring data between
+remote HPC systems is that of large numbers of files. There is an overhead to
+transferring each individual file and when we are transferring large numbers of
+files these overheads combine to slow down our transfers to a large degree.</p>
+<p>The solution to this problem is to <em>archive</em> multiple files into smaller
+numbers of larger files before we transfer the data to improve our transfer
+efficiency.
+Sometimes we will combine archiving with <em>compression</em> to reduce the amount of
+data we have to transfer and so speed up the transfer.
+The most common archiving command you will use on a (Linux) HPC cluster is
+<code class="docutils literal notranslate"><span class="pre">tar</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tar</span></code> can be used to combine files and folders into a single archive file and,
+optionally, compress the result.
+Let’s look at the file we downloaded from the lesson site, <code class="docutils literal notranslate"><span class="pre">amdahl.tar.gz</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.gz</span></code> part stands for <em>gzip</em>, which is a compression library.
+It’s common (but not necessary!) that this kind of file can be interpreted by
+reading its name: it appears somebody took files and folders relating to
+something called “amdahl,” wrapped them all up into a single file with <code class="docutils literal notranslate"><span class="pre">tar</span></code>,
+then compressed that archive with <code class="docutils literal notranslate"><span class="pre">gzip</span></code> to save space.</p>
+<p>Let’s see if that is the case, <em>without</em> unpacking the file.
+<code class="docutils literal notranslate"><span class="pre">tar</span></code> prints the “<strong>t</strong>able of contents” with the <code class="docutils literal notranslate"><span class="pre">-t</span></code> flag, for the file
+specified with the <code class="docutils literal notranslate"><span class="pre">-f</span></code> flag followed by the filename.
+Note that you can concatenate the two flags: writing <code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">-f</span></code> is interchangeable
+with writing <code class="docutils literal notranslate"><span class="pre">-tf</span></code> together.
+However, the argument following <code class="docutils literal notranslate"><span class="pre">-f</span></code> must be a filename, so writing <code class="docutils literal notranslate"><span class="pre">-ft</span></code> will
+<em>not</em> work.</p>
+<p>This example output shows a folder which contains a few files, where <code class="docutils literal notranslate"><span class="pre">46c9b4b</span></code>
+is an 8-character <a class="reference external" href="https://swcarpentry.github.io/git-novice/">git</a> commit hash that will change when the source
+material is updated.</p>
+<p>Now let’s unpack the archive. We’ll run <code class="docutils literal notranslate"><span class="pre">tar</span></code> with a few common flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code> to e<strong>x</strong>tract the archive</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code> for <strong>v</strong>erbose output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-z</span></code> for g<strong>z</strong>ip compression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">«tarball»</span></code> for the file to be unpacked</p></li>
+</ul>
+<div class="admonition-extract-the-archive discussion important admonition" id="discussion-0">
+<p class="admonition-title">Extract the Archive</p>
+<p>Using the flags above, unpack the source code tarball into a new
+directory named “amdahl” using <code class="docutils literal notranslate"><span class="pre">tar</span></code>.</p>
+</div>
+<p>{{ site.local.prompt }} tar -xvzf amdahl.tar.gz</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{:</span> <span class="o">.</span><span class="n">language</span><span class="o">-</span><span class="n">bash</span><span class="p">}</span>
+
+</pre></div>
+</div>
+<p>hpc-carpentry-amdahl-46c9b4b/
+hpc-carpentry-amdahl-46c9b4b/.github/
+hpc-carpentry-amdahl-46c9b4b/.github/workflows/
+hpc-carpentry-amdahl-46c9b4b/.github/workflows/python-publish.yml
+hpc-carpentry-amdahl-46c9b4b/.gitignore
+hpc-carpentry-amdahl-46c9b4b/LICENSE
+hpc-carpentry-amdahl-46c9b4b/README.md
+hpc-carpentry-amdahl-46c9b4b/amdahl/
+hpc-carpentry-amdahl-46c9b4b/amdahl/<strong>init</strong>.py
+hpc-carpentry-amdahl-46c9b4b/amdahl/<strong>main</strong>.py
+hpc-carpentry-amdahl-46c9b4b/amdahl/amdahl.py
+hpc-carpentry-amdahl-46c9b4b/requirements.txt
+hpc-carpentry-amdahl-46c9b4b/setup.py</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{: .output}
+
+Note that we did not need to type out `-x -v -z -f`, thanks to flag
+concatenation, though the command works identically either way --
+so long as the concatenated list ends with `f`, because the next string
+must specify the name of the file to extract.
+</pre></div>
+</div>
+<p>The folder has an unfortunate name, so let’s change that to something more
+convenient.</p>
+<p>Check the size of the extracted directory and compare to the compressed
+file size, using <code class="docutils literal notranslate"><span class="pre">du</span></code> for “<strong>d</strong>isk <strong>u</strong>sage”.</p>
+<p>Text files (including Python source code) compress nicely:
+the “tarball” is one-sixth the total size of the raw data!</p>
+<p>If you want to reverse the process – compressing raw data instead of
+extracting it – set a <code class="docutils literal notranslate"><span class="pre">c</span></code> flag instead of <code class="docutils literal notranslate"><span class="pre">x</span></code>, set the archive filename,
+then provide a directory to compress:</p>
+<p>If you give <code class="docutils literal notranslate"><span class="pre">amdahl.tar.gz</span></code> as the filename in the above command, <code class="docutils literal notranslate"><span class="pre">tar</span></code> will
+update the existing tarball with any changes you made to the files.
+That would mean adding the new <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> folder to the <em>existing</em> folder
+(<code class="docutils literal notranslate"><span class="pre">hpc-carpentry-amdahl-46c9b4b</span></code>) inside the tarball, doubling the size of the
+archive!</p>
+<div class="admonition-working-with-windows callout admonition" id="callout-0">
+<p class="admonition-title">Working with Windows</p>
+<p>When you transfer text files from a Windows system to a Unix system (Mac,
+Linux, BSD, Solaris, etc.) this can cause problems. Windows encodes its files
+slightly different than Unix, and adds an extra character to every line.</p>
+<p>On a Unix system, every line in a file ends with a <code class="docutils literal notranslate"><span class="pre">\n</span></code> (newline). On
+Windows, every line in a file ends with a <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> (carriage return + newline).
+This causes problems sometimes.</p>
+<p>Though most modern programming languages and software handles this correctly,
+in some rare instances, you may run into an issue. The solution is to convert
+a file from Windows to Unix encoding with the <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> command.</p>
+<p>You can identify if a file has Windows line endings with <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">-A</span> <span class="pre">filename</span></code>. A
+file with Windows line endings will have <code class="docutils literal notranslate"><span class="pre">^M$</span></code> at the end of every line. A
+file with Unix line endings will have <code class="docutils literal notranslate"><span class="pre">$</span></code> at the end of a line.</p>
+<p>To convert the file, just run <code class="docutils literal notranslate"><span class="pre">dos2unix</span> <span class="pre">filename</span></code>. (Conversely, to convert
+back to Windows format, you can run <code class="docutils literal notranslate"><span class="pre">unix2dos</span> <span class="pre">filename</span></code>.)</p>
+</div>
+</section>
+<section id="transferring-single-files-and-folders-with-scp">
+<h1>Transferring Single Files and Folders With <code class="docutils literal notranslate"><span class="pre">scp</span></code><a class="headerlink" href="#transferring-single-files-and-folders-with-scp" title="Permalink to this heading"></a></h1>
+<p>To copy a single file to or from the cluster, we can use <code class="docutils literal notranslate"><span class="pre">scp</span></code> (“secure copy”).
+The syntax can be a little complex for new users, but we’ll break it down.
+The <code class="docutils literal notranslate"><span class="pre">scp</span></code> command is a relative of the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> command we used to
+access the system, and can use the same public-key authentication
+mechanism.</p>
+<p>To <em>upload to</em> another computer, the template command is</p>
+<p>in which <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> and <code class="docutils literal notranslate"><span class="pre">:</span></code> are field separators and <code class="docutils literal notranslate"><span class="pre">remote_destination</span></code> is a path
+relative to your remote home directory, or a new filename if you wish to change
+it, or both a relative path <em>and</em> a new filename.
+If you don’t have a specific folder in mind you can omit the
+<code class="docutils literal notranslate"><span class="pre">remote_destination</span></code> and the file will be copied to your home directory on the
+remote computer (with its original name).
+If you include a <code class="docutils literal notranslate"><span class="pre">remote_destination</span></code>, note that <code class="docutils literal notranslate"><span class="pre">scp</span></code> interprets this the same
+way <code class="docutils literal notranslate"><span class="pre">cp</span></code> does when making local copies:
+if it exists and is a folder, the file is copied inside the folder; if it
+exists and is a file, the file is overwritten with the contents of
+<code class="docutils literal notranslate"><span class="pre">local_file</span></code>; if it does not exist, it is assumed to be a destination filename
+for <code class="docutils literal notranslate"><span class="pre">local_file</span></code>.</p>
+<p>Upload the lesson material to your remote home directory like so:</p>
+<div class="admonition-why-not-download-on-site-remote-name-directly exercise important admonition" id="exercise-1">
+<p class="admonition-title">Why Not Download on {{ site.remote.name }} Directly?</p>
+<p>Most computer clusters are protected from the open internet by a <em>firewall</em>.
+For enhanced security, some are configured to allow traffic <em>inbound</em>, but
+not <em>outbound</em>.
+This means that an authenticated user can send a file to a cluster machine,
+but a cluster machine cannot retrieve files from a user’s machine or the
+open Internet.</p>
+<p>Try downloading the file directly. Note that it may well fail, and that’s
+OK!</p>
+<blockquote>
+<div><p class="rubric">Commands</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ssh</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">amdahl</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hpc</span><span class="o">-</span><span class="n">carpentry</span><span class="o">/</span><span class="n">amdahl</span><span class="o">/</span><span class="n">tarball</span><span class="o">/</span><span class="n">main</span>
+<span class="c1"># or</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">curl</span> <span class="o">-</span><span class="n">o</span> <span class="n">amdahl</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hpc</span><span class="o">-</span><span class="n">carpentry</span><span class="o">/</span><span class="n">amdahl</span><span class="o">/</span><span class="n">tarball</span><span class="o">/</span><span class="n">main</span>
+</pre></div>
+</div>
+<p>{: .language-bash}
+{: .solution}</p>
+</div></blockquote>
+<p>Did it work? If not, what does the terminal output tell you about what
+happened?</p>
+</div>
+</section>
+<section id="transferring-a-directory">
+<h1>Transferring a Directory<a class="headerlink" href="#transferring-a-directory" title="Permalink to this heading"></a></h1>
+<p>To transfer an entire directory, we add the <code class="docutils literal notranslate"><span class="pre">-r</span></code> flag for “<strong>r</strong>ecursive”:
+copy the item specified, and every item below it, and every item below those…
+until it reaches the bottom of the directory tree rooted at the folder name you
+provided.</p>
+<div class="admonition-caution callout admonition" id="callout-1">
+<p class="admonition-title">Caution</p>
+<p>For a large directory – either in size or number of files –
+copying with <code class="docutils literal notranslate"><span class="pre">-r</span></code> can take a long time to complete.</p>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">scp</span></code>, you may have noticed that a <code class="docutils literal notranslate"><span class="pre">:</span></code> <em>always</em> follows the remote
+computer name.
+A string <em>after</em> the <code class="docutils literal notranslate"><span class="pre">:</span></code> specifies the remote directory you wish to transfer
+the file or folder to, including a new name if you wish to rename the remote
+material.
+If you leave this field blank, <code class="docutils literal notranslate"><span class="pre">scp</span></code> defaults to your home directory and the
+name of the local material to be transferred.</p>
+<p>On Linux computers, <code class="docutils literal notranslate"><span class="pre">/</span></code> is the separator in file or directory paths.
+A path starting with a <code class="docutils literal notranslate"><span class="pre">/</span></code> is called <em>absolute</em>, since there can be nothing
+above the root <code class="docutils literal notranslate"><span class="pre">/</span></code>.
+A path that does not start with <code class="docutils literal notranslate"><span class="pre">/</span></code> is called <em>relative</em>, since it is not
+anchored to the root.</p>
+<p>If you want to upload a file to a location inside your home directory –
+which is often the case – then you don’t need a <em>leading</em> <code class="docutils literal notranslate"><span class="pre">/</span></code>. After the <code class="docutils literal notranslate"><span class="pre">:</span></code>,
+you can type the destination path relative to your home directory.
+If your home directory <em>is</em> the destination, you can leave the destination
+field blank, or type <code class="docutils literal notranslate"><span class="pre">~</span></code> – the shorthand for your home directory – for
+completeness.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">scp</span></code>, a trailing slash on the target directory is optional, and has
+no effect. It is important for other commands, like <code class="docutils literal notranslate"><span class="pre">rsync</span></code>.</p>
+<p>```{callout} A Note on <code class="docutils literal notranslate"><span class="pre">rsync</span></code></p>
+<p>As you gain experience with transferring files, you may find the <code class="docutils literal notranslate"><span class="pre">scp</span></code>
+command limiting. The <a class="reference external" href="https://rsync.samba.org/">rsync</a> utility provides
+advanced features for file transfer and is typically faster compared to both
+<code class="docutils literal notranslate"><span class="pre">scp</span></code> and <code class="docutils literal notranslate"><span class="pre">sftp</span></code> (see below). It is especially useful for transferring large
+and/or many files and for synchronizing folder contents between computers.</p>
+<p>The syntax is similar to <code class="docutils literal notranslate"><span class="pre">scp</span></code>. To transfer <em>to</em> another computer with
+commonly used options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">avP</span> <span class="n">amdahl</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span>
+</pre></div>
+</div>
+<p>{: .language-bash}</p>
+<p>The options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-a</span></code> (<strong>a</strong>rchive) to preserve file timestamps, permissions, and folders,
+among other things; implies recursion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code> (<strong>v</strong>erbose) to get verbose output to help monitor the transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-P</span></code> (partial/progress) to preserve partially transferred files in case
+of an interruption and also displays the progress of the transfer.</p></li>
+</ul>
+<p>To recursively copy a directory, we can use the same options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">avP</span> <span class="n">amdahl</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+<p>{: .language-bash}</p>
+<p>As written, this will place the local directory and its contents under your
+home directory on the remote system. If the trailing slash is omitted on
+the destination, a new directory corresponding to the transferred directory
+will not be created, and the contents of the source
+directory will be copied directly into the destination directory.</p>
+<p>To download a file, we simply change the source and destination:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">avP</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="n">amdahl</span> <span class="o">./</span>
+</pre></div>
+</div>
+<p>{: .language-bash}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+File transfers using both `scp` and `rsync` use SSH to encrypt data sent through
+the network. So, if you can connect via SSH, you will be able to transfer
+files. By default, SSH uses network port 22. If a custom SSH port is in use,
+you will have to specify it using the appropriate flag, often `-p`, `-P`, or
+`--port`. Check `--help` or the `man` page if you&#39;re unsure.
+
+```{challenge} Change the Rsync Port
+
+
+Say we have to connect `rsync` through port 768 instead of 22. How would we
+modify this command?
+
+</pre></div>
+</div>
+<p>{{ site.local.prompt }} rsync amdahl.tar.gz {{ site.remote.user }}&#64;{{ site.remote.login }}:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{: .language-bash}
+
+_Hint:_ check the `man` page or &quot;help&quot; for `rsync`.
+
+&gt; ## Solution
+&gt;
+&gt; ```
+&gt; {{ site.local.prompt }} man rsync
+&gt; {{ site.local.prompt }} rsync --help | grep port
+&gt;      --port=PORT             specify double-colon alternate port number
+&gt; See http://rsync.samba.org/ for updates, bug reports, and answers
+&gt; {{ site.local.prompt }} rsync --port=768 amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
+&gt; ```
+&gt; {: .language-bash}
+&gt;
+&gt; (Note that this command will fail, as the correct port in this case is the
+&gt; default: 22.)
+{: .solution}
+</pre></div>
+</div>
+</section>
+<section id="transferring-files-interactively-with-filezilla">
+<h1>Transferring Files Interactively with FileZilla<a class="headerlink" href="#transferring-files-interactively-with-filezilla" title="Permalink to this heading"></a></h1>
+<p>FileZilla is a cross-platform client for downloading and uploading files to and
+from a remote computer. It is absolutely fool-proof and always works quite
+well. It uses the <code class="docutils literal notranslate"><span class="pre">sftp</span></code> protocol. You can read more about using the <code class="docutils literal notranslate"><span class="pre">sftp</span></code>
+protocol in the command line in the
+[lesson discussion]({{ site.baseurl }}{% link _extras/discuss.md %}).</p>
+<p>Download and install the FileZilla client from <a class="reference external" href="https://filezilla-project.org">https://filezilla-project.org</a>.
+After installing and opening the program, you should end up with a window with
+a file browser of your local system on the left hand side of the screen. When
+you connect to the cluster, your cluster files will appear on the right hand
+side.</p>
+<p>To connect to the cluster, we’ll just need to enter our credentials at the top
+of the screen:</p>
+<ul class="simple">
+<li><p>Host: <code class="docutils literal notranslate"><span class="pre">sftp://{{</span> <span class="pre">site.remote.login</span> <span class="pre">}}</span></code></p></li>
+<li><p>User: Your cluster username</p></li>
+<li><p>Password: Your cluster password</p></li>
+<li><p>Port: (leave blank to use the default port)</p></li>
+</ul>
+<p>Hit “Quickconnect” to connect. You should see your remote files appear on the
+right hand side of the screen. You can drag-and-drop files between the left
+(local) and right (remote) sides of the screen to transfer files.</p>
+<p>Finally, if you need to move large files (typically larger than a gigabyte)
+from one remote computer to another remote computer, SSH in to the computer
+hosting the files and use <code class="docutils literal notranslate"><span class="pre">scp</span></code> or <code class="docutils literal notranslate"><span class="pre">rsync</span></code> to transfer over to the other. This
+will be more efficient than using FileZilla (or related applications) that
+would copy from the source to your local machine, then to the destination
+machine.</p>
+<p>{% include links.md %}</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
