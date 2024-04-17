@@ -1,5 +1,7 @@
 # Modules and software stacks
 
+(Good information and explanations on this page. Parts of it could be merged with the 'software-and-modules.md' page.)
+
 ```{instructor-note}
 - teaching: 30
 - exercises: 15

@@ -10,8 +10,11 @@ Welcome to the *Introduction to LUMI* self-learning course!
 About the course
 ----------------
 
-This self-learning course is intended for anyone interested in using the LUMI
-supercomputer. The course consists of N sections focusing on how to use the LUMI
+This self-learning course is intended as a beginner friendly material for anyone interested in using the LUMI
+supercomputer. The collection of examples and tutorials will walk you through the basics of how to work with LUMI. 
+For a more detailed guide about how to use the LUMI supercomputer, please see the official [LUMI documentation](https://docs.lumi-supercomputer.eu/). 
+
+This course consists of N sections focusing on how to use the LUMI
 computing environment. The material is organized by topics of increasing complexity
 -- feel free to jump if you know the basics already. In each section, read the
 text and complete the tutorial(s) to make sure you've understood the content.
@@ -31,10 +34,11 @@ and/or development projects and know where to look for more information.
 
    10-introduction-to-supercomputing-and-lumi.md
    11-prerequisites.md
-   12-lumi-environment.md
+   12-terminal-and-webinterface.md
    13a-exploring-remote-resources.md
    13-lumi-disk-areas.md
    14-modules-and-software-stacks.md
+   14a-software-and-modules.md 
    15-software-on-lumi.md
    16-scheduler-and-batch-jobs.md
    17-parallel.md
