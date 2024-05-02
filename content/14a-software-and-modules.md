@@ -9,11 +9,42 @@ To see the available software on LUMI, one doesn't need to login to LUMI. To see
 Let's take a few examples. 
 
 First, let's search Gnuplot, and see the page about it.
-When we open the page about Gnuplot, we see that there is a green box that reads `pre-installed`. This means that the software is already available in the system, and one can directly use the typical LMOD commands (e.g. `module load`) with it. (We'll see a bit later how the LMOD commands work in practise, and what the term _pre-installed_ means.)
+When we open the page about Gnuplot, we see that there is a green box that reads `pre-installed`. This means that the software is already available in the system, and one can directly use the typical Lmod commands (e.g. `module load`) with it. (We'll see a bit later how the Lmod commands work in practise, and what the term _pre-installed_ means.)
 
-As a second example, let's take a look at the page of the software Gromacs. On this page we have a blue box that reads `user installable`. This means that LMOD can't directly find the software on LUMI, but user needs to _install_ it first. This installation is not a difficult process, and only requires typing few commands. We'll come back to how to do this with specific examples later in this guide. 
+As a second example, let's take a look at the page of the software Gromacs. On this page we have a blue box that reads `user installable`. This means that Lmod can't directly find the software on LUMI, but user needs to _install_ it first. This installation is not a difficult process, and only requires typing few commands. We'll come back to how to do this with specific examples later in this guide. 
 
 Besides the software available in the central LUMI software collection, there are software collections available by local LUMI organizations. Currently (April 2024) there is available an additional software stack by CSC, Finland. To see these available software via this collection, visit the [page about local software collections](https://docs.lumi-supercomputer.eu/software/local/csc/) in the LUMI documentation. 
+
+## Good to know: Software stacks on LUMI
+
+(Should this be marked as an info-box? Kind of additional information, but definitelly good to mention shortly somewhere here when we are talking about software on LUMI.)
+
+A sotware stack means a collection of software. On LUMI the main collections are the versions of the `LUMI software stack`, maintained and supported by the LUMI user support team. It is good to know in general what the software environment on LUMI is based on, and what kind of options there are for software stacks on LUMI. Here we give just a very brief description. In case you would like to know more, please see the [LUMI documentation](https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/). 
+
+As LUMI is a HPE Cray machine, the basis of all the software environments on LUMI is a basic Cray environment. This is what you get as default, when you login to LUMI. It is recommended to load one of the offered software stacks on top of this. In the following examples in this guide we will be using versions of the main software stacks on LUMI, i.e. versions of the "LUMI software stack". 
+
+(A figure here, what sw stack options there are?)
+
+```
+          Login
+            |
+  Basic Cray environment
+            |
+  --------------------------
+  |         |              |
+CrayEnv   LUMI stacks     Spack
+
+```
+
+`The Cray environment` (CrayEnv) contains some additional tools on top of the default environemnt what you get at login. https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#crayenv
+
+`The LUMI stacks` are the main software stacks on LUMI that is build on top of the basic Cray environment using EasyBuild. https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#lumi
+This is what we will be using in the following examples. 
+
+`Spack` is available, but it is only recommended if you are already familiar with using Spack. It is offered "as-is". No support with developing or debugging Spack modules is provided by the LUMI user support team. 
+https://docs.lumi-supercomputer.eu/software/installing/spack/
+
+
 
 ## Modular structure with software
 
@@ -24,6 +55,8 @@ Maybe here a chapter from 14-modules-and-software.md that helps understanding a 
 ...
 
 ## Modules on LUMI
+
+Let's now login to LUMI and start experimenting what we see and what's available.
 
 1. Log in to LUMI with your user credentials (SSH or [LUMI web interface](https://www.lumi.csc.fi)):
 
@@ -40,28 +73,72 @@ ssh -i <path-to-private-key> <username>@lumi.csc.fi    # replace <username> with
 module list
 ```
 
-The modules you see listed, are both _installed_ and currently _loaded_ to use. 
+The modules you see listed are both _installed_ and currently _loaded_ to use. This is the default environment, before you load anything else. 
 
-To see other modules that are currently installed to the system, but not yet loaded, one can use the command `module avail`. The output lists everything that is currently available to load, so it's quite a long list. To search if a specific software is directly availabe to load, one can use the command `module spider <software_name>` . E.g. to see, if we have the editor Nano available to load:
+To see other modules that are currently installed to the system, but not yet loaded to use, one can use the command `module avail`. The output lists everything that is currently available to be loaded, so it's quite a long list. (Typing this opens an output with the `less` tool, which you can scroll e.g. with the keyboard arrow kyes, and exit with pressing `q` from the keyboard.)
+
+------------------------------
+** Going to change the order on this page a bit ** 
+ - First to include examples of checking and loading software stacks, and then example of e.g. Nano etc. 
+ - Going to continue from here (- Hd, 2nd May)
+
+(Work in progress ... )
+
+
+
+
+To search if a specific software is directly availabe to load, one can use the command `module spider <software_name>` . E.g. to see, if we have the simple text editor `Nano` available to load:
 
 ```bash
 module spider nano
 ```
+The output is an overview of versions of Nano that are available to be loaded. In general it's good to use the latest versions of a software available, unless one has a reason to use an older version. Let's see more information of some of the Nano versions:
 
-<!-- To be checked through again when LUMI is back in use. Maybe we could also take another editor/example than Nano, what do you think? -->
+```bash
+module spider nano/7.2
+```
 
-The output gives the available versions of Nano, of which one can choose. (We'll come back to the meaning of the different versions a bit later.) 
+We get an output that gives us some information about this software or the version of it, and what we need to do first to load this version of Nano, if anything. 
+We see that this version of Nano is available in the `CrayEnv` software stack, and also in several versions of the main `LUMI software stacks`. 
+
+What it comes to the Nano editor itself, it doesn't really matter which version of software stacks and which _partition_ we choose. This is relevant what it comes to other things we are doing on LUMI besides using the Nano editor (since probably you didn't apply compute time on LUMI to use the Nano editor, but rather are using Nano in addition to some other workflow). In some cases it matters how a software is optimized or compiled, and all the software one is using in the same workflow should be optimized or compiled the way that it is compatible. This is the reason why there are so many different versions for such a simple tool as Nano available, for example. 
+
+From the output of available prerequisites that we just got with `module spider nano/7.2` we choose **one line**. Let's now choose the latest (on May 2024) of the available LUMI software stacks `LUMI/23.09`. Besides this let's choose to use the `partition/L` that just means a set of settings optimized for the _login nodes_ on LUMI. Because we are just going to test Nano on a login node where we are now, and not submitting jobs e.g. to LUMI-C or LUMI-G and using Nano interactively from a compute node for example, we are happy with settings optimized for the login nodes. 
+
+At this point we are still with the same environment than which we had right after login to LUMI. If we do the `module list` the listing is exactly the same as earlier. Now, let's load a version of LUMI software stacks `LUMI/23.09`:
+
+```bash
+module load LUMI/23.09
+```
+
+
+
+
+Because we haven't loaded any of the available versions of software stacks (CrayEnv, LUMI, Spack), we get versions for the Nano editor that are adjusted for several of these. 
+
+
+
+
+
+(Note that if there are very many versions available, all versions might not be visible in this output. One can always check the [LUMI software library](https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/, if unsure about availability of  )
+
+
+
+
+
+
+
+
 
 If there is no output when searching a specific software, it doesn't yet mean that the software woulnd't be available on LUMI at all. 
 It just might mean that one needs to do an extra step to _install_ the software first. In practise this means a couple more commands that one needs to type. Detailed examples how to find the software available to install on LUMI, as well as how to actually do this in practise, follow later in this material.
 
-Why is some software only available after installing it, and not there directly to be loaded? This is because there are in many cases very many different versions and variations of the same software, and different people prefer different qualities for their specific use cases. Having everything already in the system available for everyone would be just heavy for the system. The approach with software on LUMI provides more variations for the specific use cases that different users might have.
+Why is some software only available after installing it, and not there directly to be loaded? This is because there are in many cases very many different versions and variations of the same software, and different people prefer different qualities for their specific use cases. Having everything already in the system available for everyone would be unpractical (the view when searching for modules would become long and messy, and also all these modules would need to be maintained). The approach with software on LUMI provides more variations for the specific use cases that different users might have.
 
 
 ## Tutorial: Load the Nano editor and write a simple script
 
-
-(I'll continue from here later. The rest of the page is still directly from CSC environment guide. -Hd)
+Work in progress
 
 ...
 
