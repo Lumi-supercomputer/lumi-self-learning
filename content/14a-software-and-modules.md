@@ -26,13 +26,15 @@ As LUMI is a HPE Cray machine, the basis of all the software environments on LUM
 (A figure here, what sw stack options there are?)
 
 ```
-          Login
-            |
-  Basic Cray environment
-            |
-  --------------------------
-  |         |              |
-CrayEnv   LUMI stacks     Spack
+Login
+|
+Basic Cray Environment
+|
+|------ CrayEnv
+|      
+|------ LUMI stacks (LUMI/22.12, LUMI/23.09, ...)
+|      
+`------ Spack (Spack/23.03, Spack/23.09, ...)
 
 ```
 
@@ -73,19 +75,51 @@ ssh -i <path-to-private-key> <username>@lumi.csc.fi    # replace <username> with
 module list
 ```
 
-The modules you see listed are both _installed_ and currently _loaded_ to use. This is the default environment, before you load anything else. 
+The modules you see listed are both _installed_ and currently _loaded_ to use. This is the default environment when you open a new session on LUMI, before you do or load anything else. (It contains e.g. some initial/default settings for libraries, compiling environment, etc.)
 
-To see other modules that are currently installed to the system, but not yet loaded to use, one can use the command `module avail`. The output lists everything that is currently available to be loaded, so it's quite a long list. (Typing this opens an output with the `less` tool, which you can scroll e.g. with the keyboard arrow kyes, and exit with pressing `q` from the keyboard.)
+Basically next step would be to load a version of the available software stacks. But it depends completely on what we want to do on LUMI, which software stack we would like to use. 
 
-------------------------------
-** Going to change the order on this page a bit ** 
- - First to include examples of checking and loading software stacks, and then example of e.g. Nano etc. 
- - Going to continue from here (- Hd, 2nd May)
+...
 
-(Work in progress ... )
+**The following is a DRAFT. (Still trying to figure out what would be the simplest way to present how to work with modules/software on LUMI. - Hd / 3rd May.)**
+
+Basically first after login we would load a software stacks (e.g. LUMI/23.09). Then we would load a suitable partition for our use case (e.g. partition/C for LUMI-C compute nodes). Then we would load our software. If the software is not yet installed e.g. by one of your group members to your `/project/project_46XXXXXXX/` location, we install the software first. 
+
+A module load example tree?
+
+```
+
+Login (Basic Cray environment loaded as default)
+|
+|-------------- CrayEnv
+|               `----- (Load or install your environments/packages)
+|      
+|-------------- LUMI/22.12
+|
+|-------------- LUMI/23.03
+|           
+|-------------- LUMI/23.09
+|                  |
+|                  |---- partition/L
+|                  |---- partition/C
+|                  `---- partition/G
+|                        `------ (Load or install your software e.g. w/ EasyBuild) 
+|
+|-------------- Spack/23.03
+|
+`-------------- Spack/23.09
+                `----- (Do whatever is done with Spack)
+
+```
+
+...
 
 
+-> Module avail etc, maybe example with Nano and some sw that we need to install w/ EB. 
 
+...
+
+To see other modules that are currently installed and available to be loaded (but not yet loaded to use), one can use the command `module avail`. The output lists everything that is currently available to be loaded, so it's quite a long list. (Typing this opens an output with the `less` tool, which you can scroll e.g. with the keyboard arrow kyes, and exit with pressing `q` from the keyboard.)
 
 To search if a specific software is directly availabe to load, one can use the command `module spider <software_name>` . E.g. to see, if we have the simple text editor `Nano` available to load:
 
