@@ -139,12 +139,24 @@ What it comes to the Nano editor itself, it doesn't really matter which version 
 
 From the output of available prerequisites that we just got with `module spider nano/7.2` we choose **one line**. Let's now choose the latest (on May 2024) of the available LUMI software stacks `LUMI/23.09`. Besides this let's choose to use the `partition/L` that just means a set of settings optimized for the _login nodes_ on LUMI. Because we are just going to test Nano on a login node where we are now, and not submitting jobs e.g. to LUMI-C or LUMI-G and using Nano interactively from a compute node for example, we are happy with settings optimized for the login nodes. 
 
-At this point we are still with the same environment than which we had right after login to LUMI. If we do the `module list` the listing is exactly the same as earlier. Now, let's load a version of LUMI software stacks `LUMI/23.09`:
+At this point we are still with the same environment than which we had right after login to LUMI. If we do the `module list` the listing is exactly the same as earlier. Let's see the currently available versions of `LUMI` software stacks: 
+
+Type `module load LUMI` and press the tabulator key twice. The output you see should be something like:
+
+`LUMI  LUMI/22.08  LUMI/22.12  LUMI/23.03  LUMI/23.09`
+
+The versions of the LUMI software stacks are named based on a year and a month that the corresponding version of a Cray software stack was reliesed.
+
+---
+(The tutorial about loading Nano here?)
+
+Now, let's load a version of LUMI software stacks `LUMI/23.09`:
 
 ```bash
 module load LUMI/23.09
 ```
 
+...
 
 
 
@@ -173,6 +185,92 @@ Why is some software only available after installing it, and not there directly 
 ## Tutorial: Load the Nano editor and write a simple script
 
 Work in progress
+
+...
+
+
+## Tutorial: Install a software with EasyBuild
+
+Let's use here an example software called 'eb-tutorial'. This is an example software that has no real practical use, but can be used in exercises as an example of a software, when getting to know EasyBuild. 
+First let's check the available versions of the software from the [LUMI software library](https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/). 
+At `e` we find the [eb-tutorial](https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/e/eb-tutorial/). We see from the blue box on top that it is `user-installable`, which means that we can install it with EasyBuild. 
+
+Let's scroll down a bit on the page, to the list of available EasyConfigs. It is in general a good idea to use the latest available installation, unless there are other restrictions (e.g. one needs a certain version of a software, or because of compatibility reasons). 
+We see that there is available one version of this software `1.0.1`. It is available as six different toolchains (May 19th 2024). The version of the compiler (GNU, Cray, AOCC) could have a meaning for us, but because we don't now care how the software is compiled, we choose as an example the one that is compiled with the GNU compiler (cpeGNU). Because we don't have other restrictions, we choose the installation made to the latest LUMI sotware stack that is available, the 22.12. 
+
+(A picture here about the text `eb-tutorial-1.0.1-cpeGNU-22.12.eb` where the software name, version, and eb-toolchain are marked?)
+
+=> We will install the `eb-tutorial-1.0.1-cpeGNU-22.12.eb` version of the eb-tutorial software. 
+
+(Some boxes with different colours next? To separate the blocks that one needs to do only once, and the ones that needs to be done every time on LUMI?)
+
+### Installation
+
+1) Decide where you want to install the software. The default location is your home folder $HOME/EasyBuild. The software installation will be done there, if you dont' change anything. It's in general a better practise to install the software in you /project folder. If the software is istalled there, all of the members of your project can use the installed software, and thus only one of you needed to actually install it. 
+
+- To change the install location to your /project folder:
+
+This change needs to be done before you load a version of LUMI sotware stacks. 
+
+Open a new shell on LUMI (e.g. logout, and login to LUMI again, or open a new LUMI session in another window)
+
+Go to your home folder:
+
+`cd`
+
+List the content of your home folder with a command that also shows the hidden files:
+
+`ls -a`
+
+Open the `.bashrc` file e.g. with
+
+`nano .bashrc`
+
+Add a following line somewhere in the file
+
+```bash
+export EBU_USER_PREFIX=/project/project_465000000/EasyBuild # Replace the project number with your project number
+```
+
+Save the changes to the `.bashrc` file with `Ctrl + s` and exit nano with `Ctrl + x` .
+
+2) Next let's load the version of LUMI software stack that corresponds to our software version:
+
+`module load LUMI/22.12`
+
+3) Next we will decide which `partition` we will use the software with. If we don't choose anything here, the default is `partition/L`, which means a set of settings that are optimized for the login nodes of LUMI. If we would be using this software on the compute nodes of LUMI-C, we would choose the `partition/C`. If the softare would be used on the LUMI-G nodes, we would load the `partition/G` . For the example let's say that our software 'eb-tutorial' is something that we want to run on the LUMI-C compute nodes. In that case we install the software with settings that are optimized for the LUMI-C compute nodes:
+
+`module load partition/C`
+
+4) To install a software with EasyBuild, we will need to load a module that does the installation:
+
+`module load EasyBuild-user`
+
+This is loaded only when we are installing the software, not anymore later when we are using the software. 
+
+5) Now the software is installed with a command:
+
+```bash
+eb eb-tutorial-1.0.1-cpeGNU-22.12.eb -r #The -r tells to also install possible dependencies
+```
+
+Depending on the software, and if it needs to first install several dependencies, the installation can take a while. 
+
+6) Once the installation is ready, the software has appeared to us on LUMI as it would be installed in the central software stack. We can take it into use with:
+
+`module load eb-tutorial`
+
+### Usage of the software
+
+When you later login to LUMI again and are using the software next times, you (or your group members) only need to do the steps:
+
+```bash
+module load LUMI/22.12
+module load partition/C
+module load eb-tutorial
+```
+
+(Continuing from here - Hd 19th May 2024)
 
 ...
 
