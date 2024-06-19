@@ -17,11 +17,12 @@ Besides the software available in the central LUMI software collection, there ar
 
 ## Good to know: Software stacks on LUMI
 
-(Should this be marked as an info-box? Kind of additional information, but definitelly good to mention shortly somewhere here when we are talking about software on LUMI.)
+A software stack is a set of modules, libraries and compilers, and everything there is needed to run the applications. On LUMI there are several software stacks available. 
+The main software stack on LUMI is the `LUMI software stack`, which is maintained and supported by the LUMI user support team. There are several versions of it available at the same time, as the components of the software stacks regularily get updates. Old software stack versions get disabled at some point. 
 
-A sotware stack means a collection of software. On LUMI the main collections are the versions of the `LUMI software stack`, maintained and supported by the LUMI user support team. It is good to know in general what the software environment on LUMI is based on, and what kind of options there are for software stacks on LUMI. Here we give just a very brief description. In case you would like to know more, please see the [LUMI documentation](https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/). 
+It is good to know the principles of what the software environment on LUMI is based on, and what kind of options there are for software stacks on LUMI. Here we give just a very brief description. In case you would like to know more, please see the [LUMI documentation](https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/). 
 
-As LUMI is a HPE Cray machine, the basis of all the software environments on LUMI is a basic Cray environment. This is what you get as default, when you login to LUMI. It is recommended to load one of the offered software stacks on top of this. In the following examples in this guide we will be using versions of the main software stacks on LUMI, i.e. versions of the "LUMI software stack". 
+As LUMI is a HPE Cray machine, the basis of all the software environments on LUMI is a Cray environment. This is what you get as a default, once you login to LUMI. It is recommended to load one of the offered software stacks on top of this. In the following examples in this guide we will be using versions of the main software stacks on LUMI, i.e. versions of the "LUMI software stack". 
 
 (A figure here, what sw stack options there are?)
 
@@ -38,13 +39,13 @@ Basic Cray Environment
 
 ```
 
-`The Cray environment` (CrayEnv) contains some additional tools on top of the default environemnt what you get at login. https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#crayenv
+[`The Cray environment`](https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#crayenv) (CrayEnv) contains some additional tools on top of the default environemnt what you get at login.
 
-`The LUMI stacks` are the main software stacks on LUMI that is build on top of the basic Cray environment using EasyBuild. https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#lumi
+[`The LUMI stacks`](https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#lumi) are the main software stacks on LUMI that is build on top of the basic Cray environment using EasyBuild.
 This is what we will be using in the following examples. 
 
-`Spack` is available, but it is only recommended if you are already familiar with using Spack. It is offered "as-is". No support with developing or debugging Spack modules is provided by the LUMI user support team. 
-https://docs.lumi-supercomputer.eu/software/installing/spack/
+[`Spack`](https://docs.lumi-supercomputer.eu/software/installing/spack/) is available, but it is only recommended if you are already familiar with using Spack. It is offered "as-is". No support with developing or debugging Spack modules is provided by the LUMI user support team. 
+
 
 
 
@@ -77,15 +78,11 @@ module list
 
 The modules you see listed are both _installed_ and currently _loaded_ to use. This is the default environment when you open a new session on LUMI, before you do or load anything else. (It contains e.g. some initial/default settings for libraries, compiling environment, etc.)
 
-Basically next step would be to load a version of the available software stacks. But it depends completely on what we want to do on LUMI, which software stack we would like to use. 
+Next step after login would usually be loading one version of the available software stacks. Which one, depends on what we would like to do on LUMI. 
 
-...
+One example workflow would be that first after login we would load a LUMI software stacks (e.g. LUMI/23.09). Then we would load a suitable partition for our use case (e.g. partition/C for LUMI-C compute nodes). Then we would load our software. If the software is not yet installed by you or by one of your group members to your `/project/project_46XXXXXXX/` location, we install the software first. 
 
-**The following is a DRAFT. (Still trying to figure out what would be the simplest way to present how to work with modules/software on LUMI. - Hd / 3rd May.)**
-
-Basically first after login we would load a software stacks (e.g. LUMI/23.09). Then we would load a suitable partition for our use case (e.g. partition/C for LUMI-C compute nodes). Then we would load our software. If the software is not yet installed e.g. by one of your group members to your `/project/project_46XXXXXXX/` location, we install the software first. 
-
-A module load example tree?
+(A some sort of module load example tree here?)
 
 ```
 
@@ -103,21 +100,14 @@ Login (Basic Cray environment loaded as default)
 |                  |---- partition/L
 |                  |---- partition/C
 |                  `---- partition/G
-|                        `------ (Load or install your software e.g. w/ EasyBuild) 
+|                        `------ Load or install your software (e.g. w/ EasyBuild) 
 |
 |-------------- Spack/23.03
 |
 `-------------- Spack/23.09
-                `----- (Do whatever is done with Spack)
+                
 
 ```
-
-...
-
-
--> Module avail etc, maybe example with Nano and some sw that we need to install w/ EB. 
-
-...
 
 To see other modules that are currently installed and available to be loaded (but not yet loaded to use), one can use the command `module avail`. The output lists everything that is currently available to be loaded, so it's quite a long list. (Typing this opens an output with the `less` tool, which you can scroll e.g. with the keyboard arrow kyes, and exit with pressing `q` from the keyboard.)
 
@@ -139,7 +129,11 @@ What it comes to the Nano editor itself, it doesn't really matter which version 
 
 From the output of available prerequisites that we just got with `module spider nano/7.2` we choose **one line**. Let's now choose the latest (on May 2024) of the available LUMI software stacks `LUMI/23.09`. Besides this let's choose to use the `partition/L` that just means a set of settings optimized for the _login nodes_ on LUMI. Because we are just going to test Nano on a login node where we are now, and not submitting jobs e.g. to LUMI-C or LUMI-G and using Nano interactively from a compute node for example, we are happy with settings optimized for the login nodes. 
 
-At this point we are still with the same environment than which we had right after login to LUMI. If we do the `module list` the listing is exactly the same as earlier. Let's see the currently available versions of `LUMI` software stacks: 
+At this point we are still with the same environment than which we had right after login to LUMI. If we do the `module list` the listing is exactly the same as earlier. 
+
+---
+
+Let's see the currently available versions of `LUMI` software stacks: 
 
 Type `module load LUMI` and press the tabulator key twice. The output you see should be something like:
 
@@ -147,39 +141,15 @@ Type `module load LUMI` and press the tabulator key twice. The output you see sh
 
 The versions of the LUMI software stacks are named based on a year and a month that the corresponding version of a Cray software stack was reliesed.
 
+Now let's not load any version of the LUMI software stacks just yet. Usually it's good to load a version of the software stacks after one knows which version we need, and we'll get to that point soon. 
+
+When loading e.g. a LUMI software stak version, if you don't specify the version in the module load command (i.e. you would do only `module load LUMI` and press enter), a default version is loaded. But it is recommended to also provide the version of the software stacks in the module load command, as we are doing above, as the default version may change. Also when specifying the version, you always know what you are actually loading, and what other modules or EasyBuild installations are compatible with it. 
+
 ---
-(The tutorial about loading Nano here?)
-
-Now, let's load a version of LUMI software stacks `LUMI/23.09`:
-
-```bash
-module load LUMI/23.09
-```
-
-...
-
-
-
-Because we haven't loaded any of the available versions of software stacks (CrayEnv, LUMI, Spack), we get versions for the Nano editor that are adjusted for several of these. 
 
 
 
 
-
-(Note that if there are very many versions available, all versions might not be visible in this output. One can always check the [LUMI software library](https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/, if unsure about availability of  )
-
-
-
-
-
-
-
-
-
-If there is no output when searching a specific software, it doesn't yet mean that the software woulnd't be available on LUMI at all. 
-It just might mean that one needs to do an extra step to _install_ the software first. In practise this means a couple more commands that one needs to type. Detailed examples how to find the software available to install on LUMI, as well as how to actually do this in practise, follow later in this material.
-
-Why is some software only available after installing it, and not there directly to be loaded? This is because there are in many cases very many different versions and variations of the same software, and different people prefer different qualities for their specific use cases. Having everything already in the system available for everyone would be unpractical (the view when searching for modules would become long and messy, and also all these modules would need to be maintained). The approach with software on LUMI provides more variations for the specific use cases that different users might have.
 
 
 ## Tutorial: Load the Nano editor and write a simple script
@@ -206,13 +176,13 @@ We see that there is available one version of this software `1.0.1`. It is avail
 
 ### Installation
 
-1) Decide where you want to install the software. The default location is your home folder $HOME/EasyBuild. The software installation will be done there, if you dont' change anything. It's in general a better practise to install the software in you /project folder. If the software is istalled there, all of the members of your project can use the installed software, and thus only one of you needed to actually install it. 
+1) Decide where you want to install the software. The default location is your home folder $HOME/EasyBuild. The software will be automatically installed there, if you don't change anything. However, it's in general a better practise to install the software in your /project folder, which is shared by everyone in your project. If the software is istalled there, all of the members of your project can use the installed software that one of the project members has installed. 
 
-- To change the install location to your /project folder:
+Now let's change the location for EasyBuild installations to the /project folder of your project. 
 
-This change needs to be done before you load a version of LUMI sotware stacks. 
+Note, that this change needs to be done before you load any version of the LUMI sotware stacks. 
 
-Open a new shell on LUMI (e.g. logout, and login to LUMI again, or open a new LUMI session in another window)
+Open a new shell on LUMI (e.g. logout, and login to LUMI again, or open a new LUMI session in another shell window)
 
 Go to your home folder:
 
@@ -270,111 +240,117 @@ module load partition/C
 module load eb-tutorial
 ```
 
-(Continuing from here - Hd 19th May 2024)
 
-...
 
-## More module commands with Gromacs as an example
+## Advanced: Adding your own EasyConfig to LUMI
 
-💬 Let's imagine that you want to do some molecular dynamics simulations using the [Gromacs](https://www.gromacs.org/about.html) application.
+If you have an EasyConfig that you have written yourself, or modified from an existing one, and you would like to bring it to LUMI, here's an example of how it's done. This is briefly described in the [LUMI documentation](https://docs.lumi-supercomputer.eu/software/installing/easybuild/#building-your-own-easybuild-repository)
 
-- It is always a good idea to start by checking [the application list in Docs CSC](https://docs.csc.fi/apps/) to see whether this application is installed in Puhti and how to use it.
 
-1. Check out the [Gromacs page](https://docs.csc.fi/apps/gromacs/).
-2. Skim through the documentation and verify that the license allows you to use the software.
-3. Check what is the module command that you need to run to be able to load Gromacs in Puhti.
-4. Back on the command-line, check which Gromacs versions are available in Puhti.
+First let's check what is the value of `EBU_USER_PREFIX` 
 
 ```bash
-module spider gromacs
+echo $EBU_USER_PREFIX
 ```
 
-☝🏻 This might take a while as the command searches through all the available modules.
-
-💬 The list can be quite long. You can go to the next line with Enter, or stop viewing by typing `q`).
-
-{:style="counter-reset:step-counter 4"}
-5. Check if some versions can be loaded directly, *i.e.* are compatible with your currently loaded module environment:
+The output should be something as:
 
 ```bash
-module avail gromacs
+/project/project_465000001/EasyBuild
 ```
 
-💡 Tip: Another quick way to list the available versions is by typing the load command until the module name and then hit `TAB` twice:
+or
 
 ```bash
-$ module load gromacs # and here double press TAB
-gromacs                gromacs/2022.3         gromacs-env/2021-gpu
-gromacs/2021.4-plumed  gromacs/2022.4         gromacs-env/2022
-gromacs/2021.5         gromacs-env            gromacs-env/2022-gpu
-gromacs/2021.6         gromacs-env/2020       
-gromacs/2022.2         gromacs-env/2021
+$HOME/EasyBuild
 ```
 
-{:style="counter-reset:step-counter 5"}
-6. Which version is loaded with the default command? Is it the newest version? Try:
+if we haven't set the `EBU_USER_PREFIX` to point to a location under our project directories. 
+
+The location where `EBU_USER_PREFIX` points is not only where EasyBuild places the EasyBuild installations, but where it goes looking for existing recipes. If we want to add an EasyConfig ourselves, this is where to place it.
+
+Let's assume we have our `EBU_USER_PREFIX` variable pointing to `/project/project_465000001/EasyBuild`. Let's go to this location
 
 ```bash
-module load gromacs
+cd /project/project_465000001/EasyBuild
 ```
 
-{:style="counter-reset:step-counter 6"}
-7. Do you notice any changes in the output of `module list` compared to the first try? Try this again:
+With `ls` we see that the location contains something as the following, depening a bit what kind of installations one has already made:
+
+`ebrepo_files  mgmt  modules  sources  SW  UserRepo`
+
+Let's move to the location where the new recipe should be placed:
 
 ```bash
-module list
-```  
-
-☝🏻 If no version is given in the module command, the default version is loaded.
-
-- The default version is typically the latest **stable** version of the program.
-- It is recommended to also provide the version in the module load command, as the default version may change.
-
-{:style="counter-reset:step-counter 7"}
-8. Let's try loading the 2021.6 version specifically:
-
-```bash
-module load gromacs/2021.6
-module list
+cd UserRepo/easybuild/easyconfigs
 ```
 
-{:style="counter-reset:step-counter 8"}
-9. If you want to do something else in the same session, it is usually best to reset the module environment to the default settings. This can be done by first removing all loaded modules and then loading the default environment:
+This location should be empty, if you haven't added any EasyConfigs yourself before. 
+
+You should name your EasyConfig using a similar naming scheme as described in the LUMI documentation: 
+https://docs.lumi-supercomputer.eu/software/installing/easybuild/#easybuild-recipes
+
+with 
+
+`software_name`-`version`-`compiler`-`LUMI_software_stack_version`-`possible_additional_information`.eb
+
+Create a new file in this location e.g. with using `nano`
 
 ```bash
-module purge            # Purge all (non-sticky) modules
-module list             # List the loaded modules
-module load StdEnv      # Load the default module environment
-module list             # List the loaded modules
+nano <your-new-easyconfig-name>.eb
 ```
 
-## More information
+and add the content of the recipe there. Save and exit the document with `Ctrl+x` and `y` and Enter. 
 
-💭 If actually using Gromacs in Puhti, you would run the application as a batch job through the queueing system, which will be discussed in detail later.
+We can check with `ls` that our EasyConfig file is there now. 
 
-💭 Check out an [example batch job script for Gromacs](https://docs.csc.fi/apps/gromacs/#example-parallel-batch-script-for-puhti) to see how the module is recommended to be loaded (`module load gromacs-env` loads the latest minor release of a specific year).
-
-### Loading an older version of a module
-
-💬 Using an older version of a module is usually possible
-
-💬 As an example, you can try to load an old version of Gromacs from 2020.
-
-1. The `gromacs/2020.5` module cannot be loaded in the default environment since it has different dependencies. Check with the `module spider` command which other modules are needed for the older version:
+It doesn't matter in which location you are next for the installation, but you can move e.g. to your home directory
 
 ```bash
-module spider gromacs/2020.5
+cd
 ```
 
-{:style="counter-reset:step-counter 1"}
-2. Load all of the required modules manually before loading `gromacs/2020.5`
+To make sure you have a clean shell environment, it is recommended e.g. to log out from LUMI and back in again at this point. 
+
+When back at LUMI with a clean shell, we can now install the software module (for us and our project members) with using the EasyConfig we just added. This works the same way as with any other EasyConfigs that we have described earlier on this page, in the previous examples.
+
+Let's assume our EasyConfig is for LUMI/23.09, and we would like to use it with LUMI-C. 
 
 ```bash
-module purge
-module load gcc/9.4.0
-module load openmpi/4.1.4
-module load gromacs/2020.5
-module list
+module load LUMI/23.09
+module load partition/C
+module load EasyBuild-user
 ```
 
-☝🏻 It is generally best to use the latest versions since they typically are more performant than old ones and may have useful new features.
+now, if we want to, we can check with `eb -S <our-software-name>` what recipes are available. If our software would be called e.g. MySoftware, we could do:
+
+```bash
+eb -S MySoftware
+```
+
+Let's now install our EasyConfig:
+
+```bash
+eb <full-name-of-our-easyconfig>.eb -r
+```
+This may take a while, depending on the software.
+
+Now with 
+
+```bash
+module avail <our-software-name> 
+```
+
+we should find out that our software is available to be loaded with LUMI/23.09 and with partition/C, and we can load it with
+
+```bash
+module load MySoftware
+```
+
+In the future, when logging in to LUMI, we can only load the same LUMI software stack and partition, and then our software. In this case it would be:
+
+```bash
+module load LUMI/23.09
+module load partition/C
+module load MySoftware
+```

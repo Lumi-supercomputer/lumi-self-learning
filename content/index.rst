@@ -48,6 +48,7 @@ and/or development projects and know where to look for more information.
    21-installing-own-applications.md
    22-working-with-containers.md
    23-advanced-topics.md
+   24-lumio-object-storage.md
 
 See also
 --------
