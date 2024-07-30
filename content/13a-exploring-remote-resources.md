@@ -19,7 +19,7 @@
 - Assess the number of idle and occupied nodes
 ```
 
-```{keypoints
+```{keypoints}
 - An HPC system is a set of networked machines.
 - HPC systems typically provide login nodes and a set of compute nodes.
 - The resources found on independent (worker) nodes can vary in volume and
@@ -36,36 +36,36 @@ If you have not already connected to {{ site.remote.name }}, please do so now:
 ```
 {{ site.local.prompt }}  ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
-{: .language-bash}
+
 
 Take a look at your home directory on the remote system:
 
 ```
 {{ site.remote.prompt }} ls
 ```
-{: .language-bash}
 
-> ## What's different between your machine and the remote?
+
+>  What's different between your machine and the remote?
 >
 > Open a second terminal window on your local computer and run the `ls` command
 > (without logging in to {{ site.remote.name }}). What differences do you see?
 >
-> > ## Solution
-> >
-> > You would likely see something more like this:
-> >
-> > ```
-> > {{ site.local.prompt }} ls
-> > ```
-> > {: .language-bash}
-> > ```
-> > Applications Documents    Library      Music        Public
-> > Desktop      Downloads    Movies       Pictures
-> > ```
-> > {: .output}
-> >
-> > The remote computer's home directory shares almost nothing in common with
-> > the local computer: they are completely separate systems!
+> Solution
+>
+> You would likely see something more like this:
+>
+> ```
+> {{ site.local.prompt }} ls
+> ```
+> 
+> ```
+> Applications Documents    Library      Music        Public
+> Desktop      Downloads    Movies       Pictures
+> ```
+> 
+>
+> The remote computer's home directory shares almost nothing in common with
+> the local computer: they are completely separate systems!
 > {: .solution}
 {: .discussion}
 
@@ -77,19 +77,19 @@ devices are anchored to the "root" directory, which is `/`:
 ```
 {{ site.remote.prompt }} ls /
 ```
-{: .language-bash}
+
 ```
 bin   etc   lib64  proc  sbin     sys  var
 boot  {{ site.remote.homedir | replace: "/", "" }}  mnt    root  scratch  tmp  working
 dev   lib   opt    run   srv      usr
 ```
-{: .output}
+
 
 The "{{ site.remote.homedir | replace: "/", "" }}" directory is the one where
 we generally want to keep all of our files. Other folders on a UNIX OS contain
 system files and change as you install new software or upgrade your OS.
 
-> ## Using HPC filesystems
+>  Using HPC filesystems
 >
 > On HPC systems, you have a number of places where you can store your files.
 > These differ in both the amount of space allocated and whether or not they
@@ -130,12 +130,12 @@ Who else is logged in to the login node?
 ```
 {{ site.remote.prompt }} who
 ```
-{: .language-bash}
+
 
 This may show only your user ID, but there are likely several other people
 (including fellow learners) connected right now.
 
-> ## Dedicated Transfer Nodes
+>  Dedicated Transfer Nodes
 >
 > If you want to transfer larger amounts of data to or from the cluster, some
 > systems offer dedicated nodes for data transfers only. The motivation for
@@ -163,7 +163,7 @@ For example, we can view all of the compute nodes by running the command
 ```
 {{ site.remote.prompt }} {{ site.sched.info }}
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/cluster/queue-info.snip %}
 
@@ -192,7 +192,7 @@ connect to a shared, remote fileserver or cluster of servers.
    file="/fig/node_anatomy.png"
    alt="Node anatomy" caption="" %}
 
-> ## Explore Your Computer
+>  Explore Your Computer
 >
 > Try to find out the number of CPUs and amount of memory available on your
 > personal computer.
@@ -204,105 +204,105 @@ connect to a shared, remote fileserver or cluster of servers.
 > {{ site.remote.prompt }} exit
 > {{ site.local.prompt }}
 > ```
-> {: .language-bash}
+> 
 >
-> > ## Solution
-> >
-> > There are several ways to do this. Most operating systems have a graphical
-> > system monitor, like the Windows Task Manager. More detailed information
-> > can be found on the command line:
-> >
-> > * Run system utilities
-> >   ```
-> >   {{ site.local.prompt }} nproc --all
-> >   {{ site.local.prompt }} free -m
-> >   ```
-> >   {: .language-bash}
-> >
-> > * Read from `/proc`
-> >   ```
-> >   {{ site.local.prompt }} cat /proc/cpuinfo
-> >   {{ site.local.prompt }} cat /proc/meminfo
-> >   ```
-> >   {: .language-bash}
-> >
-> > * Run system monitor
-> >   ```
-> >   {{ site.local.prompt }} htop
-> >   ```
-> >   {: .language-bash}
+>  Solution
+>
+> There are several ways to do this. Most operating systems have a graphical
+> system monitor, like the Windows Task Manager. More detailed information
+> can be found on the command line:
+>
+> * Run system utilities
+>   ```
+>   {{ site.local.prompt }} nproc --all
+>   {{ site.local.prompt }} free -m
+>   ```
+>   
+>
+> * Read from `/proc`
+>   ```
+>   {{ site.local.prompt }} cat /proc/cpuinfo
+>   {{ site.local.prompt }} cat /proc/meminfo
+>   ```
+>   
+>
+> * Run system monitor
+>   ```
+>   {{ site.local.prompt }} htop
+>   ```
+>   
 > {: .solution}
 {: .challenge}
 
-> ## Explore the Login Node
+>  Explore the Login Node
 >
 > Now compare the resources of your computer with those of the login node.
 >
-> > ## Solution
+>  Solution
+>
+> ```
+> {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+> {{ site.remote.prompt }} nproc --all
+> {{ site.remote.prompt }} free -m
+> ```
+> 
+>
+> You can get more information about the processors using `lscpu`,
+> and a lot of detail about the memory by reading the file `/proc/meminfo`:
+>
+> ```
+> {{ site.remote.prompt }} less /proc/meminfo
+> ```
+> 
+>
+> You can also explore the available filesystems using `df` to show **d**isk
+> **f**ree space. The `-h` flag renders the sizes in a human-friendly format,
+> i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
+> each resource is.
+>
+> ```
+> {{ site.remote.prompt }} df -Th
+> ```
+> 
+>
+> >  Different results from `df`
 > >
-> > ```
-> > {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-> > {{ site.remote.prompt }} nproc --all
-> > {{ site.remote.prompt }} free -m
-> > ```
-> > {: .language-bash}
+> > * The local filesystems (ext, tmp, xfs, zfs) will depend on whether
+> >   you're on the same login node (or compute node, later on).
+> > * Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar
+> >   -- but may include {{ site.remote.user }}, depending on how it
+> >   is [mounted][mount].
+> {: .discussion}
+>
+> >  Shared Filesystems
 > >
-> > You can get more information about the processors using `lscpu`,
-> > and a lot of detail about the memory by reading the file `/proc/meminfo`:
-> >
-> > ```
-> > {{ site.remote.prompt }} less /proc/meminfo
-> > ```
-> > {: .language-bash}
-> >
-> > You can also explore the available filesystems using `df` to show **d**isk
-> > **f**ree space. The `-h` flag renders the sizes in a human-friendly format,
-> > i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
-> > each resource is.
-> >
-> > ```
-> > {{ site.remote.prompt }} df -Th
-> > ```
-> > {: .language-bash}
-> >
-> > > ## Different results from `df`
-> > >
-> > > * The local filesystems (ext, tmp, xfs, zfs) will depend on whether
-> > >   you're on the same login node (or compute node, later on).
-> > > * Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar
-> > >   -- but may include {{ site.remote.user }}, depending on how it
-> > >   is [mounted][mount].
-> > {: .discussion}
-> >
-> > > ## Shared Filesystems
-> > >
-> > > This is an important point to remember: files saved on one node
-> > > (computer) are often available everywhere on the cluster!
-> > {: .callout}
+> > This is an important point to remember: files saved on one node
+> > (computer) are often available everywhere on the cluster!
+> {: .callout}
 > {: .solution}
 {: .challenge}
 
 {% include {{ site.snippets }}/cluster/specific-node-info.snip %}
 
-> ## Compare Your Computer, the Login Node and the Compute Node
+>  Compare Your Computer, the Login Node and the Compute Node
 >
 > Compare your laptop's number of processors and memory with the numbers you
 > see on the cluster login node and compute node. What implications do
 > you think the differences might have on running your research work on the
 > different systems and nodes?
 >
-> > ## Solution
-> >
-> > Compute nodes are usually built with processors that have _higher
-> > core-counts_ than the login node or personal computers in order to support
-> > highly parallel tasks. Compute nodes usually also have substantially _more
-> > memory (RAM)_ installed than a personal computer. More cores tends to help
-> > jobs that depend on some work that is easy to perform in _parallel_, and
-> > more, faster memory is key for large or _complex numerical tasks_.
+>  Solution
+>
+> Compute nodes are usually built with processors that have _higher
+> core-counts_ than the login node or personal computers in order to support
+> highly parallel tasks. Compute nodes usually also have substantially _more
+> memory (RAM)_ installed than a personal computer. More cores tends to help
+> jobs that depend on some work that is easy to perform in _parallel_, and
+> more, faster memory is key for large or _complex numerical tasks_.
 > {: .solution}
 {: .discussion}
 
-> ## Differences Between Nodes
+>  Differences Between Nodes
 >
 > Many HPC clusters have a variety of nodes optimized for particular workloads.
 > Some nodes may have larger amount of memory, or specialized resources such as
