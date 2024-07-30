@@ -94,7 +94,7 @@ servers working together.
 - [Hyperscale computing](https://en.wikipedia.org/wiki/Hyperscale_computing)
 - [MapReduce](https://en.wikipedia.org/wiki/MapReduce)
 
-```{keypoints}
+```{keypoints}}
 - High Performance Computing (HPC) typically involves connecting to very large
   computing systems elsewhere in the world.
 - These other systems can be used to do work that would either be impossible

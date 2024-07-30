@@ -16,7 +16,7 @@
 - Explain how the shell environment changes when the module mechanism loads or unloads packages.
 ```
 
-```{keypoints
+```{keypoints}
 - Load software with `module load softwareName`.
 - Unload software with `module unload`
 - The module system handles software versioning and package conflicts for you automatically
@@ -82,7 +82,7 @@ To see available software modules, use `module avail`:
 ```
 {{ site.remote.prompt }} module avail
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/modules/available-modules.snip %}
 
@@ -95,12 +95,12 @@ message telling you so
 ```
 {{ site.remote.prompt }} module list
 ```
-{: .language-bash}
+
 
 ```
 No Modulefiles Currently Loaded.
 ```
-{: .output}
+
 
 ## Loading and Unloading Software
 
@@ -114,7 +114,7 @@ it to tell us where a particular piece of software is stored.
 ```
 {{ site.remote.prompt }} which python3
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/modules/missing-python.snip %}
 
@@ -136,7 +136,7 @@ variables we can print it out using `echo`.
 ```
 {{ site.remote.prompt }} echo $PATH
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/modules/python-module-path.snip %}
 
@@ -183,40 +183,40 @@ Let's examine the output of `module avail` more closely.
 ```
 {{ site.remote.prompt }} module avail
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/modules/available-modules.snip %}
 
 {% include {{ site.snippets }}/modules/wrong-gcc-version.snip %}
 
-> ## Using Software Modules in Scripts
+>  Using Software Modules in Scripts
 >
 > Create a job that is able to run `python3 --version`. Remember, no software
 > is loaded by default! Running a job is just like logging on to the system
 > (you should not assume a module loaded on the login node is loaded on a
 > compute node).
 >
-> > ## Solution
-> >
-> > ```
-> > {{ site.remote.prompt }} nano python-module.sh
-> > {{ site.remote.prompt }} cat python-module.sh
-> > ```
-> > {: .language-bash}
-> >
-> > ```
-> > {{ site.remote.bash_shebang }}
-> >
-> > module load {{ site.remote.module_python3 }}
-> >
-> > python3 --version
-> > ```
-> > {: .output}
-> >
-> > ```
-> > {{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}python-module.sh
-> > ```
-> > {: .language-bash}
+>  Solution
+>
+> ```
+> {{ site.remote.prompt }} nano python-module.sh
+> {{ site.remote.prompt }} cat python-module.sh
+> ```
+> 
+>
+> ```
+> {{ site.remote.bash_shebang }}
+>
+> module load {{ site.remote.module_python3 }}
+>
+> python3 --version
+> ```
+> 
+>
+> ```
+> {{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}python-module.sh
+> ```
+> 
 > {: .solution}
 {: .challenge}
 

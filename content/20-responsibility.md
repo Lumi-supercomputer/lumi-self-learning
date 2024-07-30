@@ -19,7 +19,7 @@
 - Convert many files to a single archive file using tar.
 ```
 
-```{keypoints
+```{keypoints}
 - Be careful how you use the login node.
 - Your data on the system is your responsibility.
 - Plan and test large data transfers.
@@ -53,7 +53,7 @@ library versions that differ from your laptop, and doing an interactive test
 run on the head node is a quick and reliable way to discover and fix these
 issues.
 
-> ## Login Nodes Are a Shared Resource
+>  Login Nodes Are a Shared Resource
 >
 > Remember, the login node is shared with all other users and your actions
 > could cause issues for other people. Think carefully about the potential
@@ -71,7 +71,7 @@ safely use it for your non-routine processing task. If something goes wrong
 -- the process takes too long, or doesn't respond -- you can use the
 `kill` command along with the _PID_ to terminate the process.
 
-> ## Login Node Etiquette
+>  Login Node Etiquette
 >
 > Which of these commands would be a routine task to run on the login node?
 >
@@ -81,18 +81,18 @@ safely use it for your non-routine processing task. If something goes wrong
 > 4. `molecular_dynamics_2`
 > 5. `tar -xzf R-3.3.0.tar.gz`
 >
-> > ## Solution
-> >
-> > Building software, creating directories, and unpacking software are common
-> > and acceptable > tasks for the login node: options #2 (`make`), #3
-> > (`mkdir`), and #5 (`tar`) are probably OK. Note that script names do not
-> > always reflect their contents: before launching #3, please
-> > `less create_directories.sh` and make sure it's not a Trojan horse.
-> >
-> > Running resource-intensive applications is frowned upon. Unless you are
-> > sure it will not affect other users, do not run jobs like #1 (`python`)
-> > or #4 (custom MD code). If you're unsure, ask your friendly sysadmin for
-> > advice.
+>  Solution
+>
+> Building software, creating directories, and unpacking software are common
+> and acceptable > tasks for the login node: options #2 (`make`), #3
+> (`mkdir`), and #5 (`tar`) are probably OK. Note that script names do not
+> always reflect their contents: before launching #3, please
+> `less create_directories.sh` and make sure it's not a Trojan horse.
+>
+> Running resource-intensive applications is frowned upon. Unless you are
+> sure it will not affect other users, do not run jobs like #1 (`python`)
+> or #4 (custom MD code). If you're unsure, ask your friendly sysadmin for
+> advice.
 > {: .solution}
 {: .challenge}
 
@@ -116,7 +116,7 @@ to a trivial typo in the job script. This is extremely frustrating!
 Most systems provide dedicated resources for testing that have short wait times
 to help you avoid this issue.
 
-> ## Test Job Submission Scripts That Use Large Amounts of Resources
+>  Test Job Submission Scripts That Use Large Amounts of Resources
 >
 > Before submitting a large run of jobs, submit one as a test first to make
 > sure everything works as expected.
@@ -161,7 +161,7 @@ In all these cases, the helpdesk of the system you are using should be able to
 provide useful guidance on your options for data transfer for the volumes of
 data you will be using.
 
-> ## Your Data Is Your Responsibility
+>  Your Data Is Your Responsibility
 >
 > Make sure you understand what the backup policy is on the file systems on the
 > system you are using and what implications this has for your work if you lose
@@ -237,7 +237,7 @@ talked about data transfer earlier.
    link points illustrate the latency of the link, with more tortuous
    mazes indicating higher latency.</i>" %}
 
-> ## Consider the Best Way to Transfer Data
+>  Consider the Best Way to Transfer Data
 >
 > If you are transferring large amounts of data you will need to think about
 > what may affect your transfer performance. It is always useful to run some
@@ -251,42 +251,42 @@ talked about data transfer earlier.
 > 1. ```
 >    {{ site.local.prompt }} scp -r data {{ site.remote.user }}@{{ site.remote.login }}:~/
 >    ```
->    {: .language-bash}
+>    
 > 2. ```
 >    {{ site.local.prompt }} rsync -ra data {{ site.remote.user }}@{{ site.remote.login }}:~/
 >    ```
->    {: .language-bash}
+>    
 > 3. ```
 >    {{ site.local.prompt }} rsync -raz data {{ site.remote.user }}@{{ site.remote.login }}:~/
 >    ```
->    {: .language-bash}
+>    
 > 4. ```
 >    {{ site.local.prompt }} tar -cvf data.tar data
 >    {{ site.local.prompt }} rsync -raz data.tar {{ site.remote.user }}@{{ site.remote.login }}:~/
 >    ```
->    {: .language-bash}
+>    
 > 5. ```
 >    {{ site.local.prompt }} tar -cvzf data.tar.gz data
 >    {{ site.local.prompt }} rsync -ra data.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:~/
 >    ```
->    {: .language-bash}
+>    
 >
-> > ## Solution
-> >
-> > 1. `scp` will recursively copy the directory. This works, but without
-> >    compression.
-> > 2. `rsync -ra` works like `scp -r`, but preserves file information like
-> >    creation times. This is marginally better.
-> > 3. `rsync -raz` adds compression, which will save some bandwidth. If you
-> >    have a strong CPU at both ends of the line, and you're on a slow
-> >    network, this is a good choice.
-> > 4. This command first uses `tar` to merge everything into a single file,
-> >    then `rsync -z` to transfer it with compression. With this large
-> >    _number_ of files, metadata overhead can hamper your transfer, so this
-> >    is a good idea.
-> > 5. This command uses `tar -z` to compress the archive, then `rsync` to
-> >    transfer it. This may perform similarly to #4, but in most cases (for
-> >    large datasets), it's the best combination of high throughput and low
-> >    latency (making the most of your time and network connection).
+>  Solution
+>
+> 1. `scp` will recursively copy the directory. This works, but without
+>    compression.
+> 2. `rsync -ra` works like `scp -r`, but preserves file information like
+>    creation times. This is marginally better.
+> 3. `rsync -raz` adds compression, which will save some bandwidth. If you
+>    have a strong CPU at both ends of the line, and you're on a slow
+>    network, this is a good choice.
+> 4. This command first uses `tar` to merge everything into a single file,
+>    then `rsync -z` to transfer it with compression. With this large
+>    _number_ of files, metadata overhead can hamper your transfer, so this
+>    is a good idea.
+> 5. This command uses `tar -z` to compress the archive, then `rsync` to
+>    transfer it. This may perform similarly to #4, but in most cases (for
+>    large datasets), it's the best combination of high throughput and low
+>    latency (making the most of your time and network connection).
 > {: .solution}
 {: .challenge}

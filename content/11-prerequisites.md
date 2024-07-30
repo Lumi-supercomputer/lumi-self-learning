@@ -14,7 +14,7 @@
 - Connect to a remote HPC system.
 ```
 
-```{keypoints
+```{keypoints}
 - An HPC system is a set of networked machines.
 - HPC systems typically provide login nodes and a set of worker nodes.
 - The resources found on independent (worker) nodes can vary in volume and
@@ -90,7 +90,7 @@ In this section you will create a pair of SSH keys:
 * a public key which can be placed on any remote system you will access.
 
 ```{caution} 
-### Private keys are your secure digital passport
+**Private keys are your secure digital passport**  
 
 A private key that is visible to anyone but you should be considered
 compromised, and must be destroyed. This includes having improper permissions
@@ -148,7 +148,7 @@ $ ssh-keygen -a 100 -f ~/.ssh/id_ed25519 -t ed25519
 ```
 
 When prompted, enter a strong password with the
-[above considerations in mind](#considerations-for-ssh-key-passwords).
+above considerations in mind.
 Note that the terminal will not appear to change while you type the password:
 this is deliberate, for your security. You will be prompted to type it again,
 so don't worry too much about typos.
@@ -178,7 +178,7 @@ $ ssh-keygen -a 100 -b 4096 -f ~/.ssh/id_rsa -o -t rsa
 ```
 
 When prompted, enter a strong password with the
-[above considerations in mind](#considerations-for-ssh-key-passwords).
+above considerations in mind.
 Take a look in `~/.ssh` (use `ls ~/.ssh`). You should see two new files:
 * your private key (`~/.ssh/id_rsa`): _do not share with anyone!_
 * the shareable public key (`~/.ssh/id_rsa.pub`): if a system administrator
@@ -196,7 +196,7 @@ key pair. See the [PuTTY documentation][putty-gen] for details.
 * Click on the "Generate" button.
 * You do not need to enter a comment.
 * When prompted, enter a strong password with the
-  [above considerations in mind](#considerations-for-ssh-key-passwords).
+  above considerations in mind.
 * Save the keys in a folder no other users of the system can read.
 
 Take a look in the folder you specified. You should see two new files:
@@ -364,11 +364,11 @@ Great, we know where we are! Let's see what's in our current directory:
 ```
 {{ site.remote.prompt }} ls
 ```
-{: .language-bash}
+
 ```
 id_ed25519.pub
 ```
-{: .output}
+
 
 The system administrators may have configured your home directory with some
 helpful files, folders, and links (shortcuts) to space reserved for you on
@@ -378,12 +378,12 @@ double-check, include hidden files in your directory listing:
 ```
 {{ site.remote.prompt }} ls -a
 ```
-{: .language-bash}
+
 ```
   .            .bashrc           id_ed25519.pub
   ..           .ssh
 ```
-{: .output}
+
 
 In the first column, `.` is a reference to the current directory and `..` a
 reference to its parent (`{{ site.remote.homedir }}`). You may or may not see

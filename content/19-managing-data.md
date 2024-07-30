@@ -13,7 +13,7 @@
 - Transfer files to and from a computing cluster.
 ```
 
-```{keypoints
+```{keypoints}
 - `wget` and `curl -O` download a file from the internet.
 - `scp` and `rsync` transfer files to and from your computer.
 - You can use an SFTP client like FileZilla to transfer files through a GUI.
@@ -55,7 +55,7 @@ your local machine, using the URL of the current codebase:
 
 <https://github.com/hpc-carpentry/amdahl/tarball/main>
 
-> ## Download the "Tarball"
+>  Download the "Tarball"
 >
 > The word "tarball" in the above URL refers to a compressed archive format
 > commonly used on Linux, which is the operating system the majority of HPC
@@ -74,14 +74,14 @@ your local machine, using the URL of the current codebase:
 > in this case, `main`.
 > Use one of the above commands to save the tarball as `amdahl.tar.gz`.
 >
-> > ## `wget` and `curl` Commands
-> >
-> > ```
-> > {{ site.local.prompt }} wget -O amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > # or
-> > {{ site.local.prompt }} curl -o amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > ```
-> > {: .language-bash}
+>  `wget` and `curl` Commands
+>
+> ```
+> {{ site.local.prompt }} wget -O amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
+> or
+> {{ site.local.prompt }} curl -o amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
+> ```
+> 
 > {: .solution}
 {: .challenge}
 
@@ -90,7 +90,7 @@ After downloading the file, use `ls` to see it in your working directory:
 ```
 {{ site.local.prompt }} ls
 ```
-{: .language-bash}
+
 
 ## Archiving Files
 
@@ -141,7 +141,7 @@ hpc-carpentry-amdahl-46c9b4b/amdahl/amdahl.py
 hpc-carpentry-amdahl-46c9b4b/requirements.txt
 hpc-carpentry-amdahl-46c9b4b/setup.py
 ```
-{: .language-bash}
+
 
 This example output shows a folder which contains a few files, where `46c9b4b`
 is an 8-character [git][git-swc] commit hash that will change when the source
@@ -154,7 +154,7 @@ Now let's unpack the archive. We'll run `tar` with a few common flags:
 * `-z` for g**z**ip compression
 * `-f «tarball»` for the file to be unpacked
 
-> ## Extract the Archive
+>  Extract the Archive
 >
 > Using the flags above, unpack the source code tarball into a new
 > directory named "amdahl" using `tar`.
@@ -162,7 +162,7 @@ Now let's unpack the archive. We'll run `tar` with a few common flags:
 > ```
 > {{ site.local.prompt }} tar -xvzf amdahl.tar.gz
 > ```
-> {: .language-bash}
+> 
 >
 > ```
 > hpc-carpentry-amdahl-46c9b4b/
@@ -179,7 +179,7 @@ Now let's unpack the archive. We'll run `tar` with a few common flags:
 > hpc-carpentry-amdahl-46c9b4b/requirements.txt
 > hpc-carpentry-amdahl-46c9b4b/setup.py
 > ```
-> {: .output}
+> 
 >
 > Note that we did not need to type out `-x -v -z -f`, thanks to flag
 > concatenation, though the command works identically either way --
@@ -193,7 +193,7 @@ convenient.
 ```
 {{ site.local.prompt }} mv hpc-carpentry-amdahl-46c9b4b amdahl
 ```
-{: .language-bash}
+
 
 Check the size of the extracted directory and compare to the compressed
 file size, using `du` for "**d**isk **u**sage".
@@ -204,7 +204,7 @@ file size, using `du` for "**d**isk **u**sage".
 {{ site.local.prompt }} du -sh amdahl
 48K    amdahl
 ```
-{: .language-bash}
+
 
 Text files (including Python source code) compress nicely:
 the "tarball" is one-sixth the total size of the raw data!
@@ -216,7 +216,7 @@ then provide a directory to compress:
 ```
 {{ site.local.prompt }} tar -cvzf compressed_code.tar.gz amdahl
 ```
-{: .language-bash}
+
 ```
 amdahl/
 amdahl/.github/
@@ -232,7 +232,7 @@ amdahl/amdahl/amdahl.py
 amdahl/requirements.txt
 amdahl/setup.py
 ```
-{: .output}
+
 
 If you give `amdahl.tar.gz` as the filename in the above command, `tar` will
 update the existing tarball with any changes you made to the files.
@@ -240,7 +240,7 @@ That would mean adding the new `amdahl` folder to the _existing_ folder
 (`hpc-carpentry-amdahl-46c9b4b`) inside the tarball, doubling the size of the
 archive!
 
-> ## Working with Windows
+>  Working with Windows
 >
 > When you transfer text files from a Windows system to a Unix system (Mac,
 > Linux, BSD, Solaris, etc.) this can cause problems. Windows encodes its files
@@ -275,7 +275,7 @@ To _upload to_ another computer, the template command is
 ```
 {{ site.local.prompt }} scp local_file {{ site.remote.user }}@{{ site.remote.login }}:remote_destination
 ```
-{: .language-bash}
+
 
 in which `@` and `:` are field separators and `remote_destination` is a path
 relative to your remote home directory, or a new filename if you wish to change
@@ -295,9 +295,9 @@ Upload the lesson material to your remote home directory like so:
 ```
 {{ site.local.prompt }} scp amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
 ```
-{: .language-bash}
 
-> ## Why Not Download on {{ site.remote.name }} Directly?
+
+>  Why Not Download on {{ site.remote.name }} Directly?
 >
 > Most computer clusters are protected from the open internet by a _firewall_.
 > For enhanced security, some are configured to allow traffic _inbound_, but
@@ -309,15 +309,15 @@ Upload the lesson material to your remote home directory like so:
 > Try downloading the file directly. Note that it may well fail, and that's
 > OK!
 >
-> > ## Commands
-> >
-> > ```
-> > {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-> > {{ site.remote.prompt }} wget -O amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > # or
-> > {{ site.remote.prompt }} curl -o amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > ```
-> > {: .language-bash}
+>  Commands
+>
+> ```
+> {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+> {{ site.remote.prompt }} wget -O amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
+> or
+> {{ site.remote.prompt }} curl -o amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
+> ```
+> 
 > {: .solution}
 >
 > Did it work? If not, what does the terminal output tell you about what
@@ -334,9 +334,9 @@ provided.
 ```
 {{ site.local.prompt }} scp -r amdahl {{ site.remote.user }}@{{ site.remote.login }}:
 ```
-{: .language-bash}
 
-> ## Caution
+
+>  Caution
 >
 > For a large directory -- either in size or number of files --
 > copying with `-r` can take a long time to complete.
@@ -366,7 +366,7 @@ completeness.
 With `scp`, a trailing slash on the target directory is optional, and has
 no effect. It is important for other commands, like `rsync`.
 
-> ## A Note on `rsync`
+>  A Note on `rsync`
 >
 > As you gain experience with transferring files, you may find the `scp`
 > command limiting. The [rsync] utility provides
@@ -380,7 +380,7 @@ no effect. It is important for other commands, like `rsync`.
 > ```
 > {{ site.local.prompt }} rsync -avP amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
 > ```
-> {: .language-bash}
+> 
 >
 > The options are:
 >
@@ -395,7 +395,7 @@ no effect. It is important for other commands, like `rsync`.
 > ```
 > {{ site.local.prompt }} rsync -avP amdahl {{ site.remote.user }}@{{ site.remote.login }}:~/
 > ```
-> {: .language-bash}
+> 
 >
 > As written, this will place the local directory and its contents under your
 > home directory on the remote system. If the trailing slash is omitted on
@@ -408,7 +408,7 @@ no effect. It is important for other commands, like `rsync`.
 > ```
 > {{ site.local.prompt }} rsync -avP {{ site.remote.user }}@{{ site.remote.login }}:amdahl ./
 > ```
-> {: .language-bash}
+> 
 {: .callout}
 
 File transfers using both `scp` and `rsync` use SSH to encrypt data sent through
@@ -417,7 +417,7 @@ files. By default, SSH uses network port 22. If a custom SSH port is in use,
 you will have to specify it using the appropriate flag, often `-p`, `-P`, or
 `--port`. Check `--help` or the `man` page if you're unsure.
 
-> ## Change the Rsync Port
+>  Change the Rsync Port
 >
 > Say we have to connect `rsync` through port 768 instead of 22. How would we
 > modify this command?
@@ -425,23 +425,23 @@ you will have to specify it using the appropriate flag, often `-p`, `-P`, or
 > ```
 > {{ site.local.prompt }} rsync amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
 > ```
-> {: .language-bash}
+> 
 >
 > _Hint:_ check the `man` page or "help" for `rsync`.
 >
-> > ## Solution
-> >
-> > ```
-> > {{ site.local.prompt }} man rsync
-> > {{ site.local.prompt }} rsync --help | grep port
-> >      --port=PORT             specify double-colon alternate port number
-> > See http://rsync.samba.org/ for updates, bug reports, and answers
-> > {{ site.local.prompt }} rsync --port=768 amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
-> > ```
-> > {: .language-bash}
-> >
-> > (Note that this command will fail, as the correct port in this case is the
-> > default: 22.)
+>  Solution
+>
+> ```
+> {{ site.local.prompt }} man rsync
+> {{ site.local.prompt }} rsync --help | grep port
+>      --port=PORT             specify double-colon alternate port number
+> See http://rsync.samba.org/ for updates, bug reports, and answers
+> {{ site.local.prompt }} rsync --port=768 amdahl.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
+> ```
+> 
+>
+> (Note that this command will fail, as the correct port in this case is the
+> default: 22.)
 > {: .solution}
 {: .challenge}
 
