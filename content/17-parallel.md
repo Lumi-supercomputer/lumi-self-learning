@@ -19,7 +19,7 @@
 - Describe the relationship between job parallelism and performance.
 ```
 
-```{keypoints
+```{keypoints}
 - Parallel programming allows applications to take advantage of parallel hardware.
 - The queuing system facilitates executing parallel tasks.
 - Performance improvements from parallel execution do not scale linearly.
@@ -34,7 +34,7 @@ If you disconnected, log back in to the cluster.
 ```
 {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
-{: .language-bash}
+
 
 ## Install the Amdahl Program
 
@@ -47,9 +47,9 @@ or `pip`, to install it in your ("user") home directory:
 {{ site.remote.prompt }} cd amdahl
 {{ site.remote.prompt }} python3 -m pip install --user .
 ```
-{: .language-bash}
 
-> ## Amdahl is Python Code
+
+>  Amdahl is Python Code
 >
 > The Amdahl program is written in Python, and installing or using it requires
 > locating the `python3` executable on the login node.
@@ -65,7 +65,7 @@ collect mpi4py from the Internet and install it for you.
 If this fails due to a one-way firewall, you must retrieve mpi4py on your
 local machine and upload it, just as we did for Amdahl.
 
-> ## Retrieve and Upload `mpi4py`
+>  Retrieve and Upload `mpi4py`
 >
 > If installing Amdahl failed because mpi4py could not be installed,
 > retrieve the tarball from <https://github.com/mpi4py/mpi4py/tarball/master>
@@ -74,10 +74,10 @@ local machine and upload it, just as we did for Amdahl.
 > ```
 > {{ site.local.prompt }} wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
 > {{ site.local.prompt }} scp mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
-> # or
+> or
 > {{ site.local.prompt }} rsync -avP mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
 > ```
-> {: .language-bash}
+> 
 >
 > ```
 > {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
@@ -88,10 +88,10 @@ local machine and upload it, just as we did for Amdahl.
 > {{ site.remote.prompt }} cd ../amdahl
 > {{ site.remote.prompt }} python3 -m pip install --user .
 > ```
-> {: .language-bash}
+> 
 {: .discussion}
 
-> ## If `pip` Raises a Warning...
+>  If `pip` Raises a Warning...
 >
 > `pip` may warn that your user package binaries are not in your PATH.
 >
@@ -108,7 +108,7 @@ local machine and upload it, just as we did for Amdahl.
 > ```
 > {{ site.remote.prompt }} which amdahl
 > ```
-> {: .language-bash}
+> 
 >
 > If the command returns no output, displaying a new prompt, it means the file
 > `amdahl` has not been found. You must update the environment variable named
@@ -120,11 +120,11 @@ local machine and upload it, just as we did for Amdahl.
 > {{ site.remote.prompt }} nano ~/.bashrc
 > {{ site.remote.prompt }} tail ~/.bashrc
 > ```
-> {: .language-bash}
+> 
 > ```
 > export PATH=${PATH}:${HOME}/.local/bin
 > ```
-> {: .output}
+> 
 >
 > After logging back in to {{ site.remote.login }}, `which` should be able to
 > find `amdahl` without difficulties.
@@ -138,7 +138,7 @@ Many command-line programs include a "help" message. Try it with `amdahl`:
 ```
 {{ site.remote.prompt }} amdahl --help
 ```
-{: .language-bash}
+
 
 ```
 usage: amdahl [-h] [-p [PARALLEL_PROPORTION]] [-w [WORK_SECONDS]] [-t] [-e] [-j [JITTER_PROPORTION]]
@@ -154,7 +154,7 @@ optional arguments:
   -j [JITTER_PROPORTION], --jitter-proportion [JITTER_PROPORTION]
                         Random jitter: a float between -1 and +1
 ```
-{: .output}
+
 
 This message doesn't tell us much about what the program _does_, but it does
 tell us the important flags we might want to use when launching it.
@@ -167,14 +167,14 @@ Create a submission file, requesting one task on a single node, then launch it.
 {{ site.remote.prompt }} nano serial-job.sh
 {{ site.remote.prompt }} cat serial-job.sh
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/parallel/one-task-jobscript.snip %}
 
 ```
 {{ site.remote.prompt }} {{ site.sched.submit.name }} serial-job.sh
 ```
-{: .language-bash}
+
 
 As before, use the {{ site.sched.name }} status commands to check whether your job
 is running and when it ends:
@@ -182,12 +182,12 @@ is running and when it ends:
 ```
 {{ site.remote.prompt }} {{ site.sched.status }} {{ site.sched.flag.user }}
 ```
-{: .language-bash}
+
 
 Use `ls` to locate the output file. The `-t` flag sorts in
 reverse-chronological order: newest first. What was the output?
 
-> ## Read the Job Output
+>  Read the Job Output
 >
 > The cluster output should be written to a file in the folder you launched the
 > job from. For example,
@@ -195,15 +195,15 @@ reverse-chronological order: newest first. What was the output?
 > ```
 > {{ site.remote.prompt }} ls -t
 > ```
-> {: .language-bash}
+> 
 > ```
 > slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
 > ```
-> {: .output}
+> 
 > ```
 > {{ site.remote.prompt }} cat slurm-347087.out
 > ```
-> {: .language-bash}
+> 
 > ```
 > Doing 30.000 seconds of 'work' on 1 processor,
 > which should take 30.000 seconds with 0.850 parallel proportion of the workload.
@@ -213,7 +213,7 @@ reverse-chronological order: newest first. What was the output?
 >
 > Total execution time (according to rank 0): 30.033 seconds
 > ```
-> {: .output}
+> 
 {: .solution}
 
 As we saw before, two of the `amdahl` program flags set the amount of work and
@@ -231,7 +231,7 @@ for 25.5 seconds, and no time was saved. The cluster can do better, if we ask.
 The `amdahl` program uses the Message Passing Interface (MPI) for parallelism
 -- this is a common tool on HPC systems.
 
-> ## What is MPI?
+>  What is MPI?
 >
 > The Message Passing Interface is a set of tools which allow multiple tasks
 > running simultaneously to communicate with each other.
@@ -252,7 +252,7 @@ such as `mpiexec` (or `mpirun`, or `srun`, etc. depending on the MPI run-time
 you need to use), which will ensure that the appropriate run-time support for
 parallelism is included.
 
-> ## MPI Runtime Arguments
+>  MPI Runtime Arguments
 >
 > On their own, commands such as `mpiexec` can take many arguments specifying
 > how many machines will participate in the execution,
@@ -270,7 +270,7 @@ Let's modify the job script to request more cores and use the MPI run-time.
 {{ site.remote.prompt }} nano parallel-job.sh
 {{ site.remote.prompt }} cat parallel-job.sh
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/parallel/four-tasks-jobscript.snip %}
 
@@ -281,22 +281,22 @@ batch file rather than the command line.
 ```
 {{ site.remote.prompt }} {{ site.sched.submit.name }} parallel-job.sh
 ```
-{: .language-bash}
+
 
 As before, use the status commands to check when your job runs.
 
 ```
 {{ site.remote.prompt }} ls -t
 ```
-{: .language-bash}
+
 ```
 slurm-347178.out  parallel-job.sh  slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
 ```
-{: .output}
+
 ```
 {{ site.remote.prompt }} cat slurm-347178.out
 ```
-{: .language-bash}
+
 ```
 Doing 30.000 seconds of 'work' on 4 processors,
 which should take 10.875 seconds with 0.850 parallel proportion of the workload.
@@ -309,32 +309,32 @@ which should take 10.875 seconds with 0.850 parallel proportion of the workload.
 
 Total execution time (according to rank 0): 10.888 seconds
 ```
-{: .output}
 
-> ## Is it 4× faster?
+
+>  Is it 4× faster?
 >
 > The parallel job received 4× more processors than the serial job:
 > does that mean it finished in ¼ the time?
 >
-> > ## Solution
-> >
-> > The parallel job did take _less_ time: 11 seconds is better than 30!
-> > But it is only a 2.7× improvement, not 4×.
-> >
-> > Look at the job output:
-> >
-> > * While "process 0" did serial work, processes 1 through 3 did their
-> >   parallel work.
-> > * While process 0 caught up on its parallel work,
-> >   the rest did nothing at all.
-> >
-> > Process 0 always has to finish its serial task before it can start on the
-> > parallel work. This sets a lower limit on the amount of time this job will
-> > take, no matter how many cores you throw at it.
-> >
-> > This is the basic principle behind [Amdahl's Law][amdahl], which is one way
-> > of predicting improvements in execution time for a __fixed__ workload that
-> > can be subdivided and run in parallel to some extent.
+>  Solution
+>
+> The parallel job did take _less_ time: 11 seconds is better than 30!
+> But it is only a 2.7× improvement, not 4×.
+>
+> Look at the job output:
+>
+> * While "process 0" did serial work, processes 1 through 3 did their
+>   parallel work.
+> * While process 0 caught up on its parallel work,
+>   the rest did nothing at all.
+>
+> Process 0 always has to finish its serial task before it can start on the
+> parallel work. This sets a lower limit on the amount of time this job will
+> take, no matter how many cores you throw at it.
+>
+> This is the basic principle behind [Amdahl's Law][amdahl], which is one way
+> of predicting improvements in execution time for a __fixed__ workload that
+> can be subdivided and run in parallel to some extent.
 > {: .solution}
 {: .challenge}
 
@@ -379,22 +379,22 @@ batch file rather than the command line.
 ```
 {{ site.remote.prompt }} {{ site.sched.submit.name }} parallel-job.sh
 ```
-{: .language-bash}
+
 
 As before, use the status commands to check when your job runs.
 
 ```
 {{ site.remote.prompt }} ls -t
 ```
-{: .language-bash}
+
 ```
 slurm-347271.out  parallel-job.sh  slurm-347178.out  slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
 ```
-{: .output}
+
 ```
 {{ site.remote.prompt }} cat slurm-347178.out
 ```
-{: .language-bash}
+
 ```
 which should take 7.688 seconds with 0.850 parallel proportion of the workload.
 
@@ -410,9 +410,9 @@ which should take 7.688 seconds with 0.850 parallel proportion of the workload.
 
 Total execution time (according to rank 0): 7.697 seconds
 ```
-{: .output}
 
-> ## Non-Linear Output
+
+>  Non-Linear Output
 >
 > When we ran the job with 4 parallel workers, the serial job wrote its output
 > first, then the parallel processes wrote their output, with process 0 coming
@@ -436,7 +436,7 @@ Then, use the first row to compute speedups _S_, using Python as a command-line 
 ```
 {{ site.remote.prompt }} for n in 30.033 10.888 7.697; do python3 -c "print(30.033 / $n)"; done
 ```
-{: .language-bash}
+
 
 | Number of CPUs | Speedup | Ideal |
 | ---            | ---     | ---   |

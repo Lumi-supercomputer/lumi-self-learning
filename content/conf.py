@@ -14,11 +14,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-
 # -- Project information -----------------------------------------------------
 
 project = "Introduction to LUMI"
-copyright = "2023, The contributors"
+copyright = "2024, The contributors"
 author = "The contributors"
 github_user = "Lumi-supercomputer"
 github_repo_name = "lumi-self-learning"  # auto-detected from dirname if blank
@@ -30,24 +29,15 @@ conf_py_path = "/content/"  # with leading and trailing slash
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [    
-    # githubpages just adds a .nojekyll file
-    "sphinx.ext.githubpages",
-    "sphinx_lesson",
-    # remove once sphinx_rtd_theme updated for contrast and accessibility:
-    "sphinx_rtd_theme_ext_color_contrast",
-    "sphinx.ext.todo",
+extensions = [
+    'sphinx.ext.githubpages',
+    'sphinx_lesson',
+    'sphinx_rtd_theme_ext_color_contrast',
 ]
 
 # Settings for myst_nb:
 # https://myst-nb.readthedocs.io/en/latest/use/execute.html#triggering-notebook-execution
-# jupyter_execute_notebooks = "off"
-# jupyter_execute_notebooks = "auto"   # *only* execute if at least one output is missing.
-# jupyter_execute_notebooks = "force"
-jupyter_execute_notebooks = "cache"
-
-# Add any paths that contain templates here, relative to this directory.
-# templates_path = ['_templates']
+nb_execution_mode = "cache"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -89,41 +79,3 @@ html_context = {
     "github_version": github_version,
     "conf_py_path": conf_py_path,
 }
-
-# Intersphinx mapping.  For example, with this you can use
-# :py:mod:`multiprocessing` to link straight to the Python docs of that module.
-# List all available references:
-#   python -msphinx.ext.intersphinx https://docs.python.org/3/objects.inv
-# extensions.append('sphinx.ext.intersphinx')
-# intersphinx_mapping = {
-#    #'python': ('https://docs.python.org/3', None),
-#    #'sphinx': ('https://www.sphinx-doc.org/', None),
-#    #'numpy': ('https://numpy.org/doc/stable/', None),
-#    #'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
-#    #'pandas': ('https://pandas.pydata.org/docs/', None),
-#    #'matplotlib': ('https://matplotlib.org/', None),
-#    'seaborn': ('https://seaborn.pydata.org/', None),
-# }
-
-# add few new directives
-from sphinx_lesson.directives import _BaseCRDirective
-
-
-class SignatureDirective(_BaseCRDirective):
-    extra_classes = ["toggle-shown", "dropdown"]
-
-
-class ParametersDirective(_BaseCRDirective):
-    extra_classes = ["dropdown"]
-
-
-class TypealongDirective(_BaseCRDirective):
-    extra_classes = ["toggle-shown", "dropdown"]
-
-
-DIRECTIVES = [SignatureDirective, ParametersDirective, TypealongDirective]
-
-
-def setup(app):
-    for obj in DIRECTIVES:
-        app.add_directive(obj.cssname(), obj)

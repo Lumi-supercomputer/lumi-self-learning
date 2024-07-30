@@ -15,7 +15,7 @@
 - Make more accurate resource requests in job scripts based on data describing past performance.
 ```
 
-```{keypoints
+```{keypoints}
 - Accurate job scripts help the queuing system efficiently allocate shared resources.
 ```
 
@@ -32,7 +32,7 @@ the first place, and its demand for each? In general, unless the software
 documentation or user testimonials provide some idea, we won't know how much
 memory or compute time a program will need.
 
-> ## Read the Documentation
+>  Read the Documentation
 >
 > Most HPC facilities maintain documentation as a wiki, a website, or a
 > document sent along when you register for an account. Take a look at these
@@ -60,7 +60,7 @@ use `{{ site.sched.hist }}` to get statistics about `parallel-job.sh`.
 ```
 {{ site.remote.prompt }} {{ site.sched.hist }}
 ```
-{: .language-bash}
+
 
 {% include {{ site.snippets }}/resources/account-history.snip %}
 
@@ -72,7 +72,7 @@ slightly.
 ```
 {{ site.remote.prompt }} {{ site.sched.hist }} {{ site.sched.flag.histdetail }} 347087
 ```
-{: .language-bash}
+
 
 It will show a lot of info; in fact, every single piece of info collected on
 your job by the scheduler will show up here. It may be useful to redirect this
@@ -82,9 +82,9 @@ keys to scroll through fields).
 ```
 {{ site.remote.prompt }} {{ site.sched.hist }} {{ site.sched.flag.histdetail }} 347087 | less -S
 ```
-{: .language-bash}
 
-> ## Discussion
+
+>  Discussion
 >
 > This view can help compare the amount of time requested and actually
 > used, duration of residence in the queue before launching, and memory
@@ -106,22 +106,22 @@ actually finish. Specifying the expected runtime in the submission
 script more accurately will help alleviate cluster congestion and may
 get your job dispatched earlier.
 
-> ## Narrow the Time Estimate
+>  Narrow the Time Estimate
 >
 > Edit `parallel_job.sh` to set a better time estimate. How close can
 > you get?
 >
 > Hint: use `{{ site.sched.flag.time }}`.
 >
-> > ## Solution
-> >
-> > The following line tells {{ site.sched.name }} that our job should
-> > finish within 2 minutes:
-> >
-> > ```
-> > {{ site.sched.comment }} {{ site.sched.flag.time }}{% if site.sched.name == "Slurm" %} {% else %}={% endif %}00:02:00
-> > ```
-> > {: .language-bash}
+>  Solution
+>
+> The following line tells {{ site.sched.name }} that our job should
+> finish within 2 minutes:
+>
+> ```
+> {{ site.sched.comment }} {{ site.sched.flag.time }}{% if site.sched.name == "Slurm" %} {% else %}={% endif %}00:02:00
+> ```
+> 
 > {: .solution}
 {: .challenge}
 

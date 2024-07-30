@@ -45,7 +45,7 @@ Create a virtual environment (venv) for each of your projects and add additional
 $ singularity exec pytorch_rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1.sif bash
 Singularity> python -m venv my_project_env --system-site-packages
 Singularity> . my_project_env/bin/activate
-(my_project_env) Singularity> # Install what else you'd need: pip install ...
+(my_project_env) Singularity> Install what else you'd need: pip install ...
 ```
 
 ```{callout} Create more virtual environments
@@ -321,7 +321,7 @@ $ singularity exec -B $HOME/tensorflow/ensurepip:/usr/lib/python3.9/ensurepip te
 Singularity> python -m venv my_project_env --system-site-packages
 Singularity> . my_project_env/bin/activate
 (my_project_env) Singularity> pip install tensorflow-datasets # Needed for later
-(my_project_env) Singularity> # Install what else you'd need: pip install ...
+(my_project_env) Singularity> Install what else you'd need: pip install ...
 ```
 
 ```{callout} Create more virtual environments
