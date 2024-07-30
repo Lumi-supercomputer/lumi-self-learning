@@ -1,14 +1,12 @@
-Introduction to LUMI
-====================
+# Introduction to LUMI
 
 Welcome to the *Introduction to LUMI* self-learning course!
 
-.. warning::
-
+```{warning}
    This material is in development. Stay tuned!
+```
 
-About the course
-----------------
+## About the course
 
 This self-learning course is intended for anyone interested in using the LUMI
 supercomputer. The course consists of N sections focusing on how to use the LUMI
@@ -20,65 +18,58 @@ After completing the course, you should possess the necessary skills to use the
 LUMI computing environment efficiently in different phases of your research
 and/or development projects and know where to look for more information.
 
-.. prereq::
-
+```{prereq}
    It is expected that you know the basics of Linux and how to work in a
    command-line interface (CLI).
+```
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Contents
+```{toctree}
+---
+maxdepth: 1
+caption: Contents
+---
 
-   10-introduction-to-supercomputing-and-lumi.md
-   11-prerequisites.md
-   12-lumi-environment.md
-   13a-exploring-remote-resources.md
-   13-lumi-disk-areas.md
-   14-modules-and-software-stacks.md
-   15-software-on-lumi.md
-   16-scheduler-and-batch-jobs.md
-   17-parallel.md
-   18-using-resources-efficiently.md
-   19-managing-data.md
-   20-responsibility.md
-   21-installing-own-applications.md
-   22-working-with-containers.md
-   23-advanced-topics.md
+10-introduction-to-supercomputing-and-lumi.md
+11-prerequisites.md
+12-lumi-environment.md
+13a-exploring-remote-resources.md
+13-lumi-disk-areas.md
+14-modules-and-software-stacks.md
+15-software-on-lumi.md
+16-scheduler-and-batch-jobs.md
+17-parallel.md
+18-using-resources-efficiently.md
+19-managing-data.md
+20-responsibility.md
+21-installing-own-applications.md
+22-working-with-containers.md
+23-advanced-topics.md
+```
 
-See also
---------
+## See also
 
-`LUMI Documentation <https://docs.lumi-supercomputer.eu/>`__
 
-Credits
--------
+[LUMI Documentation](https://docs.lumi-supercomputer.eu/)
 
-.. |logo1| image:: img/eurocc.png
-   :scale: 10 %
-.. |logo2| image:: img/coderefinery.png
-   :scale: 50 %
+## Credits
 
-+---------+---------+
-| |logo1| | |logo2| |
-+---------+---------+
+![](img/eurocc.svg)
+![](img/coderefinery.svg)
 
 This project has received funding from the European High-Performance Computing
 Joint Undertaking (JU) under grant agreement No 101101903.
 
 The lesson file structure and browsing layout is inspired by and derived from
-`work <https://github.com/coderefinery/sphinx-lesson>`__ by `CodeRefinery
-<https://coderefinery.org/>`__ licensed under the `MIT license
-<http://opensource.org/licenses/mit-license.html>`__. We have copied and adapted
+[work](https://github.com/coderefinery/sphinx-lesson) by [CodeRefinery](https://coderefinery.org/) licensed under the
+[MIT license](https://opensource.org/licenses/mit-license.html). We have copied and adapted
 most of their license text.
 
-Instructional Material
-^^^^^^^^^^^^^^^^^^^^^^
+### Instructional Material
 
 This instructional material is made available under the
-`Creative Commons Attribution license (CC-BY-4.0) <https://creativecommons.org/licenses/by/4.0/>`__.
+[Creative Commons Attribution license (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/).
 The following is a human-readable summary of (and not a substitute for) the
-`full legal text of the CC-BY-4.0 license
-<https://creativecommons.org/licenses/by/4.0/legalcode>`__.
+[full legal text of the CC-BY-4.0 license](https://creativecommons.org/licenses/by/4.0/legalcode).
 You are free to:
 
 - **share** - copy and redistribute the material in any medium or format
@@ -87,8 +78,8 @@ You are free to:
 
 The licensor cannot revoke these freedoms as long as you follow these license terms:
 
-- **Attribution** - You must give appropriate credit, provide a `link to the license
-  <https://creativecommons.org/licenses/by/4.0/>`__, and indicate if changes were
+- **Attribution** - You must give appropriate credit, provide a
+  [link to the license](https://creativecommons.org/licenses/by/4.0/), and indicate if changes were
   made. You may do so in any reasonable manner, but not in any way that suggests
   the licensor endorses you or your use.
 - **No additional restrictions** - You may not apply legal terms or
@@ -104,9 +95,8 @@ With the understanding that:
   necessary for your intended use. For example, other rights such as
   publicity, privacy, or moral rights may limit how you use the material.
 
-Software
-^^^^^^^^
+### Software
 
 Except where otherwise noted, the example programs and other software provided
-with this repository are made available under the `OSI <http://opensource.org/>`__-approved
-`MIT license <https://opensource.org/licenses/mit-license.html>`__.
+with this repository are made available under the [OSI](https://opensource.org/)-approved
+[MIT license](https://opensource.org/licenses/mit-license.html).
