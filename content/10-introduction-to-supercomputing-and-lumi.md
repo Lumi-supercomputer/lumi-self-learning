@@ -16,8 +16,6 @@
 - Identify how an HPC system could benefit you.
 ```
 
-
-
 Frequently, research problems that use computing can outgrow the capabilities
 of the desktop or laptop computer where they started:
 
@@ -58,12 +56,12 @@ Open the [HPC Jargon Buster]({{ site.url }}{{ site.baseurl }}/files/jargon.html#
 in a new tab. To present the content, press `C` to open a **c**lone in a
 separate window, then press `P` to toggle **p**resentation mode.
 
-```{challenge} I've Never Used a Server, Have I?
+````{challenge} I've Never Used a Server, Have I?
 Take a minute and think about which of your daily interactions with a
 computer may require a remote server or even cluster to provide you with
 results.
 
-````{solution} Some Ideas
+```{solution} Some Ideas
 * Checking email: your computer (possibly in your pocket) contacts a remote
   machine, authenticates, and downloads a list of new messages; it also
   uploads changes to message status, such as whether you read, marked as
@@ -94,7 +92,7 @@ servers working together.
 - [Hyperscale computing](https://en.wikipedia.org/wiki/Hyperscale_computing)
 - [MapReduce](https://en.wikipedia.org/wiki/MapReduce)
 
-```{keypoints}}
+```{keypoints}
 - High Performance Computing (HPC) typically involves connecting to very large
   computing systems elsewhere in the world.
 - These other systems can be used to do work that would either be impossible
