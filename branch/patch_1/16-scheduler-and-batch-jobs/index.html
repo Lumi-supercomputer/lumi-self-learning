@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scheduler and batch jobs &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Parallel" href="../17-parallel/" />
+    <link rel="prev" title="Software on LUMI" href="../15-software-on-lumi/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-terminal-and-webinterface/">Terminal and Web interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Using the LUMI filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14a-software-and-modules/">Software and Modules on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scheduler and batch jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#job-scheduler">Job Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-batch-job">Running a Batch Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customising-a-job">Customising a Job</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#resource-requests">Resource Requests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cancelling-a-job">Cancelling a Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-types-of-jobs">Other Types of Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-serial-jobs">Tutorial: Serial jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#serial-jobs">Serial jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launching-a-serial-job">Launching a serial job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#checking-the-output">Checking the output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24-lumio-object-storage/">Using LUMI-O object storage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Scheduler and batch jobs</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/16-scheduler-and-batch-jobs.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scheduler-and-batch-jobs">
+<h1>Scheduler and batch jobs<a class="headerlink" href="#scheduler-and-batch-jobs" title="Permalink to this heading"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>What is a scheduler and why does a cluster need one?</p></li>
+<li><p>How do I capture the output of a program that is run on a node in the cluster?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Submit a simple script to the cluster.</p></li>
+<li><p>Monitor the execution of jobs using command line tools.</p></li>
+<li><p>Inspect the output and error files of your jobs.</p></li>
+<li><p>Find the right place to put large datasets on the cluster.</p></li>
+</ul>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>The scheduler handles how compute resources are shared between users.</p></li>
+<li><p>A job is just a shell script.</p></li>
+<li><p>Request <em>slightly</em> more resources than you will need.</p></li>
+</ul>
+</div>
+<section id="job-scheduler">
+<h2>Job Scheduler<a class="headerlink" href="#job-scheduler" title="Permalink to this heading"></a></h2>
+<p>An HPC system might have thousands of nodes and thousands of users. How do we
+decide who gets what and when? How do we ensure that a task is run with the
+resources it needs? This job is handled by a special piece of software called
+the <em>scheduler</em>. On an HPC system, the scheduler manages which jobs run where
+and when.</p>
+<p>The following illustration compares these tasks of a job scheduler to a waiter
+in a restaurant. If you can relate to an instance where you had to wait for a
+while in a queue to get in to a popular restaurant, then you may now understand
+why sometimes your job do not start instantly as in your laptop.</p>
+<p>{% include figure.html max-width=”75%” caption=””
+file=”/fig/restaurant_queue_manager.svg”
+alt=”Compare a job scheduler to a waiter in a restaurant” %}</p>
+<p>The scheduler used in this lesson is {{ site.sched.name }}. Although
+{{ site.sched.name }} is not used everywhere, running jobs is quite similar
+regardless of what software is being used. The exact syntax might change, but
+the concepts remain the same.</p>
+</section>
+<section id="running-a-batch-job">
+<h2>Running a Batch Job<a class="headerlink" href="#running-a-batch-job" title="Permalink to this heading"></a></h2>
+<p>The most basic use of the scheduler is to run a command non-interactively. Any
+command (or series of commands) that you want to run on the cluster is called a
+<em>job</em>, and the process of using a scheduler to run the job is called <em>batch job
+submission</em>.</p>
+<p>In this case, the job we want to run is a shell script – essentially a
+text file containing a list of UNIX commands to be executed in a sequential
+manner. Our shell script will have three parts:</p>
+<ul class="simple">
+<li><p>On the very first line, add <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.remote.bash_shebang</span> <span class="pre">}}</span></code>. The <code class="docutils literal notranslate"><span class="pre">#!</span></code>
+(pronounced “hash-bang” or “shebang”) tells the computer what program is
+meant to process the contents of this file. In this case, we are telling it
+that the commands that follow are written for the command-line shell (what
+we’ve been doing everything in so far).</p></li>
+<li><p>Anywhere below the first line, we’ll add an <code class="docutils literal notranslate"><span class="pre">echo</span></code> command with a friendly
+greeting. When run, the shell script will print whatever comes after <code class="docutils literal notranslate"><span class="pre">echo</span></code>
+in the terminal.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">-n</span></code> will print everything that follows, <em>without</em> ending
+the line by printing the new-line character.</p></li>
+</ul>
+</li>
+<li><p>On the last line, we’ll invoke the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> command, which will print the
+name of the machine the script is run on.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">nano</span> <span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">bash_shebang</span> <span class="p">}}</span>
+
+<span class="n">echo</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;This script is running on &quot;</span>
+<span class="n">hostname</span>
+</pre></div>
+</div>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>Creating Our Test Job</p>
+<p>Run the script. Does it execute on the cluster or just our login node?</p>
+<p>Solution</p>
+</div>
+<p>{{ site.remote.prompt }} bash example-job.sh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>This script is running on {{ site.remote.host }}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="p">{:</span> <span class="o">.</span><span class="n">solution</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This script ran on the login node, but we want to take advantage of
+the compute nodes: we need the scheduler to queue up <code class="docutils literal notranslate"><span class="pre">example-job.sh</span></code>
+to run on a compute node.</p>
+<p>To submit this task to the scheduler, we use the
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.submit.name</span> <span class="pre">}}</span></code> command.
+This creates a <em>job</em> which will run the <em>script</em> when <em>dispatched</em> to
+a compute node which the queuing system has identified as being
+available to perform the work.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span><span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/basic-job-script.snip %}</p>
+<p>And that’s all we need to do to submit a job. Our work is done – now the
+scheduler takes over and tries to run the job for us. While the job is waiting
+to run, it goes into a list of jobs called the <em>queue</em>. To check on our job’s
+status, we check the queue using the command
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.status</span> <span class="pre">}}</span> <span class="pre">{{</span> <span class="pre">site.sched.flag.user</span> <span class="pre">}}</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/basic-job-status.snip %}</p>
+<div class="admonition-discussion discussion important admonition" id="discussion-0">
+<p class="admonition-title">Discussion</p>
+<p>Where’s the Output?</p>
+<p>On the login node, this script printed output to the terminal – but
+now, when <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.status</span> <span class="pre">}}</span></code> shows the job has finished,
+nothing was printed to the terminal.</p>
+<p>Cluster job output is typically redirected to a file in the directory you
+launched it from. Use <code class="docutils literal notranslate"><span class="pre">ls</span></code> to find and <code class="docutils literal notranslate"><span class="pre">cat</span></code> to read the file.</p>
+</div>
+</section>
+<section id="customising-a-job">
+<h2>Customising a Job<a class="headerlink" href="#customising-a-job" title="Permalink to this heading"></a></h2>
+<p>The job we just ran used all of the scheduler’s default options. In a
+real-world scenario, that’s probably not what we want. The default options
+represent a reasonable minimum. Chances are, we will need more cores, more
+memory, more time, among other special considerations. To get access to these
+resources we must customize our job script.</p>
+<p>Comments in UNIX shell scripts (denoted by <code class="docutils literal notranslate"><span class="pre">#</span></code>) are typically ignored, but
+there are exceptions. For instance the special <code class="docutils literal notranslate"><span class="pre">#!</span></code> comment at the beginning of
+scripts specifies what program should be used to run it (you’ll typically see
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.local.bash_shebang</span> <span class="pre">}}</span></code>). Schedulers like {{ site.sched.name }} also
+have a special comment used to denote special scheduler-specific options.
+Though these comments differ from scheduler to scheduler,
+{{ site.sched.name }}’s special comment is <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.comment</span> <span class="pre">}}</span></code>. Anything
+following the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.comment</span> <span class="pre">}}</span></code> comment is interpreted as an
+instruction to the scheduler.</p>
+<p>Let’s illustrate this by example. By default, a job’s name is the name of the
+script, but the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.flag.name</span> <span class="pre">}}</span></code> option can be used to change the
+name of a job. Add an option to the script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cat</span> <span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">bash_shebang</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">comment</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
+
+<span class="n">echo</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;This script is running on &quot;</span>
+<span class="n">hostname</span>
+</pre></div>
+</div>
+<p>Submit the job and monitor its status:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span><span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/job-with-name-status.snip %}</p>
+<p>Fantastic, we’ve successfully changed the name of our job!</p>
+<section id="resource-requests">
+<h3>Resource Requests<a class="headerlink" href="#resource-requests" title="Permalink to this heading"></a></h3>
+<p>What about more important changes, such as the number of cores and memory for
+our jobs? One thing that is absolutely critical when working on an HPC system
+is specifying the resources required to run a job. This allows the scheduler to
+find the right time and place to schedule our job. If you do not specify
+requirements (such as the amount of time you need), you will likely be stuck
+with your site’s default resources, which is probably not what you want.</p>
+<p>The following are several key resource requests:</p>
+<p>{% include {{ site.snippets }}/scheduler/option-flags-list.snip %}</p>
+<p>Note that just <em>requesting</em> these resources does not make your job run faster,
+nor does it necessarily mean that you will consume all of these resources. It
+only means that these are made available to you. Your job may end up using less
+memory, or less time, or fewer nodes than you have requested, and it will still
+run.</p>
+<p>It’s best if your requests accurately reflect your job’s requirements. We’ll
+talk more about how to make sure that you’re using resources effectively in a
+later episode of this lesson.</p>
+<div class="admonition-exercise exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise</p>
+<p>Submitting Resource Requests</p>
+<p>Modify our <code class="docutils literal notranslate"><span class="pre">hostname</span></code> script so that it runs for a minute, then submit a job
+for it on the cluster.</p>
+<p>Solution</p>
+</div>
+<p>{{ site.remote.prompt }} cat example-job.sh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+</pre></div>
+</div>
+<p>{{ site.remote.bash_shebang }}
+{{ site.sched.comment }} {{ site.sched.flag.time }} 00:01 # timeout in HH:MM</p>
+<p>echo -n “This script is running on “
+sleep 20 # time in seconds
+hostname</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != ‘’ %}{{ site.sched.submit.options }} {% endif %}example-job.sh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+Why are the {{ site.sched.name }} runtime and `sleep` time not identical?
+{: .solution}
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/print-sched-variables.snip %}</p>
+<p>Resource requests are typically binding. If you exceed them, your job will be
+killed. Let’s use wall time as an example. We will request 1 minute of
+wall time, and attempt to run a job for two minutes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cat</span> <span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">bash_shebang</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">comment</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="n">long_job</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">comment</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">time</span> <span class="p">}}</span> <span class="mi">00</span><span class="p">:</span><span class="mi">01</span> <span class="c1"># timeout in HH:MM</span>
+
+<span class="n">echo</span> <span class="s2">&quot;This script is running on ... &quot;</span>
+<span class="n">sleep</span> <span class="mi">240</span> <span class="c1"># time in seconds</span>
+<span class="n">hostname</span>
+</pre></div>
+</div>
+<p>Submit the job and wait for it to finish. Once it is has finished, check the
+log file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span><span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/runtime-exceeded-job.snip %}</p>
+<p>{% include {{ site.snippets }}/scheduler/runtime-exceeded-output.snip %}</p>
+<p>Our job was killed for exceeding the amount of resources it requested. Although
+this appears harsh, this is actually a feature. Strict adherence to resource
+requests allows the scheduler to find the best possible place for your jobs.
+Even more importantly, it ensures that another user cannot use more resources
+than they’ve been given. If another user messes up and accidentally attempts to
+use all of the cores or memory on a node, {{ site.sched.name }} will either
+restrain their job to the requested resources or kill the job outright. Other
+jobs on the node will be unaffected. This means that one user cannot mess up
+the experience of others, the only jobs affected by a mistake in scheduling
+will be their own.</p>
+</section>
+</section>
+<section id="cancelling-a-job">
+<h2>Cancelling a Job<a class="headerlink" href="#cancelling-a-job" title="Permalink to this heading"></a></h2>
+<p>Sometimes we’ll make a mistake and need to cancel a job. This can be done with
+the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.del</span> <span class="pre">}}</span></code> command. Let’s submit a job and then cancel it using
+its job number (remember to change the walltime so that it runs long enough for
+you to cancel it before it is killed!).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">options</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span><span class="n">example</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/terminate-job-begin.snip %}</p>
+<p>Now cancel the job with its job number (printed in your terminal). A clean
+return of your command prompt indicates that the request to cancel the job was
+successful.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span><span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="k">del</span> <span class="p">}}</span> <span class="mi">38759</span>
+<span class="c1"># It might take a minute for the job to disappear from the queue...</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/scheduler/terminate-job-cancel.snip %}</p>
+<p>{% include {{ site.snippets }}/scheduler/terminate-multiple-jobs.snip %}</p>
+</section>
+<section id="other-types-of-jobs">
+<h2>Other Types of Jobs<a class="headerlink" href="#other-types-of-jobs" title="Permalink to this heading"></a></h2>
+<p>Up to this point, we’ve focused on running jobs in batch mode.
+{{ site.sched.name }} also provides the ability to start an interactive session.</p>
+<p>There are very frequently tasks that need to be done interactively. Creating an
+entire job script might be overkill, but the amount of resources required is
+too much for a login node to handle. A good example of this might be building a
+genome index for alignment with a tool like <a class="reference external" href="https://daehwankimlab.github.io/hisat2/">HISAT2</a>. Fortunately, we
+can run these types of tasks as a one-off with <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.interactive</span> <span class="pre">}}</span></code>.</p>
+<p>{% include {{ site.snippets }}/scheduler/using-nodes-interactively.snip %}</p>
+</section>
+<section id="tutorial-serial-jobs">
+<h2>Tutorial: Serial jobs<a class="headerlink" href="#tutorial-serial-jobs" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p>In this tutorial we’ll get familiar with the basic usage of the Slurm batch queue system on LUMI.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>The goal is to learn how to request resources that <strong>match</strong> the needs of a job</p></li>
+</ul>
+<p>💬 A batch job consists of two parts: resource requests and the job step(s)</p>
+<p>☝🏻 Examples are done on LUMI. If using the web interface, open a login node shell.</p>
+</section>
+<section id="serial-jobs">
+<h2>Serial jobs<a class="headerlink" href="#serial-jobs" title="Permalink to this heading"></a></h2>
+<p>💬 A serial program can only use one core (CPU)</p>
+<ul class="simple">
+<li><p>One should request only a single core from Slurm</p></li>
+<li><p>The job does not benefit from additional cores</p></li>
+<li><p>Excess cores are wasted since they will not be available to other users</p></li>
+</ul>
+<p>💬 Within the job (or allocation), the actual program is launched using the command <code class="docutils literal notranslate"><span class="pre">srun</span></code></p>
+<p>☝🏻 If you use a software that is available in the LUMI software stack, please check the <a class="reference external" href="https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/">software library page</a>; it might have a batch job example with useful default settings.
+In case you are using an installation by a local organization (e.g. CSC), <a class="reference external" href="https://docs.lumi-supercomputer.eu/software/local/csc/">check the documentation pages</a> there.</p>
+<section id="launching-a-serial-job">
+<h3>Launching a serial job<a class="headerlink" href="#launching-a-serial-job" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Go to the <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> directory of your project:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/scratch/&lt;project&gt;<span class="w">      </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000000</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Now your input (and output) will be on a shared disk that is accessible to the compute nodes.</p></li>
+</ul>
+<p>💡 You can list your projects with <code class="docutils literal notranslate"><span class="pre">lumi-workspaces</span></code></p>
+<p>💡 Note! If you’re using a project with other members (like the course project), first make a subdirectory for yourself (e.g. <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">$USER</span></code> and then move there (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$USER</span></code>) to not clutter the <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> root of your project)</p>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Create a file called <code class="docutils literal notranslate"><span class="pre">my_serial.bash</span></code> e.g. with the <code class="docutils literal notranslate"><span class="pre">nano</span></code> text editor:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>my_serial.bash
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. Copy the following <strong>batch script</strong> there and change <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;</span></code> to the LUMI project you actually want to use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --account=&lt;project&gt;      # Choose the billing project. Has to be defined!</span>
+<span class="c1">#SBATCH --time=00:02:00          # Maximum duration of the job. Upper limit depends on the partition. </span>
+<span class="c1">#SBATCH --partition=debug        # Job queues: debug, interactive, small, standard, small-g, standard-g, largemem, lumid, ..</span>
+<span class="c1">#SBATCH --ntasks=1               # Number of tasks. Upper limit depends on partition. For a serial job this should be set 1!</span>
+
+srun<span class="w"> </span>hostname<span class="w">                    </span><span class="c1"># Run hostname-command</span>
+srun<span class="w"> </span>sleep<span class="w"> </span><span class="m">60</span><span class="w">                    </span><span class="c1"># Run sleep-command</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 3”}
+4. Submit the job to the batch queue and check its status with the commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>my_serial.bash
+squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>💬 In the batch job example above we are requesting</p>
+<ul class="simple">
+<li><p>one core (<code class="docutils literal notranslate"><span class="pre">--ntasks=1</span></code>)</p></li>
+<li><p>for two minutes (<code class="docutils literal notranslate"><span class="pre">--time=00:02:00</span></code>)</p></li>
+<li><p>from the test queue (<code class="docutils literal notranslate"><span class="pre">--partition=debug</span></code>)</p></li>
+</ul>
+<p>💬 We want to run the program <code class="docutils literal notranslate"><span class="pre">hostname</span></code> that will print the name of the LUMI compute node that has been allocated for this particular job</p>
+<p>💬 In addition, we are running the <code class="docutils literal notranslate"><span class="pre">sleep</span></code> program to keep the job running for an additional 60 seconds, in order to have time to monitor the job</p>
+<section id="checking-the-output">
+<h4>Checking the output<a class="headerlink" href="#checking-the-output" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>By default, the output is written to a file named <code class="docutils literal notranslate"><span class="pre">slurm-&lt;jobid&gt;.out</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;jobid&gt;</span></code> is a unique job ID assigned to the job by Slurm</p></li>
+</ul>
+<p>💭 You can get a list of all your jobs that are running or queuing with the command <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">$USER</span></code></p>
+<p>🗯 A submitted job can be cancelled using the command <code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;jobid&gt;</span></code></p>
+</section>
+</section>
+</section>
+<section id="more-information">
+<h2>More information<a class="headerlink" href="#more-information" title="Permalink to this heading"></a></h2>
+<p>💡 <a class="reference external" href="https://docs.lumi-supercomputer.eu/runjobs/scheduled-jobs/slurm-quickstart/">Batch jobs</a> in LUMI documentation</p>
+<p>{% include links.md %}</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../15-software-on-lumi/" class="btn btn-neutral float-left" title="Software on LUMI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../17-parallel/" class="btn btn-neutral float-right" title="Parallel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

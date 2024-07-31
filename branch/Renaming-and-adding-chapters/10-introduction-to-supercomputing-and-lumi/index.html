@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to supercomputing and LUMI &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction to supercomputing and LUMI</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/content/blob/main/content/10-introduction-to-supercomputing-and-lumi.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction-to-supercomputing-and-lumi">
+<h1>Introduction to supercomputing and LUMI<a class="headerlink" href="#introduction-to-supercomputing-and-lumi" title="Permalink to this heading"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>teaching: 15</p></li>
+<li><p>exercises: 5</p></li>
+</ul>
+</div>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>“Why would I be interested in High Performance Computing (HPC)?”</p></li>
+<li><p>“What can I expect to learn from this course?”</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Describe what an HPC system is</p></li>
+<li><p>Identify how an HPC system could benefit you.</p></li>
+</ul>
+</div>
+<p>Frequently, research problems that use computing can outgrow the capabilities
+of the desktop or laptop computer where they started:</p>
+<ul class="simple">
+<li><p>A statistics student wants to cross-validate a model. This involves running
+the model 1000 times – but each run takes an hour. Running the model on
+a laptop will take over a month! In this research problem, final results are
+calculated after all 1000 models have run, but typically only one model is
+run at a time (in <strong>serial</strong>) on the laptop. Since each of the 1000 runs is
+independent of all others, and given enough computers, it’s theoretically
+possible to run them all at once (in <strong>parallel</strong>).</p></li>
+<li><p>A genomics researcher has been using small datasets of sequence data, but
+soon will be receiving a new type of sequencing data that is 10 times as
+large. It’s already challenging to open the datasets on a computer –
+analyzing these larger datasets will probably crash it. In this research
+problem, the calculations required might be impossible to parallelize, but a
+computer with <strong>more memory</strong> would be required to analyze the much larger
+future data set.</p></li>
+<li><p>An engineer is using a fluid dynamics package that has an option to run in
+parallel. So far, this option was not used on a desktop. In going from 2D
+to 3D simulations, the simulation time has more than tripled. It might be
+useful to take advantage of that option or feature. In this research problem,
+the calculations in each region of the simulation are largely independent of
+calculations in other regions of the simulation. It’s possible to run each
+region’s calculations simultaneously (in <strong>parallel</strong>), communicate selected
+results to adjacent regions as needed, and repeat the calculations to
+converge on a final set of results. In moving from a 2D to a 3D model, <strong>both
+the amount of data and the amount of calculations increases greatly</strong>, and
+it’s theoretically possible to distribute the calculations across multiple
+computers communicating over a shared network.</p></li>
+</ul>
+<p>In all these cases, access to more (and larger) computers is needed. Those
+computers should be usable at the same time, <strong>solving many researchers’
+problems in parallel</strong>.</p>
+<section id="jargon-busting-presentation">
+<h2>Jargon Busting Presentation<a class="headerlink" href="#jargon-busting-presentation" title="Permalink to this heading"></a></h2>
+<p>Open the [HPC Jargon Buster]({{ site.url }}{{ site.baseurl }}/files/jargon.html#p1)
+in a new tab. To present the content, press <code class="docutils literal notranslate"><span class="pre">C</span></code> to open a <strong>c</strong>lone in a
+separate window, then press <code class="docutils literal notranslate"><span class="pre">P</span></code> to toggle <strong>p</strong>resentation mode.</p>
+<div class="admonition-i-ve-never-used-a-server-have-i exercise important admonition" id="exercise-0">
+<p class="admonition-title">I’ve Never Used a Server, Have I?</p>
+<p>Take a minute and think about which of your daily interactions with a
+computer may require a remote server or even cluster to provide you with
+results.</p>
+<div class="admonition-some-ideas solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Some Ideas</p>
+<ul class="simple">
+<li><p>Checking email: your computer (possibly in your pocket) contacts a remote
+machine, authenticates, and downloads a list of new messages; it also
+uploads changes to message status, such as whether you read, marked as
+junk, or deleted the message. Since yours is not the only account, the
+mail server is probably one of many in a data center.</p></li>
+<li><p>Searching for a phrase online involves comparing your search term against
+a massive database of all known sites, looking for matches. This “query”
+operation can be straightforward, but building that database is a
+[monumental task][mapreduce]! Servers are involved at every step.</p></li>
+<li><p>Searching for directions on a mapping website involves connecting your
+(A) starting and (B) end points by [traversing a graph][dijkstra] in
+search of the “shortest” path by distance, time, expense, or another
+metric. Converting a map into the right form is relatively simple, but
+calculating all the possible routes between A and B is expensive.
+Checking email could be serial: your machine connects to one server and
+exchanges data. Searching by querying the database for your search term (or
+endpoints) could also be serial, in that one machine receives your query
+and returns the result. However, assembling and storing the full database
+is far beyond the capability of any one machine. Therefore, these functions
+are served in parallel by a large, [“hyperscale”][hyperscale] collection of
+servers working together.</p></li>
+</ul>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+## See also
+
+- [Dijkstra&#39;s algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+- [Hyperscale computing](https://en.wikipedia.org/wiki/Hyperscale_computing)
+- [MapReduce](https://en.wikipedia.org/wiki/MapReduce)
+
+```{keypoints}
+- High Performance Computing (HPC) typically involves connecting to very large
+  computing systems elsewhere in the world.
+- These other systems can be used to do work that would either be impossible
+  or much slower on smaller systems.
+- HPC resources are shared by multiple users.
+- The standard method of interacting with such systems is via a command line
+  interface.
+```
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
