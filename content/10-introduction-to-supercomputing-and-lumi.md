@@ -1,4 +1,4 @@
-# Introduction to supercomputing and LUMI
+# Introduction to supercomputing
 
 ```{instructor-note}
 - teaching: 15
