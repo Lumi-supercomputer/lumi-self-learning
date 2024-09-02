@@ -1,35 +1,10 @@
-# Modules and software stacks
+# Software on supercomputers - Introduction to the concept of modules
 
-```{instructor-note}
-- teaching: 30
-- exercises: 15
-```
+This chapter presents some (optional) background information, in case it is a new concept for the reader that software are provided available as _modules_ on a supercomputer.
 
-```{questions}
-- How do we load and unload software packages?
-```
+This material is from HPC carpentry by ENCCS (with small modifications)
 
-```{objectives}
-- Load and use a software package.
-- Explain how the shell environment changes when the module mechanism loads or unloads packages.
-```
-
-```{keypoints}
-- Load software with `module load softwareName`.
-- Unload software with `module unload`
-- The module system handles software versioning and package conflicts for you automatically
-```
-
-On a high-performance computing system, it is seldom the case that the software
-we want to use is available when we log in. It is installed, but we will need
-to "load" it before it can run.
-
-Before we start using individual software packages, however, we should
-understand the reasoning behind this approach. The three biggest factors are:
-
-- software incompatibilities
-- versioning
-- dependencies
+## Software compatibility 
 
 Software incompatibility is a major headache for programmers. Sometimes the
 presence (or absence) of a software package will break others that depend on
@@ -73,32 +48,40 @@ On login you may start out with a default set of modules loaded or you may
 start out with an empty environment; this depends on the setup of the system
 you are using.
 
+
+```{callout} 
+On LUMI we have Lmod. 
+
+The following commands work also on LUMI. But as we present in the next chapter, all software modules are not directly available to be loaded, but require an _installation_ step before they are visible e.g. with the `module avail` command. 
+Consider the following examples just useful to know at this point, you will be further introduced them on LUMI in the next chapter.
+
+```
+
+
 ### Listing Available Modules
 
-To see available software modules, use `module avail`:
+To see available software modules, use `module avail`. On LUMI this list is already quite long, with many versions of different software and packages available. Don't get intimidated! 
 
+```bash
+module avail
 ```
-{{ site.remote.prompt }} module avail
-```
-
-
-{% include {{ site.snippets }}/modules/available-modules.snip %}
 
 ### Listing Currently Loaded Modules
 
 You can use the `module list` command to see which modules you currently have
-loaded in your environment. If you have no modules loaded, you will see a
-message telling you so
+loaded in your environment. (If you have no modules loaded, you will see a
+message telling you so.) On LUMI you will have a small set of modules loaded already by default, when you login.
 
-```
-{{ site.remote.prompt }} module list
-```
-
-
-```
-No Modulefiles Currently Loaded.
+```bash
+module list
 ```
 
+
+```{caution} 
+
+Note to self: **To be checked when LUMI is back available, if it makes sense to include something about this at this point of the material (as a common example)**
+
+```
 
 ## Loading and Unloading Software
 
