@@ -40,6 +40,7 @@ caption: Contents
 17-parallel.md
 18-using-resources-efficiently.md
 19-managing-data.md
+19b-object-storage-lumio.md
 20-responsibility.md
 21-installing-own-applications.md
 22-working-with-containers.md
