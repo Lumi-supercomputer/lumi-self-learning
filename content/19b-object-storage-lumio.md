@@ -4,11 +4,13 @@ All your data doesn't fit to the filesystem on LUMI? You don't actively need it,
 
 LUMI-O is a S3 compatible object storage, based on Ceph Reef (v18.2.2). 
 
-Some benefits of LUMI-O:
-- LUMI-O can fit up to X? of data per project (30 PB all together)
-- Data lifetime on LUMI-O is the same as your project lifetime
-- Can be used as a backup of your data that you have on your /project and /scratch locations
-- Can be used to share data outside of project members (privately, or making the content public)
+Some features of LUMI-O:
+- Space for 150 TB of your project data
+- Separate from the Lustre filesystem of LUMI, with a fast connection for data transfer between LUMI filesystem and LUMI-O
+- The available storage space in LUMI-O can also be used as an easily reachable location to backup your data that you have on LUMI
+- Accessible also without connecting to LUMI - in most cases available also during service breaks of LUMI
+- Can be used to share data outside your project (publicly or privately)
+- Data lifetime in LUMI-O is the same as your project lifetime
 
 Guide for LUMI-O in the LUMI documentation: https://docs.lumi-supercomputer.eu/storage/lumio/
 
