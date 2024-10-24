@@ -143,7 +143,7 @@ For more details,
 [see the LUMI user guide](https://docs.lumi-supercomputer.eu/hardware/).
 
 ```{keypoints}
-- High Performance Computing (HPC), typically involves connecting to very large
+- High Performance Computing (HPC) typically involves connecting to very large
   computing systems elsewhere in the world.
 - These other systems can be used to do work that would either be impossible
   or much slower on smaller systems.
