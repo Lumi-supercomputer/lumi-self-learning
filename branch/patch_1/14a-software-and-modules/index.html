@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software and Modules on LUMI &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Software on LUMI" href="../15-software-on-lumi/" />
+    <link rel="prev" title="Modules and software stacks" href="../14-modules-and-software-stacks/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-terminal-and-webinterface/">Terminal and Web interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Using the LUMI filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software and Modules on LUMI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-software-there-are-available-on-lumi">What software there are available on LUMI?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#good-to-know-software-stacks-on-lumi">Good to know: Software stacks on LUMI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modular-structure-with-software">Modular structure with software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modules-on-lumi">Modules on LUMI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-load-the-nano-editor-and-write-a-simple-script">Tutorial: Load the Nano editor and write a simple script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-install-a-software-with-easybuild">Tutorial: Install a software with EasyBuild</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-of-the-software">Usage of the software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-adding-your-own-easyconfig-to-lumi">Advanced: Adding your own EasyConfig to LUMI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24-lumio-object-storage/">Using LUMI-O object storage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Software and Modules on LUMI</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/14a-software-and-modules.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-and-modules-on-lumi">
+<h1>Software and Modules on LUMI<a class="headerlink" href="#software-and-modules-on-lumi" title="Permalink to this heading"></a></h1>
+<p>This tutorial helps you to get started with modules on LUMI. For a more comprehensive look to options with modules on LUMI, see the <a class="reference external" href="https://docs.lumi-supercomputer.eu/runjobs/lumi_env/Lmod_modules/">LUMI documentation</a>.</p>
+<section id="what-software-there-are-available-on-lumi">
+<h2>What software there are available on LUMI?<a class="headerlink" href="#what-software-there-are-available-on-lumi" title="Permalink to this heading"></a></h2>
+<p>To see the available software on LUMI, one doesn’t need to login to LUMI. To see the software available in the central LUMI software collection, just open the <a class="reference external" href="https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/">LUMI software library</a> page, which lists all the software that are either <em>pre-installed</em> to the system, or easily <em>user installable</em>.</p>
+<p>Let’s take a few examples.</p>
+<p>First, let’s search Gnuplot, and see the page about it.
+When we open the page about Gnuplot, we see that there is a green box that reads <code class="docutils literal notranslate"><span class="pre">pre-installed</span></code>. This means that the software is already available in the system, and one can directly use the typical Lmod commands (e.g. <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code>) with it. (We’ll see a bit later how the Lmod commands work in practise, and what the term <em>pre-installed</em> means.)</p>
+<p>As a second example, let’s take a look at the page of the software Gromacs. On this page we have a blue box that reads <code class="docutils literal notranslate"><span class="pre">user</span> <span class="pre">installable</span></code>. This means that Lmod can’t directly find the software on LUMI, but user needs to <em>install</em> it first. This installation is not a difficult process, and only requires typing few commands. We’ll come back to how to do this with specific examples later in this guide.</p>
+<p>Besides the software available in the central LUMI software collection, there are software collections available by local LUMI organizations. Currently (April 2024) there is available an additional software stack by CSC, Finland. To see these available software via this collection, visit the <a class="reference external" href="https://docs.lumi-supercomputer.eu/software/local/csc/">page about local software collections</a> in the LUMI documentation.</p>
+</section>
+<section id="good-to-know-software-stacks-on-lumi">
+<h2>Good to know: Software stacks on LUMI<a class="headerlink" href="#good-to-know-software-stacks-on-lumi" title="Permalink to this heading"></a></h2>
+<p>A software stack is a set of modules, libraries and compilers, and everything there is needed to run the applications. On LUMI there are several software stacks available.
+The main software stack on LUMI is the <code class="docutils literal notranslate"><span class="pre">LUMI</span> <span class="pre">software</span> <span class="pre">stack</span></code>, which is maintained and supported by the LUMI user support team. There are several versions of it available at the same time, as the components of the software stacks regularily get updates. Old software stack versions get disabled at some point.</p>
+<p>It is good to know the principles of what the software environment on LUMI is based on, and what kind of options there are for software stacks on LUMI. Here we give just a very brief description. In case you would like to know more, please see the <a class="reference external" href="https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/">LUMI documentation</a>.</p>
+<p>As LUMI is a HPE Cray machine, the basis of all the software environments on LUMI is a Cray environment. This is what you get as a default, once you login to LUMI. It is recommended to load one of the offered software stacks on top of this. In the following examples in this guide we will be using versions of the main software stacks on LUMI, i.e. versions of the “LUMI software stack”.</p>
+<p>(A figure here, what sw stack options there are?)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Login
+|
+Basic Cray Environment
+|
+|------ CrayEnv
+|      
+|------ LUMI stacks (LUMI/22.12, LUMI/23.09, ...)
+|      
+`------ Spack (Spack/23.03, Spack/23.09, ...)
+
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#crayenv"><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">Cray</span> <span class="pre">environment</span></code></a> (CrayEnv) contains some additional tools on top of the default environemnt what you get at login.</p>
+<p><a class="reference external" href="https://docs.lumi-supercomputer.eu/runjobs/lumi_env/softwarestacks/#lumi"><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">LUMI</span> <span class="pre">stacks</span></code></a> are the main software stacks on LUMI that is build on top of the basic Cray environment using EasyBuild.
+This is what we will be using in the following examples.</p>
+<p><a class="reference external" href="https://docs.lumi-supercomputer.eu/software/installing/spack/"><code class="docutils literal notranslate"><span class="pre">Spack</span></code></a> is available, but it is only recommended if you are already familiar with using Spack. It is offered “as-is”. No support with developing or debugging Spack modules is provided by the LUMI user support team.</p>
+</section>
+<section id="modular-structure-with-software">
+<h2>Modular structure with software<a class="headerlink" href="#modular-structure-with-software" title="Permalink to this heading"></a></h2>
+<p>Maybe here a chapter from 14-modules-and-software.md that helps understanding a bit, why software available via modules and so.</p>
+<p>?</p>
+<p>…</p>
+</section>
+<section id="modules-on-lumi">
+<h2>Modules on LUMI<a class="headerlink" href="#modules-on-lumi" title="Permalink to this heading"></a></h2>
+<p>Let’s now login to LUMI and start experimenting what we see and what’s available.</p>
+<ol class="arabic simple">
+<li><p>Log in to LUMI with your user credentials (SSH or <a class="reference external" href="https://www.lumi.csc.fi">LUMI web interface</a>):</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-i<span class="w"> </span>&lt;path-to-private-key&gt;<span class="w"> </span>&lt;username&gt;@lumi.csc.fi<span class="w">    </span><span class="c1"># replace &lt;username&gt; with your LUMI username, e.g. myname@lumi.csc.fi</span>
+<span class="w">                                                       </span><span class="c1"># replace &lt;path-to-private-key&gt; with the path to your private key file, e.g. </span>
+<span class="w">                                                       </span><span class="c1"># ./.ssh/id_ed25519 or /home/user/.ssh/id_ed25519</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Try a <code class="docutils literal notranslate"><span class="pre">module</span></code> command! Check out which modules are loaded as default as you login to LUMI:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>list
+</pre></div>
+</div>
+<p>The modules you see listed are both <em>installed</em> and currently <em>loaded</em> to use. This is the default environment when you open a new session on LUMI, before you do or load anything else. (It contains e.g. some initial/default settings for libraries, compiling environment, etc.)</p>
+<p>Next step after login would usually be loading one version of the available software stacks. Which one, depends on what we would like to do on LUMI.</p>
+<p>One example workflow would be that first after login we would load a LUMI software stacks (e.g. LUMI/23.09). Then we would load a suitable partition for our use case (e.g. partition/C for LUMI-C compute nodes). Then we would load our software. If the software is not yet installed by you or by one of your group members to your <code class="docutils literal notranslate"><span class="pre">/project/project_46XXXXXXX/</span></code> location, we install the software first.</p>
+<p>(A some sort of module load example tree here?)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+Login (Basic Cray environment loaded as default)
+|
+|-------------- CrayEnv
+|               `----- (Load or install your environments/packages)
+|      
+|-------------- LUMI/22.12
+|
+|-------------- LUMI/23.03
+|           
+|-------------- LUMI/23.09
+|                  |
+|                  |---- partition/L
+|                  |---- partition/C
+|                  `---- partition/G
+|                        `------ Load or install your software (e.g. w/ EasyBuild) 
+|
+|-------------- Spack/23.03
+|
+`-------------- Spack/23.09
+                
+
+</pre></div>
+</div>
+<p>To see other modules that are currently installed and available to be loaded (but not yet loaded to use), one can use the command <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span></code>. The output lists everything that is currently available to be loaded, so it’s quite a long list. (Typing this opens an output with the <code class="docutils literal notranslate"><span class="pre">less</span></code> tool, which you can scroll e.g. with the keyboard arrow kyes, and exit with pressing <code class="docutils literal notranslate"><span class="pre">q</span></code> from the keyboard.)</p>
+<p>To search if a specific software is directly availabe to load, one can use the command <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">spider</span> <span class="pre">&lt;software_name&gt;</span></code> . E.g. to see, if we have the simple text editor <code class="docutils literal notranslate"><span class="pre">Nano</span></code> available to load:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>spider<span class="w"> </span>nano
+</pre></div>
+</div>
+<p>The output is an overview of versions of Nano that are available to be loaded. In general it’s good to use the latest versions of a software available, unless one has a reason to use an older version. Let’s see more information of some of the Nano versions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>spider<span class="w"> </span>nano/7.2
+</pre></div>
+</div>
+<p>We get an output that gives us some information about this software or the version of it, and what we need to do first to load this version of Nano, if anything.
+We see that this version of Nano is available in the <code class="docutils literal notranslate"><span class="pre">CrayEnv</span></code> software stack, and also in several versions of the main <code class="docutils literal notranslate"><span class="pre">LUMI</span> <span class="pre">software</span> <span class="pre">stacks</span></code>.</p>
+<p>What it comes to the Nano editor itself, it doesn’t really matter which version of software stacks and which <em>partition</em> we choose. This is relevant what it comes to other things we are doing on LUMI besides using the Nano editor (since probably you didn’t apply compute time on LUMI to use the Nano editor, but rather are using Nano in addition to some other workflow). In some cases it matters how a software is optimized or compiled, and all the software one is using in the same workflow should be optimized or compiled the way that it is compatible. This is the reason why there are so many different versions for such a simple tool as Nano available, for example.</p>
+<p>From the output of available prerequisites that we just got with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">spider</span> <span class="pre">nano/7.2</span></code> we choose <strong>one line</strong>. Let’s now choose the latest (on May 2024) of the available LUMI software stacks <code class="docutils literal notranslate"><span class="pre">LUMI/23.09</span></code>. Besides this let’s choose to use the <code class="docutils literal notranslate"><span class="pre">partition/L</span></code> that just means a set of settings optimized for the <em>login nodes</em> on LUMI. Because we are just going to test Nano on a login node where we are now, and not submitting jobs e.g. to LUMI-C or LUMI-G and using Nano interactively from a compute node for example, we are happy with settings optimized for the login nodes.</p>
+<p>At this point we are still with the same environment than which we had right after login to LUMI. If we do the <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">list</span></code> the listing is exactly the same as earlier.</p>
+<hr class="docutils" />
+<p>Let’s see the currently available versions of <code class="docutils literal notranslate"><span class="pre">LUMI</span></code> software stacks:</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">LUMI</span></code> and press the tabulator key twice. The output you see should be something like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">LUMI</span>&#160; <span class="pre">LUMI/22.08</span>&#160; <span class="pre">LUMI/22.12</span>&#160; <span class="pre">LUMI/23.03</span>&#160; <span class="pre">LUMI/23.09</span></code></p>
+<p>The versions of the LUMI software stacks are named based on a year and a month that the corresponding version of a Cray software stack was reliesed.</p>
+<p>Now let’s not load any version of the LUMI software stacks just yet. Usually it’s good to load a version of the software stacks after one knows which version we need, and we’ll get to that point soon.</p>
+<p>When loading e.g. a LUMI software stak version, if you don’t specify the version in the module load command (i.e. you would do only <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">LUMI</span></code> and press enter), a default version is loaded. But it is recommended to also provide the version of the software stacks in the module load command, as we are doing above, as the default version may change. Also when specifying the version, you always know what you are actually loading, and what other modules or EasyBuild installations are compatible with it.</p>
+</section>
+<hr class="docutils" />
+<section id="tutorial-load-the-nano-editor-and-write-a-simple-script">
+<h2>Tutorial: Load the Nano editor and write a simple script<a class="headerlink" href="#tutorial-load-the-nano-editor-and-write-a-simple-script" title="Permalink to this heading"></a></h2>
+<p>Work in progress</p>
+<p>…</p>
+</section>
+<section id="tutorial-install-a-software-with-easybuild">
+<h2>Tutorial: Install a software with EasyBuild<a class="headerlink" href="#tutorial-install-a-software-with-easybuild" title="Permalink to this heading"></a></h2>
+<p>Let’s use here an example software called ‘eb-tutorial’. This is an example software that has no real practical use, but can be used in exercises as an example of a software, when getting to know EasyBuild.
+First let’s check the available versions of the software from the <a class="reference external" href="https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/">LUMI software library</a>.
+At <code class="docutils literal notranslate"><span class="pre">e</span></code> we find the <a class="reference external" href="https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/e/eb-tutorial/">eb-tutorial</a>. We see from the blue box on top that it is <code class="docutils literal notranslate"><span class="pre">user-installable</span></code>, which means that we can install it with EasyBuild.</p>
+<p>Let’s scroll down a bit on the page, to the list of available EasyConfigs. It is in general a good idea to use the latest available installation, unless there are other restrictions (e.g. one needs a certain version of a software, or because of compatibility reasons).
+We see that there is available one version of this software <code class="docutils literal notranslate"><span class="pre">1.0.1</span></code>. It is available as six different toolchains (May 19th 2024). The version of the compiler (GNU, Cray, AOCC) could have a meaning for us, but because we don’t now care how the software is compiled, we choose as an example the one that is compiled with the GNU compiler (cpeGNU). Because we don’t have other restrictions, we choose the installation made to the latest LUMI sotware stack that is available, the 22.12.</p>
+<p>(A picture here about the text <code class="docutils literal notranslate"><span class="pre">eb-tutorial-1.0.1-cpeGNU-22.12.eb</span></code> where the software name, version, and eb-toolchain are marked?)</p>
+<p>=&gt; We will install the <code class="docutils literal notranslate"><span class="pre">eb-tutorial-1.0.1-cpeGNU-22.12.eb</span></code> version of the eb-tutorial software.</p>
+<p>(Some boxes with different colours next? To separate the blocks that one needs to do only once, and the ones that needs to be done every time on LUMI?)</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Decide where you want to install the software. The default location is your home folder $HOME/EasyBuild. The software will be automatically installed there, if you don’t change anything. However, it’s in general a better practise to install the software in your /project folder, which is shared by everyone in your project. If the software is istalled there, all of the members of your project can use the installed software that one of the project members has installed.</p></li>
+</ol>
+<p>Now let’s change the location for EasyBuild installations to the /project folder of your project.</p>
+<p>Note, that this change needs to be done before you load any version of the LUMI sotware stacks.</p>
+<p>Open a new shell on LUMI (e.g. logout, and login to LUMI again, or open a new LUMI session in another shell window)</p>
+<p>Go to your home folder:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span></code></p>
+<p>List the content of your home folder with a command that also shows the hidden files:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-a</span></code></p>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file e.g. with</p>
+<p><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">.bashrc</span></code></p>
+<p>Add a following line somewhere in the file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">EBU_USER_PREFIX</span><span class="o">=</span>/project/project_465000000/EasyBuild<span class="w"> </span><span class="c1"># Replace the project number with your project number</span>
+</pre></div>
+</div>
+<p>Save the changes to the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file with <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">s</span></code> and exit nano with <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">x</span></code> .</p>
+<ol class="arabic simple" start="2">
+<li><p>Next let’s load the version of LUMI software stack that corresponds to our software version:</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">LUMI/22.12</span></code></p>
+<ol class="arabic simple" start="3">
+<li><p>Next we will decide which <code class="docutils literal notranslate"><span class="pre">partition</span></code> we will use the software with. If we don’t choose anything here, the default is <code class="docutils literal notranslate"><span class="pre">partition/L</span></code>, which means a set of settings that are optimized for the login nodes of LUMI. If we would be using this software on the compute nodes of LUMI-C, we would choose the <code class="docutils literal notranslate"><span class="pre">partition/C</span></code>. If the softare would be used on the LUMI-G nodes, we would load the <code class="docutils literal notranslate"><span class="pre">partition/G</span></code> . For the example let’s say that our software ‘eb-tutorial’ is something that we want to run on the LUMI-C compute nodes. In that case we install the software with settings that are optimized for the LUMI-C compute nodes:</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">partition/C</span></code></p>
+<ol class="arabic simple" start="4">
+<li><p>To install a software with EasyBuild, we will need to load a module that does the installation:</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">EasyBuild-user</span></code></p>
+<p>This is loaded only when we are installing the software, not anymore later when we are using the software.</p>
+<ol class="arabic simple" start="5">
+<li><p>Now the software is installed with a command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eb<span class="w"> </span>eb-tutorial-1.0.1-cpeGNU-22.12.eb<span class="w"> </span>-r<span class="w"> </span><span class="c1">#The -r tells to also install possible dependencies</span>
+</pre></div>
+</div>
+<p>Depending on the software, and if it needs to first install several dependencies, the installation can take a while.</p>
+<ol class="arabic simple" start="6">
+<li><p>Once the installation is ready, the software has appeared to us on LUMI as it would be installed in the central software stack. We can take it into use with:</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">eb-tutorial</span></code></p>
+</section>
+<section id="usage-of-the-software">
+<h3>Usage of the software<a class="headerlink" href="#usage-of-the-software" title="Permalink to this heading"></a></h3>
+<p>When you later login to LUMI again and are using the software next times, you (or your group members) only need to do the steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>LUMI/22.12
+module<span class="w"> </span>load<span class="w"> </span>partition/C
+module<span class="w"> </span>load<span class="w"> </span>eb-tutorial
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-adding-your-own-easyconfig-to-lumi">
+<h2>Advanced: Adding your own EasyConfig to LUMI<a class="headerlink" href="#advanced-adding-your-own-easyconfig-to-lumi" title="Permalink to this heading"></a></h2>
+<p>If you have an EasyConfig that you have written yourself, or modified from an existing one, and you would like to bring it to LUMI, here’s an example of how it’s done. This is briefly described in the <a class="reference external" href="https://docs.lumi-supercomputer.eu/software/installing/easybuild/#building-your-own-easybuild-repository">LUMI documentation</a></p>
+<p>First let’s check what is the value of <code class="docutils literal notranslate"><span class="pre">EBU_USER_PREFIX</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$EBU_USER_PREFIX</span>
+</pre></div>
+</div>
+<p>The output should be something as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/project/project_465000001/EasyBuild
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$HOME</span>/EasyBuild
+</pre></div>
+</div>
+<p>if we haven’t set the <code class="docutils literal notranslate"><span class="pre">EBU_USER_PREFIX</span></code> to point to a location under our project directories.</p>
+<p>The location where <code class="docutils literal notranslate"><span class="pre">EBU_USER_PREFIX</span></code> points is not only where EasyBuild places the EasyBuild installations, but where it goes looking for existing recipes. If we want to add an EasyConfig ourselves, this is where to place it.</p>
+<p>Let’s assume we have our <code class="docutils literal notranslate"><span class="pre">EBU_USER_PREFIX</span></code> variable pointing to <code class="docutils literal notranslate"><span class="pre">/project/project_465000001/EasyBuild</span></code>. Let’s go to this location</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/project/project_465000001/EasyBuild
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">ls</span></code> we see that the location contains something as the following, depening a bit what kind of installations one has already made:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ebrepo_files</span>&#160; <span class="pre">mgmt</span>&#160; <span class="pre">modules</span>&#160; <span class="pre">sources</span>&#160; <span class="pre">SW</span>&#160; <span class="pre">UserRepo</span></code></p>
+<p>Let’s move to the location where the new recipe should be placed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>UserRepo/easybuild/easyconfigs
+</pre></div>
+</div>
+<p>This location should be empty, if you haven’t added any EasyConfigs yourself before.</p>
+<p>You should name your EasyConfig using a similar naming scheme as described in the LUMI documentation:
+https://docs.lumi-supercomputer.eu/software/installing/easybuild/#easybuild-recipes</p>
+<p>with</p>
+<p><code class="docutils literal notranslate"><span class="pre">software_name</span></code>-<code class="docutils literal notranslate"><span class="pre">version</span></code>-<code class="docutils literal notranslate"><span class="pre">compiler</span></code>-<code class="docutils literal notranslate"><span class="pre">LUMI_software_stack_version</span></code>-<code class="docutils literal notranslate"><span class="pre">possible_additional_information</span></code>.eb</p>
+<p>Create a new file in this location e.g. with using <code class="docutils literal notranslate"><span class="pre">nano</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>&lt;your-new-easyconfig-name&gt;.eb
+</pre></div>
+</div>
+<p>and add the content of the recipe there. Save and exit the document with <code class="docutils literal notranslate"><span class="pre">Ctrl+x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> and Enter.</p>
+<p>We can check with <code class="docutils literal notranslate"><span class="pre">ls</span></code> that our EasyConfig file is there now.</p>
+<p>It doesn’t matter in which location you are next for the installation, but you can move e.g. to your home directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span>
+</pre></div>
+</div>
+<p>To make sure you have a clean shell environment, it is recommended e.g. to log out from LUMI and back in again at this point.</p>
+<p>When back at LUMI with a clean shell, we can now install the software module (for us and our project members) with using the EasyConfig we just added. This works the same way as with any other EasyConfigs that we have described earlier on this page, in the previous examples.</p>
+<p>Let’s assume our EasyConfig is for LUMI/23.09, and we would like to use it with LUMI-C.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>LUMI/23.09
+module<span class="w"> </span>load<span class="w"> </span>partition/C
+module<span class="w"> </span>load<span class="w"> </span>EasyBuild-user
+</pre></div>
+</div>
+<p>now, if we want to, we can check with <code class="docutils literal notranslate"><span class="pre">eb</span> <span class="pre">-S</span> <span class="pre">&lt;our-software-name&gt;</span></code> what recipes are available. If our software would be called e.g. MySoftware, we could do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eb<span class="w"> </span>-S<span class="w"> </span>MySoftware
+</pre></div>
+</div>
+<p>Let’s now install our EasyConfig:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eb<span class="w"> </span>&lt;full-name-of-our-easyconfig&gt;.eb<span class="w"> </span>-r
+</pre></div>
+</div>
+<p>This may take a while, depending on the software.</p>
+<p>Now with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>avail<span class="w"> </span>&lt;our-software-name&gt;<span class="w"> </span>
+</pre></div>
+</div>
+<p>we should find out that our software is available to be loaded with LUMI/23.09 and with partition/C, and we can load it with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>MySoftware
+</pre></div>
+</div>
+<p>In the future, when logging in to LUMI, we can only load the same LUMI software stack and partition, and then our software. In this case it would be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>LUMI/23.09
+module<span class="w"> </span>load<span class="w"> </span>partition/C
+module<span class="w"> </span>load<span class="w"> </span>MySoftware
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../14-modules-and-software-stacks/" class="btn btn-neutral float-left" title="Modules and software stacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../15-software-on-lumi/" class="btn btn-neutral float-right" title="Software on LUMI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

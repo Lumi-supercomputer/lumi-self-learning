@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exploring Remote Resources &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Where to store files in LUMI computing environment?" href="../13-lumi-disk-areas/" />
+    <link rel="prev" title="LUMI environment" href="../12-lumi-environment/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exploring Remote Resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#look-around-the-remote-system">Look Around the Remote System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nodes">Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-in-a-node">What’s in a Node?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19b-object-storage-lumio/">Using LUMI-O object storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Exploring Remote Resources</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/13a-exploring-remote-resources.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="exploring-remote-resources">
+<h1>Exploring Remote Resources<a class="headerlink" href="#exploring-remote-resources" title="Permalink to this heading"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>teaching: 30</p></li>
+<li><p>exercises: 15</p></li>
+</ul>
+</div>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How does my local computer compare to the remote systems?</p></li>
+<li><p>How does the login node compare to the compute nodes?</p></li>
+<li><p>Are all compute nodes alike?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Survey system resources using <code class="docutils literal notranslate"><span class="pre">nproc</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>, and the queuing system</p></li>
+<li><p>Compare &amp; contrast resources on the local machine, login node, and worker nodes</p></li>
+<li><p>Learn about the various filesystems on the cluster using <code class="docutils literal notranslate"><span class="pre">df</span></code></p></li>
+<li><p>Find out <code class="docutils literal notranslate"><span class="pre">who</span></code> else is logged in</p></li>
+<li><p>Assess the number of idle and occupied nodes</p></li>
+</ul>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>An HPC system is a set of networked machines.</p></li>
+<li><p>HPC systems typically provide login nodes and a set of compute nodes.</p></li>
+<li><p>The resources found on independent (worker) nodes can vary in volume and
+type (amount of RAM, processor architecture, availability of network mounted
+filesystems, etc.).</p></li>
+<li><p>Files saved on shared storage are available on all nodes.</p></li>
+<li><p>The login node is a shared machine: be considerate of other users.</p></li>
+</ul>
+</div>
+<section id="look-around-the-remote-system">
+<h2>Look Around the Remote System<a class="headerlink" href="#look-around-the-remote-system" title="Permalink to this heading"></a></h2>
+<p>If you have not already connected to {{ site.remote.name }}, please do so now:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span>  <span class="n">ssh</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Take a look at your home directory on the remote system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span>
+</pre></div>
+</div>
+<div class="admonition-discussion discussion important admonition" id="discussion-0">
+<p class="admonition-title">Discussion</p>
+<p>What’s different between your machine and the remote?</p>
+<p>Open a second terminal window on your local computer and run the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command
+(without logging in to {{ site.remote.name }}). What differences do you see?</p>
+<p>Solution</p>
+<p>You would likely see something more like this:</p>
+</div>
+<p>{{ site.local.prompt }} ls</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>Applications Documents    Library      Music        Public
+Desktop      Downloads    Movies       Pictures</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+The remote computer&#39;s home directory shares almost nothing in common with
+the local computer: they are completely separate systems!
+{: .solution}
+</pre></div>
+</div>
+<p>Most high-performance computing systems run the Linux operating system, which
+is built around the UNIX <a class="reference external" href="https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">Filesystem Hierarchy Standard</a>. Instead of
+having a separate root for each hard drive or storage medium, all files and
+devices are anchored to the “root” directory, which is <code class="docutils literal notranslate"><span class="pre">/</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span> <span class="o">/</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span>   <span class="n">etc</span>   <span class="n">lib64</span>  <span class="n">proc</span>  <span class="n">sbin</span>     <span class="n">sys</span>  <span class="n">var</span>
+<span class="n">boot</span>  <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">homedir</span> <span class="o">|</span> <span class="n">replace</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="p">}}</span>  <span class="n">mnt</span>    <span class="n">root</span>  <span class="n">scratch</span>  <span class="n">tmp</span>  <span class="n">working</span>
+<span class="n">dev</span>   <span class="n">lib</span>   <span class="n">opt</span>    <span class="n">run</span>   <span class="n">srv</span>      <span class="n">usr</span>
+</pre></div>
+</div>
+<p>The “{{ site.remote.homedir | replace: “/”, “” }}” directory is the one where
+we generally want to keep all of our files. Other folders on a UNIX OS contain
+system files and change as you install new software or upgrade your OS.</p>
+<div class="admonition-callout callout admonition" id="callout-0">
+<p class="admonition-title">Callout</p>
+<p>Using HPC filesystems</p>
+<p>On HPC systems, you have a number of places where you can store your files.
+These differ in both the amount of space allocated and whether or not they
+are backed up.</p>
+<ul class="simple">
+<li><p><strong>Home</strong> – often a <em>network filesystem</em>, data stored here is available
+throughout the HPC system, and often backed up periodically. Files stored
+here are typically slower to access, the data is actually stored on another
+computer and is being transmitted and made available over the network!</p></li>
+<li><p><strong>Scratch</strong> – typically faster than the networked Home directory, but not
+usually backed up, and should not be used for long term storage.</p></li>
+<li><p><strong>Work</strong> – sometimes provided as an alternative to Scratch space, Work is
+a fast file system accessed over the network. Typically, this will have
+higher performance than your home directory, but lower performance than
+Scratch; it may not be backed up. It differs from Scratch space in that
+files in a work file system are not automatically deleted for you: you must
+manage the space yourself.</p></li>
+</ul>
+</div>
+</section>
+<section id="nodes">
+<h2>Nodes<a class="headerlink" href="#nodes" title="Permalink to this heading"></a></h2>
+<p>Individual computers that compose a cluster are typically called <em>nodes</em>
+(although you will also hear people call them <em>servers</em>, <em>computers</em> and
+<em>machines</em>). On a cluster, there are different types of nodes for different
+types of tasks. The node where you are right now is called the <em>login node</em>,
+<em>head node</em>, <em>landing pad</em>, or <em>submit node</em>. A login node serves as an access
+point to the cluster.</p>
+<p>As a gateway, the login node should not be used for time-consuming or
+resource-intensive tasks. You should be alert to this, and check with your
+site’s operators or documentation for details of what is and isn’t allowed. It
+is well suited for uploading and downloading files, setting up software, and
+running tests. Generally speaking, in these lessons, we will avoid running jobs
+on the login node.</p>
+<p>Who else is logged in to the login node?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">who</span>
+</pre></div>
+</div>
+<p>This may show only your user ID, but there are likely several other people
+(including fellow learners) connected right now.</p>
+<div class="admonition-callout callout admonition" id="callout-1">
+<p class="admonition-title">Callout</p>
+<p>Dedicated Transfer Nodes</p>
+<p>If you want to transfer larger amounts of data to or from the cluster, some
+systems offer dedicated nodes for data transfers only. The motivation for
+this lies in the fact that larger data transfers should not obstruct
+operation of the login node for anybody else. Check with your cluster’s
+documentation or its support team if such a transfer node is available. As a
+rule of thumb, consider all transfers of a volume larger than 500 MB to 1 GB
+as large. But these numbers change, e.g., depending on the network connection
+of yourself and of your cluster or other factors.</p>
+</div>
+<p>The real work on a cluster gets done by the <em>compute</em> (or <em>worker</em>) <em>nodes</em>.
+compute nodes come in many shapes and sizes, but generally are dedicated to long
+or hard tasks that require a lot of computational resources.</p>
+<p>All interaction with the compute nodes is handled by a specialized piece of
+software called a scheduler (the scheduler used in this lesson is called
+{{ site.sched.name }}). We’ll learn more about how to use the
+scheduler to submit jobs next, but for now, it can also tell us more
+information about the compute nodes.</p>
+<p>For example, we can view all of the compute nodes by running the command
+<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.sched.info</span> <span class="pre">}}</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">info</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/cluster/queue-info.snip %}</p>
+<p>A lot of the nodes are busy running work for other users: we are not alone
+here!</p>
+<p>There are also specialized machines used for managing disk storage, user
+authentication, and other infrastructure-related tasks. Although we do not
+typically logon to or interact with these machines directly, they enable a
+number of key features like ensuring our user account and files are available
+throughout the HPC system.</p>
+</section>
+<section id="what-s-in-a-node">
+<h2>What’s in a Node?<a class="headerlink" href="#what-s-in-a-node" title="Permalink to this heading"></a></h2>
+<p>All of the nodes in an HPC system have the same components as your own laptop
+or desktop: <em>CPUs</em> (sometimes also called <em>processors</em> or <em>cores</em>), <em>memory</em>
+(or <em>RAM</em>), and <em>disk</em> space. CPUs are a computer’s tool for actually running
+programs and calculations. Information about a current task is stored in the
+computer’s memory. Disk refers to all storage that can be accessed like a file
+system. This is generally storage that can hold data permanently, i.e. data is
+still there even if the computer has been restarted. While this storage can be
+local (a hard drive installed inside of it), it is more common for nodes to
+connect to a shared, remote fileserver or cluster of servers.</p>
+<p>{% include figure.html url=”” max-width=”40%”
+file=”/fig/node_anatomy.png”
+alt=”Node anatomy” caption=”” %}</p>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>Explore Your Computer</p>
+<p>Try to find out the number of CPUs and amount of memory available on your
+personal computer.</p>
+<p>Note that, if you’re logged in to the remote computer cluster, you need to
+log out first. To do so, type <code class="docutils literal notranslate"><span class="pre">Ctrl+d</span></code> or <code class="docutils literal notranslate"><span class="pre">exit</span></code>:</p>
+</div>
+<p>{{ site.remote.prompt }} exit
+{{ site.local.prompt }}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+ <span class="n">Solution</span>
+
+<span class="n">There</span> <span class="n">are</span> <span class="n">several</span> <span class="n">ways</span> <span class="n">to</span> <span class="n">do</span> <span class="n">this</span><span class="o">.</span> <span class="n">Most</span> <span class="n">operating</span> <span class="n">systems</span> <span class="n">have</span> <span class="n">a</span> <span class="n">graphical</span>
+<span class="n">system</span> <span class="n">monitor</span><span class="p">,</span> <span class="n">like</span> <span class="n">the</span> <span class="n">Windows</span> <span class="n">Task</span> <span class="n">Manager</span><span class="o">.</span> <span class="n">More</span> <span class="n">detailed</span> <span class="n">information</span>
+<span class="n">can</span> <span class="n">be</span> <span class="n">found</span> <span class="n">on</span> <span class="n">the</span> <span class="n">command</span> <span class="n">line</span><span class="p">:</span>
+
+<span class="o">*</span> <span class="n">Run</span> <span class="n">system</span> <span class="n">utilities</span>
+</pre></div>
+</div>
+<p>{{ site.local.prompt }} nproc –all
+{{ site.local.prompt }} free -m</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+* Read from `/proc`
+</pre></div>
+</div>
+<p>{{ site.local.prompt }} cat /proc/cpuinfo
+{{ site.local.prompt }} cat /proc/meminfo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+<span class="o">*</span> <span class="n">Run</span> <span class="n">system</span> <span class="n">monitor</span>
+</pre></div>
+</div>
+<p>{{ site.local.prompt }} htop</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="p">{:</span> <span class="o">.</span><span class="n">solution</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-exercise exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise</p>
+<p>Explore the Login Node</p>
+<p>Now compare the resources of your computer with those of the login node.</p>
+<p>Solution</p>
+</div>
+<p>{{ site.local.prompt }} ssh {{ site.remote.user }}&#64;{{ site.remote.login }}
+{{ site.remote.prompt }} nproc –all
+{{ site.remote.prompt }} free -m</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+You can get more information about the processors using `lscpu`,
+and a lot of detail about the memory by reading the file `/proc/meminfo`:
+
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} less /proc/meminfo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+You can also explore the available filesystems using `df` to show **d**isk
+**f**ree space. The `-h` flag renders the sizes in a human-friendly format,
+i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
+each resource is.
+
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} df -Th</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+&gt;  Different results from `df`
+&gt;
+&gt; * The local filesystems (ext, tmp, xfs, zfs) will depend on whether
+&gt;   you&#39;re on the same login node (or compute node, later on).
+&gt; * Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar
+&gt;   -- but may include {{ site.remote.user }}, depending on how it
+&gt;   is [mounted][mount].
+{: .discussion}
+
+&gt;  Shared Filesystems
+&gt;
+&gt; This is an important point to remember: files saved on one node
+&gt; (computer) are often available everywhere on the cluster!
+{: .callout}
+{: .solution}
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/cluster/specific-node-info.snip %}</p>
+<div class="admonition-discussion discussion important admonition" id="discussion-1">
+<p class="admonition-title">Discussion</p>
+<p>Compare Your Computer, the Login Node and the Compute Node</p>
+<p>Compare your laptop’s number of processors and memory with the numbers you
+see on the cluster login node and compute node. What implications do
+you think the differences might have on running your research work on the
+different systems and nodes?</p>
+<p>Solution</p>
+<p>Compute nodes are usually built with processors that have <em>higher
+core-counts</em> than the login node or personal computers in order to support
+highly parallel tasks. Compute nodes usually also have substantially <em>more
+memory (RAM)</em> installed than a personal computer. More cores tends to help
+jobs that depend on some work that is easy to perform in <em>parallel</em>, and
+more, faster memory is key for large or <em>complex numerical tasks</em>.
+{: .solution}</p>
+</div>
+<div class="admonition-callout callout admonition" id="callout-2">
+<p class="admonition-title">Callout</p>
+<p>Differences Between Nodes</p>
+<p>Many HPC clusters have a variety of nodes optimized for particular workloads.
+Some nodes may have larger amount of memory, or specialized resources such as
+Graphics Processing Units (GPUs or “video cards”).</p>
+</div>
+<p>With all of this in mind, we will now cover how to talk to the cluster’s
+scheduler, and use it to start running our scripts and programs!</p>
+<p>{% include links.md %}</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../12-lumi-environment/" class="btn btn-neutral float-left" title="LUMI environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../13-lumi-disk-areas/" class="btn btn-neutral float-right" title="Where to store files in LUMI computing environment?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallel &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Using resources efficiently" href="../18-using-resources-efficiently/" />
+    <link rel="prev" title="Scheduler and batch jobs" href="../16-scheduler-and-batch-jobs/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-amdahl-program">Install the Amdahl Program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mpi-for-python">MPI for Python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#help">Help!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-job-on-a-compute-node">Running the Job on a Compute Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-parallel-job">Running the Parallel Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-much-does-parallel-execution-improve-performance">How Much Does Parallel Execution Improve Performance?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19b-object-storage-lumio/">Using LUMI-O object storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Parallel</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/17-parallel.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parallel">
+<h1>Parallel<a class="headerlink" href="#parallel" title="Permalink to this heading"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>teaching: 45</p></li>
+<li><p>exercises: 30</p></li>
+</ul>
+</div>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How do we execute a task in parallel?</p></li>
+<li><p>What benefits arise from parallel execution?</p></li>
+<li><p>What are the limits of gains from execution in parallel?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Install a Python package using <code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+<li><p>Prepare a job submission script for the parallel executable.</p></li>
+<li><p>Launch jobs with parallel execution.</p></li>
+<li><p>Record and summarize the timing and accuracy of jobs.</p></li>
+<li><p>Describe the relationship between job parallelism and performance.</p></li>
+</ul>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Parallel programming allows applications to take advantage of parallel hardware.</p></li>
+<li><p>The queuing system facilitates executing parallel tasks.</p></li>
+<li><p>Performance improvements from parallel execution do not scale linearly.</p></li>
+</ul>
+</div>
+<p>We now have the tools we need to run a multi-processor job. This is a very
+important aspect of HPC systems, as parallelism is one of the primary tools
+we have to improve the performance of computational tasks.</p>
+<p>If you disconnected, log back in to the cluster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ssh</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<section id="install-the-amdahl-program">
+<h2>Install the Amdahl Program<a class="headerlink" href="#install-the-amdahl-program" title="Permalink to this heading"></a></h2>
+<p>With the Amdahl source code on the cluster, we can install it, which will
+provide access to the <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> executable.
+Move into the extracted directory, then use the Package Installer for Python,
+or <code class="docutils literal notranslate"><span class="pre">pip</span></code>, to install it in your (“user”) home directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cd</span> <span class="n">amdahl</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">.</span>
+</pre></div>
+</div>
+<div class="admonition-callout callout admonition" id="callout-0">
+<p class="admonition-title">Callout</p>
+<p>Amdahl is Python Code</p>
+<p>The Amdahl program is written in Python, and installing or using it requires
+locating the <code class="docutils literal notranslate"><span class="pre">python3</span></code> executable on the login node.
+If it can’t be found, try listing available modules using <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span></code>,
+load the appropriate one, and try the command again.</p>
+</div>
+<section id="mpi-for-python">
+<h3>MPI for Python<a class="headerlink" href="#mpi-for-python" title="Permalink to this heading"></a></h3>
+<p>The Amdahl code has one dependency: <strong>mpi4py</strong>.
+If it hasn’t already been installed on the cluster, <code class="docutils literal notranslate"><span class="pre">pip</span></code> will attempt to
+collect mpi4py from the Internet and install it for you.
+If this fails due to a one-way firewall, you must retrieve mpi4py on your
+local machine and upload it, just as we did for Amdahl.</p>
+<div class="admonition-discussion discussion important admonition" id="discussion-0">
+<p class="admonition-title">Discussion</p>
+<p>Retrieve and Upload <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code></p>
+<p>If installing Amdahl failed because mpi4py could not be installed,
+retrieve the tarball from <a class="reference external" href="https://github.com/mpi4py/mpi4py/tarball/master">https://github.com/mpi4py/mpi4py/tarball/master</a>
+then <code class="docutils literal notranslate"><span class="pre">rsync</span></code> it to the cluster, extract, and install:</p>
+</div>
+<p>{{ site.local.prompt }} wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
+{{ site.local.prompt }} scp mpi4py.tar.gz {{ site.remote.user }}&#64;{{ site.remote.login }}:
+or
+{{ site.local.prompt }} rsync -avP mpi4py.tar.gz {{ site.remote.user }}&#64;{{ site.remote.login }}:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+</pre></div>
+</div>
+<p>{{ site.local.prompt }} ssh {{ site.remote.user }}&#64;{{ site.remote.login }}
+{{ site.remote.prompt }} tar -xvzf mpi4py.tar.gz  # extract the archive
+{{ site.remote.prompt }} mv mpi4py* mpi4py        # rename the directory
+{{ site.remote.prompt }} cd mpi4py
+{{ site.remote.prompt }} python3 -m pip install –user .
+{{ site.remote.prompt }} cd ../amdahl
+{{ site.remote.prompt }} python3 -m pip install –user .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="admonition-discussion discussion important admonition" id="discussion-1">
+<p class="admonition-title">Discussion</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">pip</span></code> Raises a Warning…</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span></code> may warn that your user package binaries are not in your PATH.</p>
+</div>
+<p>WARNING: The script amdahl is installed in “${HOME}/.local/bin” which is
+not on PATH. Consider adding this directory to PATH or, if you prefer to
+suppress this warning, use –no-warn-script-location.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{: .warning}
+
+To check whether this warning is a problem, use `which` to search for the
+`amdahl` program:
+
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} which amdahl</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+If the command returns no output, displaying a new prompt, it means the file
+`amdahl` has not been found. You must update the environment variable named
+`PATH` to include the missing folder.
+Edit your shell configuration file as follows, then log off the cluster and
+back on again so it takes effect.
+
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} nano ~/.bashrc
+{{ site.remote.prompt }} tail ~/.bashrc</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>export PATH=${PATH}:${HOME}/.local/bin</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+After logging back in to {{ site.remote.login }}, `which` should be able to
+find `amdahl` without difficulties.
+If you had to load a Python module, load it again.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="help">
+<h2>Help!<a class="headerlink" href="#help" title="Permalink to this heading"></a></h2>
+<p>Many command-line programs include a “help” message. Try it with <code class="docutils literal notranslate"><span class="pre">amdahl</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">amdahl</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">amdahl</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="p">[</span><span class="n">PARALLEL_PROPORTION</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="p">[</span><span class="n">WORK_SECONDS</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="p">[</span><span class="n">JITTER_PROPORTION</span><span class="p">]]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">p</span> <span class="p">[</span><span class="n">PARALLEL_PROPORTION</span><span class="p">],</span> <span class="o">--</span><span class="n">parallel</span><span class="o">-</span><span class="n">proportion</span> <span class="p">[</span><span class="n">PARALLEL_PROPORTION</span><span class="p">]</span>
+                        <span class="n">Parallel</span> <span class="n">proportion</span><span class="p">:</span> <span class="n">a</span> <span class="nb">float</span> <span class="n">between</span> <span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span>
+  <span class="o">-</span><span class="n">w</span> <span class="p">[</span><span class="n">WORK_SECONDS</span><span class="p">],</span> <span class="o">--</span><span class="n">work</span><span class="o">-</span><span class="n">seconds</span> <span class="p">[</span><span class="n">WORK_SECONDS</span><span class="p">]</span>
+                        <span class="n">Total</span> <span class="n">seconds</span> <span class="n">of</span> <span class="n">workload</span><span class="p">:</span> <span class="n">an</span> <span class="n">integer</span> <span class="n">greater</span> <span class="n">than</span> <span class="mi">0</span>
+  <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">terse</span>           <span class="n">Format</span> <span class="n">output</span> <span class="k">as</span> <span class="n">a</span> <span class="n">machine</span><span class="o">-</span><span class="n">readable</span> <span class="nb">object</span> <span class="k">for</span> <span class="n">easier</span> <span class="n">analysis</span>
+  <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">exact</span>           <span class="n">Exactly</span> <span class="n">match</span> <span class="n">requested</span> <span class="n">timing</span> <span class="n">by</span> <span class="n">disabling</span> <span class="n">random</span> <span class="n">jitter</span>
+  <span class="o">-</span><span class="n">j</span> <span class="p">[</span><span class="n">JITTER_PROPORTION</span><span class="p">],</span> <span class="o">--</span><span class="n">jitter</span><span class="o">-</span><span class="n">proportion</span> <span class="p">[</span><span class="n">JITTER_PROPORTION</span><span class="p">]</span>
+                        <span class="n">Random</span> <span class="n">jitter</span><span class="p">:</span> <span class="n">a</span> <span class="nb">float</span> <span class="n">between</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>This message doesn’t tell us much about what the program <em>does</em>, but it does
+tell us the important flags we might want to use when launching it.</p>
+</section>
+<section id="running-the-job-on-a-compute-node">
+<h2>Running the Job on a Compute Node<a class="headerlink" href="#running-the-job-on-a-compute-node" title="Permalink to this heading"></a></h2>
+<p>Create a submission file, requesting one task on a single node, then launch it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">nano</span> <span class="n">serial</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cat</span> <span class="n">serial</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/parallel/one-task-jobscript.snip %}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="n">serial</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>As before, use the {{ site.sched.name }} status commands to check whether your job
+is running and when it ends:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">status</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">flag</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ls</span></code> to locate the output file. The <code class="docutils literal notranslate"><span class="pre">-t</span></code> flag sorts in
+reverse-chronological order: newest first. What was the output?</p>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<p>Read the Job Output</p>
+<p>The cluster output should be written to a file in the folder you launched the
+job from. For example,</p>
+</div>
+<p>{{ site.remote.prompt }} ls -t</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>{{ site.remote.prompt }} cat slurm-347087.out</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>Doing 30.000 seconds of ‘work’ on 1 processor,
+which should take 30.000 seconds with 0.850 parallel proportion of the workload.</p>
+<p>Hello, World! I am process 0 of 1 on {{ site.remote.node }}. I will do all the serial ‘work’ for 4.500 seconds.
+Hello, World! I am process 0 of 1 on {{ site.remote.node }}. I will do parallel ‘work’ for 25.500 seconds.</p>
+<p>Total execution time (according to rank 0): 30.033 seconds</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>As we saw before, two of the <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> program flags set the amount of work and
+the proportion of that work that is parallel in nature. Based on the output, we
+can see that the code uses a default of 30 seconds of work that is 85%
+parallel. The program ran for just over 30 seconds in total, and if we run the
+numbers, it is true that 15% of it was marked ‘serial’ and 85% was ‘parallel’.</p>
+<p>Since we only gave the job one CPU, this job wasn’t really parallel: the same
+processor performed the ‘serial’ work for 4.5 seconds, then the ‘parallel’ part
+for 25.5 seconds, and no time was saved. The cluster can do better, if we ask.</p>
+</section>
+<section id="running-the-parallel-job">
+<h2>Running the Parallel Job<a class="headerlink" href="#running-the-parallel-job" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">amdahl</span></code> program uses the Message Passing Interface (MPI) for parallelism
+– this is a common tool on HPC systems.</p>
+<div class="admonition-callout callout admonition" id="callout-1">
+<p class="admonition-title">Callout</p>
+<p>What is MPI?</p>
+<p>The Message Passing Interface is a set of tools which allow multiple tasks
+running simultaneously to communicate with each other.
+Typically, a single executable is run multiple times, possibly on different
+machines, and the MPI tools are used to inform each instance of the
+executable about its sibling processes, and which instance it is.
+MPI also provides tools to allow communication between instances to
+coordinate work, exchange information about elements of the task, or to
+transfer data.
+An MPI instance typically has its own copy of all the local variables.</p>
+</div>
+<p>While MPI-aware executables can generally be run as stand-alone programs, in
+order for them to run in parallel they must use an MPI <em>run-time environment</em>,
+which is a specific implementation of the MPI <em>standard</em>.
+To activate the MPI environment, the program should be started via a command
+such as <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> (or <code class="docutils literal notranslate"><span class="pre">mpirun</span></code>, or <code class="docutils literal notranslate"><span class="pre">srun</span></code>, etc. depending on the MPI run-time
+you need to use), which will ensure that the appropriate run-time support for
+parallelism is included.</p>
+<div class="admonition-callout callout admonition" id="callout-2">
+<p class="admonition-title">Callout</p>
+<p>MPI Runtime Arguments</p>
+<p>On their own, commands such as <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> can take many arguments specifying
+how many machines will participate in the execution,
+and you might need these if you would like to run an MPI program on your
+own (for example, on your laptop).
+In the context of a queuing system, however, it is frequently the case that
+MPI run-time will obtain the necessary parameters from the queuing system,
+by examining the environment variables set when the job is launched.</p>
+</div>
+<p>Let’s modify the job script to request more cores and use the MPI run-time.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{{</span><span class="w"> </span>site.remote.prompt<span class="w"> </span><span class="o">}}</span><span class="w"> </span>cp<span class="w"> </span>serial-job.sh<span class="w"> </span>parallel-job.sh
+<span class="o">{{</span><span class="w"> </span>site.remote.prompt<span class="w"> </span><span class="o">}}</span><span class="w"> </span>nano<span class="w"> </span>parallel-job.sh
+<span class="o">{{</span><span class="w"> </span>site.remote.prompt<span class="w"> </span><span class="o">}}</span><span class="w"> </span>cat<span class="w"> </span>parallel-job.sh
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/parallel/four-tasks-jobscript.snip %}</p>
+<p>Then submit your job. Note that the submission command has not really changed
+from how we submitted the serial job: all the parallel settings are in the
+batch file rather than the command line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="n">parallel</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>As before, use the status commands to check when your job runs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span> <span class="o">-</span><span class="n">t</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slurm</span><span class="o">-</span><span class="mf">347178.</span><span class="n">out</span>  <span class="n">parallel</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>  <span class="n">slurm</span><span class="o">-</span><span class="mf">347087.</span><span class="n">out</span>  <span class="n">serial</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>  <span class="n">amdahl</span>  <span class="n">README</span><span class="o">.</span><span class="n">md</span>  <span class="n">LICENSE</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cat</span> <span class="n">slurm</span><span class="o">-</span><span class="mf">347178.</span><span class="n">out</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Doing 30.000 seconds of &#39;work&#39; on 4 processors,
+which should take 10.875 seconds with 0.850 parallel proportion of the workload.
+
+  Hello, World! I am process 0 of 4 on {{ site.remote.node }}. I will do all the serial &#39;work&#39; for 4.500 seconds.
+  Hello, World! I am process 2 of 4 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 6.375 seconds.
+  Hello, World! I am process 1 of 4 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 6.375 seconds.
+  Hello, World! I am process 3 of 4 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 6.375 seconds.
+  Hello, World! I am process 0 of 4 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 6.375 seconds.
+
+Total execution time (according to rank 0): 10.888 seconds
+</pre></div>
+</div>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>Is it 4× faster?</p>
+<p>The parallel job received 4× more processors than the serial job:
+does that mean it finished in ¼ the time?</p>
+<p>Solution</p>
+<p>The parallel job did take <em>less</em> time: 11 seconds is better than 30!
+But it is only a 2.7× improvement, not 4×.</p>
+<p>Look at the job output:</p>
+<ul class="simple">
+<li><p>While “process 0” did serial work, processes 1 through 3 did their
+parallel work.</p></li>
+<li><p>While process 0 caught up on its parallel work,
+the rest did nothing at all.</p></li>
+</ul>
+<p>Process 0 always has to finish its serial task before it can start on the
+parallel work. This sets a lower limit on the amount of time this job will
+take, no matter how many cores you throw at it.</p>
+<p>This is the basic principle behind <a class="reference external" href="https://en.wikipedia.org/wiki/Amdahl's_law">Amdahl’s Law</a>, which is one way
+of predicting improvements in execution time for a <strong>fixed</strong> workload that
+can be subdivided and run in parallel to some extent.
+{: .solution}</p>
+</div>
+</section>
+<section id="how-much-does-parallel-execution-improve-performance">
+<h2>How Much Does Parallel Execution Improve Performance?<a class="headerlink" href="#how-much-does-parallel-execution-improve-performance" title="Permalink to this heading"></a></h2>
+<p>In theory, dividing up a perfectly parallel calculation among <em>n</em> MPI processes
+should produce a decrease in total run time by a factor of <em>n</em>.
+As we have just seen, real programs need some time for the MPI processes to
+communicate and coordinate, and some types of calculations can’t be subdivided:
+they only run effectively on a single CPU.</p>
+<p>Additionally, if the MPI processes operate on different physical CPUs in the
+computer, or across multiple compute nodes, even more time is required for
+communication than it takes when all processes operate on a single CPU.</p>
+<p>In practice, it’s common to evaluate the parallelism of an MPI program by</p>
+<ul class="simple">
+<li><p>running the program across a range of CPU counts,</p></li>
+<li><p>recording the execution time on each run,</p></li>
+<li><p>comparing each execution time to the time when using a single CPU.</p></li>
+</ul>
+<p>Since “more is better” – improvement is easier to interpret from increases in
+some quantity than decreases – comparisons are made using the speedup factor
+<em>S</em>, which is calculated as the single-CPU execution time divided by the multi-CPU
+execution time. For a perfectly parallel program, a plot of the speedup <em>S</em>
+versus the number of CPUs <em>n</em> would give a straight line, <em>S</em> = <em>n</em>.</p>
+<p>Let’s run one more job, so we can see how close to a straight line our <code class="docutils literal notranslate"><span class="pre">amdahl</span></code>
+code gets.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{{</span><span class="w"> </span>site.remote.prompt<span class="w"> </span><span class="o">}}</span><span class="w"> </span>nano<span class="w"> </span>parallel-job.sh
+<span class="o">{{</span><span class="w"> </span>site.remote.prompt<span class="w"> </span><span class="o">}}</span><span class="w"> </span>cat<span class="w"> </span>parallel-job.sh
+</pre></div>
+</div>
+<p>{% include {{ site.snippets }}/parallel/eight-tasks-jobscript.snip %}</p>
+<p>Then submit your job. Note that the submission command has not really changed
+from how we submitted the serial job: all the parallel settings are in the
+batch file rather than the command line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">sched</span><span class="o">.</span><span class="n">submit</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span> <span class="n">parallel</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>As before, use the status commands to check when your job runs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span> <span class="o">-</span><span class="n">t</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slurm</span><span class="o">-</span><span class="mf">347271.</span><span class="n">out</span>  <span class="n">parallel</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>  <span class="n">slurm</span><span class="o">-</span><span class="mf">347178.</span><span class="n">out</span>  <span class="n">slurm</span><span class="o">-</span><span class="mf">347087.</span><span class="n">out</span>  <span class="n">serial</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>  <span class="n">amdahl</span>  <span class="n">README</span><span class="o">.</span><span class="n">md</span>  <span class="n">LICENSE</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">cat</span> <span class="n">slurm</span><span class="o">-</span><span class="mf">347178.</span><span class="n">out</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>which should take 7.688 seconds with 0.850 parallel proportion of the workload.
+
+  Hello, World! I am process 4 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on {{ site.remote.node }}. I will do all the serial &#39;work&#39; for 4.500 seconds.
+  Hello, World! I am process 2 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 1 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 3 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 5 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 6 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 7 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on {{ site.remote.node }}. I will do parallel &#39;work&#39; for 3.188 seconds.
+
+Total execution time (according to rank 0): 7.697 seconds
+</pre></div>
+</div>
+<div class="admonition-discussion discussion important admonition" id="discussion-2">
+<p class="admonition-title">Discussion</p>
+<p>Non-Linear Output</p>
+<p>When we ran the job with 4 parallel workers, the serial job wrote its output
+first, then the parallel processes wrote their output, with process 0 coming
+in first and last.</p>
+<p>With 8 workers, this is not the case: since the parallel workers take less
+time than the serial work, it is hard to say which process will write its
+output first, except that it will <em>not</em> be process 0!</p>
+</div>
+<p>Now, let’s summarize the amount of time it took each job to run:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number of CPUs</p></th>
+<th class="head"><p>Runtime (sec)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>30.033</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>10.888</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>7.697</p></td>
+</tr>
+</tbody>
+</table>
+<p>Then, use the first row to compute speedups <em>S</em>, using Python as a command-line calculator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mf">30.033</span> <span class="mf">10.888</span> <span class="mf">7.697</span><span class="p">;</span> <span class="n">do</span> <span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;print(30.033 / $n)&quot;</span><span class="p">;</span> <span class="n">done</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number of CPUs</p></th>
+<th class="head"><p>Speedup</p></th>
+<th class="head"><p>Ideal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1.0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2.75</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>3.90</p></td>
+<td><p>8</p></td>
+</tr>
+</tbody>
+</table>
+<p>The job output files have been telling us that this program is performing 85%
+of its work in parallel, leaving 15% to run in serial. This seems reasonably
+high, but our quick study of speedup shows that in order to get a 4× speedup,
+we have to use 8 or 9 processors in parallel. In real programs, the speedup
+factor is influenced by</p>
+<ul class="simple">
+<li><p>CPU design</p></li>
+<li><p>communication network between compute nodes</p></li>
+<li><p>MPI library implementations</p></li>
+<li><p>details of the MPI program itself</p></li>
+</ul>
+<p>Using Amdahl’s Law, you can prove that with this program, it is <em>impossible</em>
+to reach 8× speedup, no matter how many processors you have on hand. Details of
+that analysis, with results to back it up, are left for the next class in the
+HPC Carpentry workshop, <em>HPC Workflows</em>.</p>
+<p>In an HPC environment, we try to reduce the execution time for all types of
+jobs, and MPI is an extremely common way to combine dozens, hundreds, or
+thousands of CPUs into solving a single problem. To learn more about
+parallelization, see the <a class="reference external" href="http://www.hpc-carpentry.org/hpc-parallel-novice/">parallel novice lesson</a> lesson.</p>
+<p>{% include links.md %}</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../16-scheduler-and-batch-jobs/" class="btn btn-neutral float-left" title="Scheduler and batch jobs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../18-using-resources-efficiently/" class="btn btn-neutral float-right" title="Using resources efficiently" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

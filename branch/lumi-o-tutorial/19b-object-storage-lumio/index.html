@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using LUMI-O object storage &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Responsibility" href="../20-responsibility/" />
+    <link rel="prev" title="Managing data" href="../19-managing-data/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using LUMI-O object storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-using-lumi-o-from-the-lumi-web-interface">Tutorial: Using LUMI-O from the LUMI web interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-accessing-lumi-o-from-a-lumi-login-node-via-terminal">Tutorial: Accessing LUMI-O from a LUMI login node (via terminal)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preparations-if-not-done-already">Preparations (if not done already)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-to-lumi-o">Connecting to LUMI-O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clean-up">Clean up</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-using-lumi-o-without-connecting-to-lumi">Advanced: Using LUMI-O without connecting to LUMI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using LUMI-O object storage</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/19b-object-storage-lumio.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-lumi-o-object-storage">
+<h1>Using LUMI-O object storage<a class="headerlink" href="#using-lumi-o-object-storage" title="Permalink to this heading"></a></h1>
+<p>All your data doesn’t fit to the filesystem on LUMI? You don’t actively need it, but would like to keep it somewhere close and easy to access? Or you would like to have a backup of the data that you have in the file system of LUMI in your /project or /scratch folders that would be also accessible during (most of) the LUMI maintenance breaks? Are you looking for a way to share data from your project to others, either to a specific audience via a link or managing the access rights, or publicly to anyone who knows where to look for it? The answer to all these questions/needs is LUMI-O!</p>
+<p>LUMI-O is a S3 compatible object storage, based on Ceph Reef (v18.2.2).</p>
+<p>Some features of LUMI-O:</p>
+<ul class="simple">
+<li><p>Space for 150 TB of your project data</p></li>
+<li><p>Separate from the Lustre filesystem of LUMI, with a fast connection for data transfer between LUMI filesystem and LUMI-O</p></li>
+<li><p>The available storage space in LUMI-O can also be used as an easily reachable location to backup your data that you have on LUMI</p></li>
+<li><p>Accessible also without connecting to LUMI - in most cases available also during service breaks of LUMI</p></li>
+<li><p>Can be used to share data outside your project (publicly or privately)</p></li>
+<li><p>Data lifetime in LUMI-O is the same as your project lifetime</p></li>
+</ul>
+<p>Guide for LUMI-O in the LUMI documentation: https://docs.lumi-supercomputer.eu/storage/lumio/</p>
+<p>One can access LUMI-O via terminal from LUMI, using the LUMI web interface, or also without connecting to LUMI at all, since LUMI-O is a separate instance from LUMI.</p>
+<section id="tutorial-using-lumi-o-from-the-lumi-web-interface">
+<h2>Tutorial: Using LUMI-O from the LUMI web interface<a class="headerlink" href="#tutorial-using-lumi-o-from-the-lumi-web-interface" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Go to the LUMI web interface: <a class="reference external" href="https://www.lumi.csc.fi">https://www.lumi.csc.fi</a></p></li>
+<li><p>Login with using your identity provider</p></li>
+<li><p>Select <em>Cloud storage configuration</em> from the <em>Pinned Apps</em> view on the dashboard.</p></li>
+<li><p>From “Configure new remotes”, choose LUMI-O.</p></li>
+<li><p>From the drop-down menu, select the project you will use for this exercise.</p></li>
+<li><p>Tick both of the selections to configure both public and private remotes (this means that you will be able to add/modify both kinds of data, public and private(=only for your project members))</p>
+<ul class="simple">
+<li><p>You may skip the previous step if you’ve already configured a connection.</p></li>
+</ul>
+</li>
+</ol>
+<p>💡 Now you’ll be able to browse your <em>buckets</em> and <em>objects</em> in LUMI-O using the <em>Files</em> app!</p>
+<p>{:style=”counter-reset:step-counter 4”}</p>
+<ol class="arabic simple">
+<li><p>From the <em>Files</em> dropdown menu in the top navigation bar, select <code class="docutils literal notranslate"><span class="pre">lumi-&lt;id&gt;-public</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> is the number of your project (e.g. 465000000).</p></li>
+<li><p>Create a new bucket by pressing the <em>New Directory</em> button.</p>
+<ul class="simple">
+<li><p>Name it as <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;_&lt;username&gt;</span></code>, in which <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> is again the number of your project and <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> is your LUMI username. Note that you cannot use a bucket name that already exists!</p></li>
+</ul>
+</li>
+<li><p>Open the created bucket by clicking it.</p></li>
+<li><p>Upload one file from your computer into the bucket (any file should do, but prefer a file that you can open in LUMI, e.g. a text file).</p></li>
+</ol>
+<p>💭 During the exercises, you can use this web interface to get another view to your buckets and objects in LUMI-O.</p>
+</section>
+<section id="tutorial-accessing-lumi-o-from-a-lumi-login-node-via-terminal">
+<h2>Tutorial: Accessing LUMI-O from a LUMI login node (via terminal)<a class="headerlink" href="#tutorial-accessing-lumi-o-from-a-lumi-login-node-via-terminal" title="Permalink to this heading"></a></h2>
+<section id="preparations-if-not-done-already">
+<h3>Preparations (if not done already)<a class="headerlink" href="#preparations-if-not-done-already" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Login to <code class="docutils literal notranslate"><span class="pre">lumi.csc.fi</span></code> via terminal (or open a login node shell, if using the LUMI web interface)</p></li>
+<li><p>Once you have a terminal open on a LUMI login node, check your environment with the command</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lumi-workspaces
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. Move to the scratch directory of your project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/scratch/&lt;project&gt;<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000000</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 3”}
+4. Create your own subdirectory named as your username (tip! your username is automatically stored in the environment variable <code class="docutils literal notranslate"><span class="pre">$USER</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$USER</span>
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+</section>
+<section id="connecting-to-lumi-o">
+<h3>Connecting to LUMI-O<a class="headerlink" href="#connecting-to-lumi-o" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Open a connection to LUMI-O with these commands:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>lumio
+lumio-conf<span class="w"> </span>
+</pre></div>
+</div>
+<p>After this you are asked to login to: https://auth.lumidata.eu/
+Please follow the guide here in the LUMI documentation: https://docs.lumi-supercomputer.eu/storage/lumio/auth-lumidata-eu/</p>
+<p>{:style=”counter-reset:step-counter 1”}
+2. If you have several projects with access to LUMI-O available, select the one where you just created a bucket using the LUMI web interface</p>
+<p>After creating the credentials for your chosen project, give the LUMI project number, e.g.</p>
+<p><code class="docutils literal notranslate"><span class="pre">465000000</span></code></p>
+<p>in the terminal. Next you need to give the access key you just generated, i.e. something like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">IXZLOSAF2E3MD42T840B</span></code></p>
+<p>Finally, you should give the secret key, i.e. something like:
+<code class="docutils literal notranslate"><span class="pre">rwfkhpNtUSvVZ2R2Pw4qsLkWetTKsd7dC5DBxS98</span></code></p>
+<ol class="arabic simple" start="3">
+<li><p>Study what you have in LUMI-O with <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/lumio/#__tabbed_1_1">rclone</a> or with <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/lumio/#__tabbed_1_2">s3cmd</a></p></li>
+</ol>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>lsd<span class="w"> </span>lumi-o:
+rclone<span class="w"> </span>ls<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>
+rclone<span class="w"> </span>lsl<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>
+rclone<span class="w"> </span>lsf<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>
+rclone<span class="w"> </span>cat<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>/&lt;filename&gt;
+</pre></div>
+</div>
+<p>The bucket <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;_$USER</span></code> is the one we just created in the first exercise using the LUMI web interface.</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>s3cmd<span class="w"> </span>ls<span class="w"> </span>s3:
+s3cmd<span class="w"> </span>ls<span class="w"> </span>s3://&lt;id&gt;_<span class="nv">$USER</span>
+s3cmd<span class="w"> </span>lsl<span class="w"> </span>s3://&lt;id&gt;_<span class="nv">$USER</span>
+s3cmd<span class="w"> </span>lsf<span class="w"> </span>s3://&lt;id&gt;_<span class="nv">$USER</span>
+s3cmd<span class="w"> </span>cat<span class="w"> </span>s3://&lt;id&gt;_<span class="nv">$USER</span>/&lt;filename&gt;
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 3”}
+4. Download to LUMI the file that you just uploaded from your local computer to LUMI-O. This can be done e.g. with rclone or s3cmd:</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>copy<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>/&lt;filename&gt;<span class="w"> </span>./<span class="w">    </span><span class="c1"># replace &lt;id&gt; with your LUMI project number, e.g. 465000000, and &lt;filename&gt; with the file you uploaded</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 4”}
+5. Open, edit and rename the file so that you can distinguish it from the original one
+6. Upload the new file to LUMI-O:</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>copy<span class="w"> </span>&lt;newfilename&gt;<span class="w"> </span>lumi-o:&lt;id&gt;_<span class="nv">$USER</span>/<span class="w">   </span><span class="c1"># replace &lt;newfilename&gt; and &lt;id&gt; accordingly</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 6”}
+7. Check that the file in LUMI indeed has a counterpart in LUMI-O:</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 7”}
+8. Check the privacy settings of your file in LUMI-O:</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Check the privacy settings of your bucket … in LUMI-O:</p></li>
+</ol>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+<p>Which is as it should be, since we created the bucket to the public end point. The objects in the buckets automatically inherit the privacy settings from the bucket where they are in. But you can also change the privacy settings of the buckets or objects in them. This goes to advanced use, but you can see more from the <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/lumio/advanced/">LUMI documentation</a> in which especially the part about <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/lumio/advanced/#granular-access-management">Granular Access management</a></p>
+<p>{:style=”counter-reset:step-counter 8”}
+10. Locate the files you just uploaded to LUMI-O in the LUMI web interface (search for the bucket name)</p>
+</section>
+<section id="clean-up">
+<h3>Clean up<a class="headerlink" href="#clean-up" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Delete the local file from LUMI:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>&lt;filename&gt;<span class="w">             </span><span class="c1"># replace &lt;filename&gt;</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Whenever you need your data again, you can download it from LUMI-O</p>
+<p>💭 If you can’t find your file but remember the name, try</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">rclone</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">s3cmd</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-using-lumi-o-without-connecting-to-lumi">
+<h2>Advanced: Using LUMI-O without connecting to LUMI<a class="headerlink" href="#advanced-using-lumi-o-without-connecting-to-lumi" title="Permalink to this heading"></a></h2>
+<p>(Comment: This might belong to LUMI docs instead of here.)</p>
+<p>Useful for example during a LUMI servcie break, when LUMI-O might be normally available.</p>
+<p>One can use LUMI-O also without connecting to LUMI. This is an example with rclone.</p>
+<ol class="arabic simple">
+<li><p>If you don’t have rclone installed already, follow directions at https://rclone.org/install/ to install rclone on your local machine.</p></li>
+<li><p>Set LUMI-O access credentials at https://auth.lumidata.eu/ for the project you want to use.</p></li>
+<li><p>Create an <code class="docutils literal notranslate"><span class="pre">rclone.conf</span></code> file (to the path ~/.config/rclone/rclone.conf) on your local machine:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># An example of an rclone config file rclone.conf</span>
+<span class="c1"># Objects will inherit the default properties from buckets. </span>
+
+<span class="o">[</span>lumi-project-private<span class="o">]</span>
+<span class="c1"># Buckets created with this endpoint configuration are private by default.</span>
+<span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s3
+<span class="nv">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>private
+<span class="nv">env_auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="nv">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ceph
+<span class="nv">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>https://lumidata.eu/
+<span class="nv">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>XXX<span class="w">  </span><span class="c1"># Replace with your created LUMI-O access key</span>
+<span class="nv">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>YYY<span class="w">  </span><span class="c1"># Replace with your created LUMI-O secret access key</span>
+
+<span class="o">[</span>lumi-project-public<span class="o">]</span>
+<span class="c1"># Buckets created with this endpoint configuration are visible for all.</span>
+<span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s3
+<span class="nv">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>public-read
+<span class="nv">env_auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="nv">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ceph
+<span class="nv">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>https://lumidata.eu/
+<span class="nv">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>XXX<span class="w">  </span><span class="c1"># Replace with your created LUMI-O access key</span>
+<span class="nv">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>YYY<span class="w"> </span><span class="c1"># Replace with your created LUMI-O secret access key</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">rclone</span> <span class="pre">config</span></code> # Not maybe necessary?</p></li>
+<li><p>Use LUMI-O with rclone commands from your local machine, e.g. to list all the buckets in your project:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rclone<span class="w"> </span>lsd<span class="w"> </span>lumi-project-private:
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../19-managing-data/" class="btn btn-neutral float-left" title="Managing data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../20-responsibility/" class="btn btn-neutral float-right" title="Responsibility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

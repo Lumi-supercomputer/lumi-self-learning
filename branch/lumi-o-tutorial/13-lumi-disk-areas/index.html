@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where to store files in LUMI computing environment? &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Modules and software stacks" href="../14-modules-and-software-stacks/" />
+    <link rel="prev" title="Exploring Remote Resources" href="../13a-exploring-remote-resources/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Where to store files in LUMI computing environment?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#identify-your-personal-and-project-specific-directories-on-lumi-supercomputer">Identify your personal and project-specific directories on LUMI supercomputer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sharing-binaries-and-data-files">Sharing binaries and data files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-the-example-files">Download the example files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#move-the-files-to-lumi-scratch-and-projappl">Move the files to LUMI <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> and <code class="docutils literal notranslate"><span class="pre">/projappl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copying-files-from-lumi-to-your-local-machine-and-from-your-local-machine-to-lumi">Copying files from LUMI to your local machine and from your local machine to LUMI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#light-pre-processing-of-data-files-using-project-flash">Light pre-processing of data files using project <code class="docutils literal notranslate"><span class="pre">/flash</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-a-tar-archive-containing-thousands-of-small-files-and-merge-the-files-into-one-large-file-using-the-fast-disk-area-flash">Download a tar archive containing thousands of small files and merge the files into one large file using the fast disk area /flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#move-your-pre-processed-data-to-the-project-specific-scratch-area">Move your pre-processed data to the project-specific <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> area</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19b-object-storage-lumio/">Using LUMI-O object storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Where to store files in LUMI computing environment?</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/13-lumi-disk-areas.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="where-to-store-files-in-lumi-computing-environment">
+<h1>Where to store files in LUMI computing environment?<a class="headerlink" href="#where-to-store-files-in-lumi-computing-environment" title="Permalink to this heading"></a></h1>
+<blockquote>
+<div><p>In this tutorial you</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Familiarize yourself with personal and project-specific disk areas and their quotas on the LUMI supercomputer.</p></li>
+<li><p>Learn how to share your files, such as software installations and data, to other members of your LUMI project.</p></li>
+<li><p>Get to try out the disk area for I/O intensive workflows, i.e. frequent read and write operations</p></li>
+</ul>
+<p>💬 Each user of LUMI supercomputer has access to different disk areas (or directories) for managing their data. Each disk area has its own specific purpose.</p>
+<p>💬 Active data files needed for computational simulations and analyses should be stored and shared in directories under <code class="docutils literal notranslate"><span class="pre">/scratch</span></code>. For I/O heavy operations use <code class="docutils literal notranslate"><span class="pre">/flash</span></code> instead, which is a high performance variant of /scratch. Any software installations and binaries should be shared under the <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directory.</p>
+<section id="identify-your-personal-and-project-specific-directories-on-lumi-supercomputer">
+<h2>Identify your personal and project-specific directories on LUMI supercomputer<a class="headerlink" href="#identify-your-personal-and-project-specific-directories-on-lumi-supercomputer" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>First login to LUMI using SSH (or by opening a login node shell in the <a class="reference external" href="https://www.lumi.csc.fi">LUMI web interface</a>):</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-i<span class="w"> </span>&lt;path-to-private-key&gt;<span class="w"> </span>&lt;username&gt;@lumi.csc.fi<span class="w">    </span><span class="c1"># replace &lt;username&gt; with your LUMI username, e.g. myname@lumi.csc.fi</span>
+<span class="w">                                                       </span><span class="c1"># replace &lt;path-to-private-key&gt; with the path to your private key file, e.g. </span>
+<span class="w">                                                       </span><span class="c1"># ./.ssh/id_ed25519 or /home/user/.ssh/id_ed25519</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Get an overview of your projects and directories by running the following command on the login node:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lumi-workspaces
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. Inspect the output information summarizing your directories and their current quotas.
+4. Visit your project’s <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> directory and list its contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/scratch/&lt;project&gt;/<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+ls
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 4”}
+5. Visit your project’s <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directory and list its contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/projappl/&lt;project&gt;/<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+ls
+</pre></div>
+</div>
+<p>💬 These directories can be briefly summarized as follows:</p>
+<ul class="simple">
+<li><p>User-specific directory (i.e. your personal home folder)</p>
+<ul>
+<li><p>Your home directory (path stored in environment variable <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>)</p></li>
+<li><p>The default directory when you login to LUMI</p></li>
+<li><p>You can store configuration files and other minor data for personal use</p></li>
+</ul>
+</li>
+<li><p>Project-specific directories:</p>
+<ul>
+<li><p>The project’s <code class="docutils literal notranslate"><span class="pre">/scratch</span></code>, <code class="docutils literal notranslate"><span class="pre">/flash</span></code> and <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directories</p></li>
+<li><p>Each project has its own <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> disk space where most computational tasks are performed. The <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> area is a temporary space not intended for long-term data storage! Please move inactive data to e.g. <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/lumio/">LUMI-O</a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">/flash</span></code> area is like /scratch, but meant to only be used shortly for I/O heavy tasks. Using /flash consumes 10x the billing units compared to using /scratch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directory on the other hand is mainly for storing and sharing compiled applications and libraries etc. with other members of the project.</p></li>
+</ul>
+</li>
+<li><p>Read more of the file system locations on LUMI from <a class="reference external" href="https://docs.lumi-supercomputer.eu/storage/">LUMI user documentation</a></p></li>
+</ul>
+<p>!!! Warning
+Notice that there are no backups for any of the file system locations on LUMI. Make sure to move your important data or back it up e.g. to your local machine.</p>
+</section>
+<section id="sharing-binaries-and-data-files">
+<h2>Sharing binaries and data files<a class="headerlink" href="#sharing-binaries-and-data-files" title="Permalink to this heading"></a></h2>
+<p>💬 Data transfer between a supercomputer and your local machine, or between two supercomputers, can be done e.g. with <code class="docutils literal notranslate"><span class="pre">rsync</span></code>.</p>
+<section id="download-the-example-files">
+<h3>Download the example files<a class="headerlink" href="#download-the-example-files" title="Permalink to this heading"></a></h3>
+<p>☝🏻 In this example you will <em>download</em> data from <a class="reference external" href="https://docs.csc.fi/data/Allas/">Allas</a> object storage. # Change the example from Allas to LUMI-O ?</p>
+<ol class="arabic simple">
+<li><p>Move to your home folder:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span>
+</pre></div>
+</div>
+<p>💡 If you know the files are large, you should consider downloading them directly to <code class="docutils literal notranslate"><span class="pre">/scratch</span></code>.</p>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Download an example program package (<code class="docutils literal notranslate"><span class="pre">ggplot2_3.3.3_Rprogramme.tar.gz</span></code>) and a data file (<code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code>) from the Allas object storage</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://a3s.fi/CSC_training/shared_files.tar.gz
+tar<span class="w"> </span>-xavf<span class="w"> </span>shared_files.tar.gz
+<span class="nb">cd</span><span class="w"> </span>shared_files
+</pre></div>
+</div>
+<p>Let’s assume that</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code> is a data file intended for computational use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ggplot2_3.3.3_Rprogramme.tar.gz</span></code> is a software tool needed for the analysis.</p></li>
+</ul>
+</section>
+<section id="move-the-files-to-lumi-scratch-and-projappl">
+<h3>Move the files to LUMI <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> and <code class="docutils literal notranslate"><span class="pre">/projappl</span></code><a class="headerlink" href="#move-the-files-to-lumi-scratch-and-projappl" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Create folders with your username (using environment variable <code class="docutils literal notranslate"><span class="pre">$USER</span></code>) in your project directories under <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> and <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> on LUMI.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/projappl/&lt;project&gt;/<span class="nv">$USER</span><span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span><span class="w">    </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Copy your <code class="docutils literal notranslate"><span class="pre">ggplot2_3.3.3_Rprogramme.tar.gz</span></code> file to the <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>ggplot2_3.3.3_Rprogramme.tar.gz<span class="w">  </span>/projappl/&lt;project&gt;/<span class="nv">$USER</span>/<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. Copy the <code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code> file to the <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>Merged.fasta<span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span>/<span class="w">    </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Note that all new files and directories are also fully accessible to other members of the project (including read and write permissions).</p></li>
+</ul>
+<p>{:style=”counter-reset:step-counter 3”}
+4. Set read-only permissions for your project members for the file <code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span>/<span class="w">    </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+chmod<span class="w"> </span>g-w<span class="w"> </span>Merged.fasta<span class="w">          </span><span class="c1"># g-w means that we &quot;subtract&quot; write permissions for users belong to our group (g), i.e. our project</span>
+</pre></div>
+</div>
+</section>
+<section id="copying-files-from-lumi-to-your-local-machine-and-from-your-local-machine-to-lumi">
+<h3>Copying files from LUMI to your local machine and from your local machine to LUMI<a class="headerlink" href="#copying-files-from-lumi-to-your-local-machine-and-from-your-local-machine-to-lumi" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Change the path to the folder where you have the example files on LUMI e.g. with <code class="docutils literal notranslate"><span class="pre">pwd</span></code> command</p></li>
+<li><p>Open a new terminal window that is not connected to LUMI. Create a suitable location where you want to copy your data. To copy <code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code> file from LUMI to your current location <code class="docutils literal notranslate"><span class="pre">.</span></code> on your local machine:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-P<span class="w"> </span>&lt;username&gt;@lumi.csc.fi:/scratch/&lt;project&gt;/<span class="nv">$USER</span>/Merged.fasta<span class="w"> </span>.<span class="w">  </span><span class="c1"># replace &lt;username&gt; with your LUMI username and &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. For the exercise, copy the <code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code> file now from your local machine to your home directory on LUMI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-P<span class="w"> </span>Merged.fasta<span class="w"> </span>&lt;username&gt;@lumi.csc.fi:<span class="w">   </span><span class="c1"># replace &lt;username&gt; with your LUMI username and &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Learn more about data transfer options from the <a class="reference external" href="https://docs.lumi-supercomputer.eu/firststeps/movingdata/">LUMI user documentation</a></p></li>
+</ul>
+</section>
+</section>
+<section id="light-pre-processing-of-data-files-using-project-flash">
+<h2>Light pre-processing of data files using project <code class="docutils literal notranslate"><span class="pre">/flash</span></code><a class="headerlink" href="#light-pre-processing-of-data-files-using-project-flash" title="Permalink to this heading"></a></h2>
+<p>You may sometimes come across situations where you have to process a large number of smaller files, which can cause heavy input/output load on the shared file system. In order to facilitate such heavy I/O operations, there is a specific disk space for that. It can be used for:</p>
+<ul class="simple">
+<li><p>pre-processing of data and I/O heavy tasks such as software compilation</p></li>
+<li><p>submitting computations for jobs that need very fast disk I/O operations</p></li>
+</ul>
+<section id="download-a-tar-archive-containing-thousands-of-small-files-and-merge-the-files-into-one-large-file-using-the-fast-disk-area-flash">
+<h3>Download a tar archive containing thousands of small files and merge the files into one large file using the fast disk area /flash<a class="headerlink" href="#download-a-tar-archive-containing-thousands-of-small-files-and-merge-the-files-into-one-large-file-using-the-fast-disk-area-flash" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Move to the /flash disk space and download a tar file from the <strong>Allas</strong> object storage:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/flash/&lt;project&gt;/<span class="nv">$USER</span>/<span class="w">   </span><span class="c1"># replace &lt;username&gt; with your LUMI username and &lt;project&gt; with your LUMI project, e.g. project_465000123     </span>
+wget<span class="w"> </span>https://a3s.fi/CSC_training/Individual_files.tar.gz
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 1”}
+2. Unpack the downloaded tar file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xavf<span class="w"> </span>Individual_files.tar.gz
+<span class="nb">cd</span><span class="w"> </span>Individual_files
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. Merge each small file into a larger one and remove all small files</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;individual.fasta*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>Merged.fasta
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;individual.fasta*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>rm
+</pre></div>
+</div>
+<p>In general it is a good idea to move any data away from the /flash disk space when it’s not used in that location anymore. Now we used the /flash disk space only for data pre-processing, in which case we will move it right away to other location. If you would need to submit an I/O heavy computation with your data, then do such way that the data is in the /flash location.</p>
+</section>
+<section id="move-your-pre-processed-data-to-the-project-specific-scratch-area">
+<h3>Move your pre-processed data to the project-specific <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> area<a class="headerlink" href="#move-your-pre-processed-data-to-the-project-specific-scratch-area" title="Permalink to this heading"></a></h3>
+<p>{:style=”counter-reset:step-counter 1”}</p>
+<ol class="arabic simple">
+<li><p>Move your pre-processed data from the previous step (i.e., the <code class="docutils literal notranslate"><span class="pre">Merged.fasta</span></code> file) from <code class="docutils literal notranslate"><span class="pre">/flash</span></code> to <code class="docutils literal notranslate"><span class="pre">/scratch</span></code>:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>Merged.fasta<span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>{:style=”counter-reset:step-counter 2”}
+3. You have now successfully moved the data to the <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> area and can start performing an analysis using batch job scripts.</p>
+<ul class="simple">
+<li><p>More about batch jobs in later tutorials.</p></li>
+</ul>
+</section>
+</section>
+<section id="more-information">
+<h2>More information<a class="headerlink" href="#more-information" title="Permalink to this heading"></a></h2>
+<p>💡 Hint: You can use your folder under <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> for the rest of the tutorials. You can save the path using an <a class="reference external" href="https://www.shell-tips.com/bash/alias/">alias</a> (with <code class="docutils literal notranslate"><span class="pre">cd</span></code> or <code class="docutils literal notranslate"><span class="pre">echo</span></code>) or somewhere in your notes.</p>
+<p>💡 It is sometimes required to export the paths of the <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> or <code class="docutils literal notranslate"><span class="pre">/projappl</span></code> directories in environmental variables (until logout). This can be done with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PROJAPPL</span><span class="o">=</span>/projappl/&lt;project&gt;/<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SCRATCH</span><span class="o">=</span>/scratch/&lt;project&gt;/<span class="w">   </span><span class="c1"># replace &lt;project&gt; with your LUMI project, e.g. project_465000123</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../13a-exploring-remote-resources/" class="btn btn-neutral float-left" title="Exploring Remote Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../14-modules-and-software-stacks/" class="btn btn-neutral float-right" title="Modules and software stacks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

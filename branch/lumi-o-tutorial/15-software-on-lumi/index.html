@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software on LUMI &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Scheduler and batch jobs" href="../16-scheduler-and-batch-jobs/" />
+    <link rel="prev" title="Modules and software stacks" href="../14-modules-and-software-stacks/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software on LUMI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-finding-available-installable-software">Tutorial: Finding available &amp; installable software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-installing-user-installable-software-with-easybuild">Tutorial: Installing user-installable software with EasyBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-pytorch-with-ddp">Tutorial: PyTorch with DDP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#st-step">1st Step</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nd-step">2nd Step</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rd-step">3rd Step</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#use-it">Use it</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-tensorflow-with-horovod">Tutorial: Tensorflow with Horovod</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1st Step</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2nd Step</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">3rd Step</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#th-step">4th Step</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Use it</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial: …</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Tutorial: …</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19b-object-storage-lumio/">Using LUMI-O object storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Software on LUMI</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/15-software-on-lumi.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-on-lumi">
+<h1>Software on LUMI<a class="headerlink" href="#software-on-lumi" title="Permalink to this heading"></a></h1>
+<p>How to find the available software, how to install, and specific software tutorials.</p>
+<section id="tutorial-finding-available-installable-software">
+<h2>Tutorial: Finding available &amp; installable software<a class="headerlink" href="#tutorial-finding-available-installable-software" title="Permalink to this heading"></a></h2>
+<p>How to find available software from LUMI software collection, and how to see what is pre-installed and what is user-installable. what other things to pay attention to (referring to previous chapter).</p>
+</section>
+<section id="tutorial-installing-user-installable-software-with-easybuild">
+<h2>Tutorial: Installing user-installable software with EasyBuild<a class="headerlink" href="#tutorial-installing-user-installable-software-with-easybuild" title="Permalink to this heading"></a></h2>
+<p>An easy example, a general hand-hold tutorial how to do this</p>
+</section>
+<section id="tutorial-pytorch-with-ddp">
+<h2>Tutorial: PyTorch with DDP<a class="headerlink" href="#tutorial-pytorch-with-ddp" title="Permalink to this heading"></a></h2>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h3>
+<p>Run through the following three steps to initialize a PyTorch environment on LUMI. This only needs to be done once.</p>
+<section id="st-step">
+<h4>1st Step<a class="headerlink" href="#st-step" title="Permalink to this heading"></a></h4>
+<p>Install ROCm Communication Collectives Library (RCCL) if you want to leverage multiple GPUs:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>LUMI/22.08<span class="w"> </span>partition/G
+<span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>EasyBuild-user
+<span class="gp">$ </span>eb<span class="w"> </span>aws-ofi-rccl-66b3b31-cpeGNU-22.08.eb<span class="w"> </span>-r
+</pre></div>
+</div>
+</section>
+<section id="nd-step">
+<h4>2nd Step<a class="headerlink" href="#nd-step" title="Permalink to this heading"></a></h4>
+<p>Get the ROCm PyTorch Docker container:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">SINGULARITY_TMPDIR</span><span class="o">=</span>/tmp/tmp-singularity<span class="w"> </span><span class="nv">SINGULARITY_CACHEDIR</span><span class="o">=</span>/tmp/tmp-singularity<span class="w"> </span>singularity<span class="w"> </span>pull<span class="w"> </span>docker://rocm/pytorch:rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1
+</pre></div>
+</div>
+</section>
+<section id="rd-step">
+<h4>3rd Step<a class="headerlink" href="#rd-step" title="Permalink to this heading"></a></h4>
+<p>Create a virtual environment (venv) for each of your projects and add additional modules you might need:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>pytorch_rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1.sif<span class="w"> </span>bash
+<span class="go">Singularity&gt; python -m venv my_project_env --system-site-packages</span>
+<span class="go">Singularity&gt; . my_project_env/bin/activate</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; Install what else you&#39;d need: pip install ...</span>
+</pre></div>
+</div>
+<div class="admonition-create-more-virtual-environments callout admonition" id="callout-0">
+<p class="admonition-title">Create more virtual environments</p>
+<p>You might want to create more virtual environments, one for each of your projects, or for experimenting with different module versions. Simply repeat the commands with providing individual virtual environment names.</p>
+</div>
+</section>
+</section>
+<section id="use-it">
+<h3>Use it<a class="headerlink" href="#use-it" title="Permalink to this heading"></a></h3>
+<p>We use the following job script (<code class="docutils literal notranslate"><span class="pre">run_sbatch.sh</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
+#SBATCH --job-name=&quot;PyTorch MNIST&quot;
+#SBATCH --output=output.txt
+#SBATCH --error=error.txt
+#SBATCH --partition=standard-g
+#SBATCH --nodes=2
+#SBATCH --ntasks=16
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=1:00:00
+#SBATCH --account=project_&lt;YOURID&gt;
+#SBATCH --gpus-per-node=8
+
+module load LUMI/22.08 partition/G
+module load singularity-bindings
+module load aws-ofi-rccl
+
+export SCRATCH=$PWD
+export NCCL_SOCKET_IFNAME=hsn
+export NCCL_NET_GDR_LEVEL=3
+export MIOPEN_USER_DB_PATH=/tmp/${USER}-miopen-cache-${SLURM_JOB_ID}
+export MIOPEN_CUSTOM_CACHE_DIR=${MIOPEN_USER_DB_PATH}
+export CXI_FORK_SAFE=1
+export CXI_FORK_SAFE_HP=1
+export FI_CXI_DISABLE_CQ_HUGETLB=1
+export SINGULARITYENV_LD_LIBRARY_PATH=${EBROOTAWSMINOFIMINRCCL}/lib:/opt/cray/xpmem/2.5.2-2.4_3.50__gd0f7936.shasta/lib64:${SINGULARITYENV_LD_LIBRARY_PATH}
+
+master_addr=$(scontrol show hostnames &quot;$SLURM_JOB_NODELIST&quot; | head -n 1)
+export SINGULARITYENV_MASTER_ADDR=&quot;$master_addr&quot;
+export SINGULARITYENV_MASTER_PORT=6200
+echo &quot;MASTER_ADDR=&quot;$SINGULARITYENV_MASTER_ADDR &quot;MASTER_PORT=&quot;$SINGULARITYENV_MASTER_PORT
+
+srun --mpi=cray_shasta singularity exec --pwd /work --bind $SCRATCH:/work pytorch_rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1.sif /work/my_project_env/bin/python PyTorch_MNIST-DDP.py
+</pre></div>
+</div>
+<p>This job script executes 16 processes over two GPU nodes. That is, one process for each of the eight GPUs in a single node. The first node is used as master node for NCCL/RCCL communication management with port 6200.</p>
+<div class="admonition-using-the-project-scratch-volume callout admonition" id="callout-1">
+<p class="admonition-title">Using the project scratch volume</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">project_&lt;YOURID&gt;</span></code> with your project ID. Consider to use the working directory <code class="docutils literal notranslate"><span class="pre">/scratch/project_&lt;YOURID&gt;</span></code> for running your experiemnts. Your virtual environment should also be located there.</p>
+</div>
+<p>Place the following <code class="docutils literal notranslate"><span class="pre">PyTorch_MNIST-DDP.py</span></code> script into your working directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.nn.parallel.distributed</span> <span class="kn">import</span> <span class="n">DistributedDataParallel</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">DistributedSampler</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">use_gpu</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">dataset_loc</span> <span class="o">=</span> <span class="s1">&#39;./mnist_data&#39;</span>
+
+<span class="c1">#rank = int(os.environ[&#39;OMPI_COMM_WORLD_RANK&#39;])</span>
+<span class="c1">#local_rank = int(os.environ[&#39;OMPI_COMM_WORLD_LOCAL_RANK&#39;])</span>
+<span class="c1">#world_size = int(os.environ[&#39;OMPI_COMM_WORLD_SIZE&#39;])</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SLURM_PROCID&#39;</span><span class="p">])</span>
+<span class="n">local_rank</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SLURM_LOCALID&#39;</span><span class="p">])</span>
+<span class="n">world_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SLURM_NTASKS&#39;</span><span class="p">])</span>
+
+<span class="c1">#os.environ[&quot;MASTER_ADDR&quot;] = &quot;127.0.0.1&quot;</span>
+<span class="c1">#os.environ[&quot;MASTER_PORT&quot;] = &quot;6108&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_ADDR&quot;</span><span class="p">],</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_PORT&quot;</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">local_rank</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">set_device</span><span class="p">(</span><span class="n">local_rank</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;nccl&quot;</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="o">=</span><span class="n">world_size</span><span class="p">)</span>
+
+<span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span> <span class="c1"># convert and scale</span>
+<span class="p">])</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">dataset_loc</span><span class="p">,</span>
+                                   <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">dataset_loc</span><span class="p">,</span>
+                                  <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">rank</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">dataset_loc</span><span class="p">,</span>
+                                   <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">dataset_loc</span><span class="p">,</span>
+                                  <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+<span class="n">train_sampler</span> <span class="o">=</span> <span class="n">DistributedSampler</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span>
+                                   <span class="n">num_replicas</span><span class="o">=</span><span class="n">world_size</span><span class="p">,</span> <span class="c1"># number of all GPUs</span>
+                                   <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>               <span class="c1"># (global) ID of GPU</span>
+                                   <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">test_sampler</span> <span class="o">=</span> <span class="n">DistributedSampler</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span>
+                                 <span class="n">num_replicas</span><span class="o">=</span><span class="n">world_size</span><span class="p">,</span> <span class="c1"># number of all GPUs</span>
+                                 <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>               <span class="c1"># (global) ID of GPU</span>
+                                 <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span>
+                          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># sampler does it</span>
+                          <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                          <span class="n">sampler</span><span class="o">=</span><span class="n">train_sampler</span><span class="p">,</span>
+                          <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span>   <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span>
+                          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                          <span class="n">sampler</span><span class="o">=</span><span class="n">test_sampler</span><span class="p">,</span>
+                          <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>  <span class="c1"># Input: 28x28(x1) pixels</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Output: 10 classes</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">local_rank</span><span class="p">))</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">DistributedDataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">device_ids</span><span class="o">=</span><span class="p">[</span><span class="n">local_rank</span><span class="p">],</span> <span class="n">output_device</span><span class="o">=</span><span class="n">local_rank</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="c1"># Main training loop</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="c1">#train_loader.sampler.set_epoch(i)</span>
+
+    <span class="c1"># Training steps per epoch</span>
+    <span class="n">epoch_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># flatten</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">batch_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">batch_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">batch_loss_scalar</span> <span class="o">=</span> <span class="n">batch_loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">epoch_loss</span> <span class="o">+=</span> <span class="n">batch_loss_scalar</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;training batch_loss=</span><span class="si">{</span><span class="n">batch_loss_scalar</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Run validation at the end of each epoch</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">val_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">val_loader</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">use_gpu</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># flatten</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">batch_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">batch_loss_scalar</span> <span class="o">=</span> <span class="n">batch_loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="n">val_loss</span> <span class="o">+=</span> <span class="n">batch_loss_scalar</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;validation batch_loss=</span><span class="si">{</span><span class="n">batch_loss_scalar</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, train_loss=</span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, val_loss=</span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;model.pt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Execute the job script in the directory of your project which contains the virtual environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sbatch<span class="w"> </span>run_sbatch.sh
+</pre></div>
+</div>
+<p>Refer to the <code class="docutils literal notranslate"><span class="pre">output.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">error.txt</span></code> files for the results.</p>
+</section>
+</section>
+<section id="tutorial-tensorflow-with-horovod">
+<h2>Tutorial: Tensorflow with Horovod<a class="headerlink" href="#tutorial-tensorflow-with-horovod" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>Setup<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Run through the following three steps to initialize a Tensorflow environment on LUMI. This only needs to be done once.</p>
+<section id="id2">
+<h4>1st Step<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>Install ROCm Communication Collectives Library (RCCL) and OpenMPI if you want to leverage multiple GPUs:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>LUMI/22.08<span class="w"> </span>partition/G
+<span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>EasyBuild-user
+<span class="gp">$ </span>eb<span class="w"> </span>aws-ofi-rccl-66b3b31-cpeGNU-22.08.eb<span class="w"> </span>-r
+<span class="gp">$ </span>eb<span class="w"> </span>OpenMPI-4.1.3-cpeGNU-22.08.eb<span class="w"> </span>-r
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>2nd Step<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>Get the ROCm Tensorflow Docker container:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>eb<span class="w"> </span>singularity-bindings-system-cpeGNU-22.08.eb<span class="w"> </span>-r
+<span class="gp">$ </span><span class="nv">SINGULARITY_TMPDIR</span><span class="o">=</span>/tmp/tmp-singularity<span class="w"> </span><span class="nv">SINGULARITY_CACHEDIR</span><span class="o">=</span>/tmp/tmp-singularity<span class="w"> </span>singularity<span class="w"> </span>pull<span class="w"> </span>docker://rocm/tensorflow:rocm5.5-tf2.11-dev
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h4>3rd Step<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>Install <code class="docutils literal notranslate"><span class="pre">ensurepip</span></code> first by executing the following script (<code class="docutils literal notranslate"><span class="pre">download_ensurepip.sh</span></code>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>base_url=https://raw.githubusercontent.com/python/cpython/3.9/Lib
+files=(&quot;__init__.py&quot; \
+  &quot;__main__.py&quot; \
+  &quot;_uninstall.py&quot; \
+  &quot;_bundled/__init__.py&quot; \
+  &quot;_bundled/pip-23.0.1-py3-none-any.whl&quot; \
+  &quot;_bundled/setuptools-58.1.0-py3-none-any.whl&quot;)
+for _f in ${files[@]}; do
+  f=ensurepip/${_f}
+  if test ! -f &quot;$f&quot;; then
+    wget -q --show-progress ${base_url}/${f} -P $(dirname $f);
+  else
+    echo -e &quot;?${f}? already exists. Nothing to do.&quot;
+  fi
+done
+</pre></div>
+</div>
+<p>with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<span class="gp">$ </span>bash<span class="w"> </span>download_ensurepip.sh
+</pre></div>
+</div>
+<div class="admonition-adjust-for-your-versions callout admonition" id="callout-2">
+<p class="admonition-title">Adjust for your versions</p>
+<p>Depending on the Python environment you chose to use (as part of the Tensorflow Docker container), you might need to adjust the file names. E.g., the version of <code class="docutils literal notranslate"><span class="pre">pip</span></code> can be different. Please look at <code class="docutils literal notranslate"><span class="pre">https://github.com/python/cpython</span></code> in the <code class="docutils literal notranslate"><span class="pre">Lib/ensurepip</span></code> directory for the Python version (branch) used in the Docker conatiner.</p>
+</div>
+<p>Create a virtual environment (venv) for each of your projects and add additional modules you might need:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-B<span class="w"> </span><span class="nv">$HOME</span>/tensorflow/ensurepip:/usr/lib/python3.9/ensurepip<span class="w"> </span>tensorflow_rocm5.5-tf2.11-dev.sif<span class="w">  </span>bash
+<span class="go">Singularity&gt; python -m venv my_project_env --system-site-packages</span>
+<span class="go">Singularity&gt; . my_project_env/bin/activate</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; pip install tensorflow-datasets # Needed for later</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; Install what else you&#39;d need: pip install ...</span>
+</pre></div>
+</div>
+<div class="admonition-create-more-virtual-environments callout admonition" id="callout-3">
+<p class="admonition-title">Create more virtual environments</p>
+<p>You might want to create more virtual environments, one for each of your projects, or for experimenting with different module versions. Simply repeat the commands with providing individual virtual environment names.</p>
+</div>
+</section>
+<section id="th-step">
+<h4>4th Step<a class="headerlink" href="#th-step" title="Permalink to this heading"></a></h4>
+<p>Build and install Horovod. Use a clean environment for this!</p>
+<div class="admonition-use-a-clean-environment callout admonition" id="callout-4">
+<p class="admonition-title">Use a clean environment</p>
+<p>Do not load <code class="docutils literal notranslate"><span class="pre">aws-ofi-rccl</span></code> or <code class="docutils literal notranslate"><span class="pre">singularity-bindings</span></code> modules before building Horovod as they interfere with the build process!</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>LUMI/22.08<span class="w"> </span>partition/G
+<span class="gp">$ </span>module<span class="w"> </span>load<span class="w"> </span>EasyBuild-user
+<span class="gp">$ </span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>tensorflow_rocm5.5-tf2.11-dev.sif<span class="w">  </span>bash
+<span class="go">Singularity&gt; . ./my_project_env/bin/activate</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_WITHOUT_MXNET=1</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_WITHOUT_PYTORCH=1</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_WITH_TENSORFLOW=1</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_GPU=ROCM</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_GPU_OPERATIONS=NCCL</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_ROCM_PATH=/opt/rocm</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_RCCL_HOME=/opt/rocm/rccl</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export RCCL_INCLUDE_DIRS=/opt/rocm/rccl/include</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HOROVOD_RCCL_LIB=/opt/rocm/rccl/lib</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HCC_AMDGPU_TARGET=gfx90a</span>
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">Singularity&gt; export HIP_PATH=/opt/rocm</span>
+
+<span class="gp gp-VirtualEnv">(my_project_env)</span> <span class="go">pip install --no-cache-dir --force-reinstall horovod==0.28.1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h3>Use it<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>We use the following job script (<code class="docutils literal notranslate"><span class="pre">run_sbatch.sh</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
+#SBATCH --job-name=&quot;PyTorch MNIST&quot;
+#SBATCH --output=output.txt
+#SBATCH --error=error.txt
+#SBATCH --partition=standard-g
+#SBATCH --nodes=2
+#SBATCH --ntasks=16
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=1:00:00
+#SBATCH --account=project_&lt;YOURID&gt;
+#SBATCH --gpus-per-node=8
+
+module load LUMI/22.08 partition/G
+module load singularity-bindings
+module load aws-ofi-rccl
+module load OpenMPI/4.1.3-cpeGNU-22.08
+
+export SCRATCH=$PWD
+export NCCL_SOCKET_IFNAME=hsn
+export MIOPEN_USER_DB_PATH=/tmp/${USER}-miopen-cache-${SLURM_JOB_ID}
+export MIOPEN_CUSTOM_CACHE_DIR=${MIOPEN_USER_DB_PATH}
+export CXI_FORK_SAFE=1
+export CXI_FORK_SAFE_HP=1
+export FI_CXI_DISABLE_CQ_HUGETLB=1
+export SINGULARITYENV_LD_LIBRARY_PATH=/openmpi/lib:/opt/rocm/lib:${EBROOTAWSMINOFIMINRCCL}/lib:/opt/cray/xpmem/2.5.2-2.4_3.50__gd0f7936.shasta/lib64:$SINGULARITYENV_LD_LIBRARY_PATH
+
+scontrol show hostname $SLURM_JOB_NODELIST &gt; hostfile
+mpirun -np 16 -hostfile hostfile singularity exec --pwd /work --bind $SCRATCH:/work tensorflow_rocm5.5-tf2.11-dev.sif /work/my_project_env/bin/python keras_horovod_example.py
+</pre></div>
+</div>
+<p>This job script executes 16 processes over two GPU nodes. That is, one process for each of the eight GPUs in a single node. This uses MPI for management/communication across the processes/nodes.</p>
+<div class="admonition-using-the-project-scratch-volume callout admonition" id="callout-5">
+<p class="admonition-title">Using the project scratch volume</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">project_&lt;YOURID&gt;</span></code> with your project ID. Consider to use the working directory <code class="docutils literal notranslate"><span class="pre">/scratch/project_&lt;YOURID&gt;</span></code> for running your experiemnts. Your virtual environment should also be located there.</p>
+</div>
+<p>Place the following <code class="docutils literal notranslate"><span class="pre">keras_horovod_example.py</span></code> script into your working directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v2</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_datasets</span> <span class="k">as</span> <span class="nn">tfds</span>
+<span class="kn">import</span> <span class="nn">horovod.tensorflow.keras</span> <span class="k">as</span> <span class="nn">hvd</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># Initialize Horovod</span>
+<span class="n">hvd</span><span class="o">.</span><span class="n">init</span><span class="p">()</span> <span class="c1"># HVD</span>
+
+<span class="n">physical_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">physical_devices</span><span class="p">)</span>
+
+<span class="n">tfds</span><span class="o">.</span><span class="n">disable_progress_bar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">enable_v2_behavior</span><span class="p">()</span>
+
+<span class="n">gpus</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Num GPUs available: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gpus</span><span class="p">))</span>
+<span class="n">local_gpu</span> <span class="o">=</span>  <span class="n">hvd</span><span class="o">.</span><span class="n">local_rank</span><span class="p">()</span> <span class="c1">#HVD</span>
+<span class="k">if</span> <span class="n">gpus</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set_visible_devices</span><span class="p">(</span><span class="n">gpus</span><span class="p">[</span><span class="n">local_gpu</span><span class="p">],</span> <span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="n">gpus</span><span class="p">:</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">gpu</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">(</span><span class="n">urllib3</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InsecureRequestWarning</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">ds_train</span><span class="p">,</span> <span class="n">ds_test</span><span class="p">),</span> <span class="n">ds_info</span> <span class="o">=</span> <span class="n">tfds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s1">&#39;mnist&#39;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">],</span>
+    <span class="n">shuffle_files</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">as_supervised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">with_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ds_train</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">assert_cardinality</span><span class="p">(</span><span class="n">ds_info</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_examples</span><span class="p">))</span>
+<span class="n">ds_test</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">assert_cardinality</span><span class="p">(</span><span class="n">ds_info</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_examples</span><span class="p">))</span>
+
+<span class="n">num_steps_train</span> <span class="o">=</span> <span class="n">ds_info</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_examples</span> <span class="o">//</span> <span class="n">batch_size</span>
+<span class="n">num_steps_test</span> <span class="o">=</span> <span class="n">ds_info</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_examples</span> <span class="o">//</span> <span class="n">batch_size</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of training steps for training/testing: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_steps_train</span><span class="p">,</span> <span class="n">num_steps_test</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">normalize_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Normalizes images: `uint8` -&gt; `float32`.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">normalize_img</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">ds_info</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_examples</span><span class="p">)</span>
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">shard</span><span class="p">(</span><span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">())</span> <span class="c1"># HVD</span>
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">ds_train</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">()</span>
+
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">normalize_img</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">shard</span><span class="p">(</span><span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">())</span> <span class="c1"># HVD</span>
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">inp</span><span class="p">)</span>
+    <span class="n">dense1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">flat</span><span class="p">)</span>
+    <span class="n">dense2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">dense1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">dense2</span><span class="p">)</span>
+
+<span class="n">fmodel</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
+
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Horovod: broadcast initial variable states from rank 0 to all other processes.</span>
+    <span class="c1"># This is necessary to ensure consistent initialization of all workers when</span>
+    <span class="c1"># training is started with random weights or restored from a checkpoint.</span>
+    <span class="n">hvd</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">BroadcastGlobalVariablesCallback</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># HVD</span>
+<span class="p">]</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">0.001</span> <span class="o">*</span> <span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="c1"># HVD</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">hvd</span><span class="o">.</span><span class="n">DistributedOptimizer</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="c1"># HVD</span>
+
+<span class="c1"># Horovod: Specify `experimental_run_tf_function=False` to ensure TensorFlow</span>
+<span class="c1"># uses hvd.DistributedOptimizer() to compute gradients.</span>
+<span class="n">fmodel</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+    <span class="n">experimental_run_tf_function</span><span class="o">=</span><span class="kc">False</span> <span class="c1"># HVD</span>
+<span class="p">)</span>
+
+<span class="c1"># Horovod: save checkpoints only on worker 0 to prevent other workers from corrupting them.</span>
+<span class="k">if</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># HVD</span>
+    <span class="n">callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;./checkpoint-</span><span class="si">{epoch}</span><span class="s1">.h5&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of processes: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+
+<span class="n">time_s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">fmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">ds_train</span><span class="p">,</span>
+    <span class="n">steps_per_epoch</span><span class="o">=</span><span class="n">num_steps_train</span> <span class="o">//</span> <span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="c1"># HVD</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="n">ds_test</span><span class="p">,</span>
+    <span class="n">validation_steps</span><span class="o">=</span><span class="n">num_steps_test</span> <span class="o">//</span> <span class="n">hvd</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="c1"># HVD</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">hvd</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Runtime: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">time_s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Execute the job script in the directory of your project which contains the virtual environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sbatch<span class="w"> </span>run_sbatch.sh
+</pre></div>
+</div>
+<p>Refer to the <code class="docutils literal notranslate"><span class="pre">output.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">error.txt</span></code> files for the results.</p>
+</section>
+</section>
+<section id="tutorial">
+<h2>Tutorial: …<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
+<p>A software tutorial</p>
+</section>
+<section id="id6">
+<h2>Tutorial: …<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>A software tutorial</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../14-modules-and-software-stacks/" class="btn btn-neutral float-left" title="Modules and software stacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../16-scheduler-and-batch-jobs/" class="btn btn-neutral float-right" title="Scheduler and batch jobs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

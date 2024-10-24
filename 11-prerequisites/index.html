@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prerequisites (accounts, projects and connecting) &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="LUMI environment" href="../12-lumi-environment/" />
+    <link rel="prev" title="Introduction to supercomputing and LUMI" href="../10-introduction-to-supercomputing-and-lumi/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites (accounts, projects and connecting)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#secure-connections">Secure Connections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#better-security-with-ssh-keys">Better Security With SSH Keys</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-keys-on-linux-mac-mobaxterm-and-windows-subsystem-for-linux">SSH Keys on Linux, Mac, MobaXterm, and Windows Subsystem for Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-keys-on-putty">SSH Keys on PuTTY</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ssh-agent-for-easier-key-handling">SSH Agent for Easier Key Handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-agents-on-linux-macos-and-windows">SSH Agents on Linux, macOS, and Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-agent-on-putty">SSH Agent on PuTTY</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#transfer-your-public-key">Transfer Your Public Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#log-in-to-the-cluster">Log In to the Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#looking-around-your-remote-home">Looking Around Your Remote Home</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-your-ssh-key">Install Your SSH Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-responsibility/">Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Prerequisites (accounts, projects and connecting)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/11-prerequisites.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prerequisites-accounts-projects-and-connecting">
+<h1>Prerequisites (accounts, projects and connecting)<a class="headerlink" href="#prerequisites-accounts-projects-and-connecting" title="Permalink to this heading"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>teaching: 25</p></li>
+<li><p>exercises: 10</p></li>
+</ul>
+</div>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How do I log in to a remote HPC system?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Configure secure access to a remote HPC system.</p></li>
+<li><p>Connect to a remote HPC system.</p></li>
+</ul>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>An HPC system is a set of networked machines.</p></li>
+<li><p>HPC systems typically provide login nodes and a set of worker nodes.</p></li>
+<li><p>The resources found on independent (worker) nodes can vary in volume and
+type (amount of RAM, processor architecture, availability of network mounted
+filesystems, etc.).</p></li>
+<li><p>Files saved on one node are available on all nodes.</p></li>
+</ul>
+</div>
+<section id="secure-connections">
+<h2>Secure Connections<a class="headerlink" href="#secure-connections" title="Permalink to this heading"></a></h2>
+<p>The first step in using a cluster is to establish a connection from our laptop
+to the cluster. When we are sitting at a computer (or standing, or holding it
+in our hands or on our wrists), we have come to expect a visual display with
+icons, widgets, and perhaps some windows or applications: a <em>graphical user
+interface</em>, or GUI. Since computer clusters are remote resources that we
+connect to over slow or intermittent interfaces (WiFi and VPNs especially), it
+is more practical to use a <em>command-line interface</em>, or CLI, to send commands
+as plain-text. If a command returns output, it is printed as plain text as
+well. The commands we run today will not open a window to show graphical
+results.</p>
+<p>If you have ever opened the Windows Command Prompt or macOS Terminal, you have
+seen a CLI. If you have already taken The Carpentries’ courses on the UNIX
+Shell or Version Control, you have used the CLI on your <em>local machine</em>
+extensively. The only leap to be made here is to open a CLI on a <em>remote machine</em>,
+while taking some precautions so that other folks on the network can’t see (or
+change) the commands you’re running or the results the remote machine sends
+back. We will use the Secure SHell protocol (or SSH) to open an encrypted
+network connection between two machines, allowing you to send &amp; receive text
+and data without having to worry about prying eyes.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/connect-to-remote.svg"><img alt="Connect to cluster&quot;" src="../_images/connect-to-remote.svg" width="50%" /></a>
+</figure>
+<p>SSH clients are usually command-line tools, where you provide the remote
+machine address as the only required argument. If your username on the remote
+system differs from what you use locally, you must provide that as well. If
+your SSH client has a graphical front-end, such as PuTTY or MobaXterm, you will
+set these arguments before clicking “connect.” From the terminal, you’ll write
+something like <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">userName&#64;hostname</span></code>, where the argument is just like an
+email address: the “&#64;” symbol is used to separate the personal ID from the
+address of the remote machine.</p>
+<p>When logging in to a laptop, tablet, or other personal device, a username,
+password, or pattern are normally required to prevent unauthorized access. In
+these situations, the likelihood of somebody else intercepting your password is
+low, since logging your keystrokes requires a malicious exploit or physical
+access. For systems like {{ site.remote.host }} running an SSH server, anybody
+on the network can log in, or try to. Since usernames are often public or easy
+to guess, your password is often the weakest link in the security chain. Many
+clusters therefore forbid password-based login, requiring instead that you
+generate and configure a public-private key pair with a much stronger password.
+Even if your cluster does not require it, the next section will guide you
+through the use of SSH keys and an SSH agent to both strengthen your security
+<em>and</em> make it more convenient to log in to remote systems.</p>
+<section id="better-security-with-ssh-keys">
+<h3>Better Security With SSH Keys<a class="headerlink" href="#better-security-with-ssh-keys" title="Permalink to this heading"></a></h3>
+<p>The [Lesson Setup]({{ page.root }}/setup) provides instructions for installing
+a shell application with SSH. If you have not done so already, please open that
+shell application with a Unix-like command line interface to your system.</p>
+<p>SSH keys are an alternative method for authentication to obtain access to
+remote computing systems. They can also be used for authentication when
+transferring files or for accessing remote version control systems (such as
+[GitHub][gh-ssh]).
+In this section you will create a pair of SSH keys:</p>
+<ul class="simple">
+<li><p>a private key which you keep on your own computer, and</p></li>
+<li><p>a public key which can be placed on any remote system you will access.</p></li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><strong>Private keys are your secure digital passport</strong></p>
+<p>A private key that is visible to anyone but you should be considered
+compromised, and must be destroyed. This includes having improper permissions
+on the directory it (or a copy) is stored in, traversing any network that is
+not secure (encrypted), attachment on unencrypted email, and even displaying
+the key on your terminal window.
+Protect this key as if it unlocks your front door. In many ways, it does.</p>
+</div>
+<p>Regardless of the software or operating system you use, <em>please</em> choose a
+strong password or passphrase to act as another layer of protection for your
+private SSH key.</p>
+<div class="admonition-considerations-for-ssh-key-passwords callout admonition" id="callout-0">
+<p class="admonition-title">Considerations for SSH Key Passwords</p>
+<p>When prompted, enter a strong password that you will remember. There are two
+common approaches to this:</p>
+<ol class="arabic simple">
+<li><p>Create a memorable passphrase with some punctuation and number-for-letter
+substitutions, 32 characters or longer. Street addresses work well; just
+be careful of social engineering or public records attacks.</p></li>
+<li><p>Use a password manager and its built-in password generator with all
+character classes, 25 characters or longer. [KeePass][keepass] and
+[BitWarden][bitwarden] are two good options.</p></li>
+<li><p>Nothing is <em>less</em> secure than a private key with no password. If you
+skipped password entry by accident, go back and generate a new key pair
+<em>with</em> a strong password.</p></li>
+</ol>
+</div>
+<section id="ssh-keys-on-linux-mac-mobaxterm-and-windows-subsystem-for-linux">
+<h4>SSH Keys on Linux, Mac, MobaXterm, and Windows Subsystem for Linux<a class="headerlink" href="#ssh-keys-on-linux-mac-mobaxterm-and-windows-subsystem-for-linux" title="Permalink to this heading"></a></h4>
+<p>Once you have opened a terminal, check for existing SSH keys and filenames
+since existing SSH keys are overwritten.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>~/.ssh/
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code> already exists, you will need to specify
+a different name for the new key-pair.</p>
+<p>Generate a new public-private key pair using the following command, which will
+produce a stronger key than the <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> default by invoking these flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-a</span></code> (default is 16): number of rounds of passphrase derivation; increase to
+slow down brute force attacks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> (default is [rsa][wiki-rsa]): specify the “type” or cryptographic
+algorithm. <code class="docutils literal notranslate"><span class="pre">ed25519</span></code> specifies [EdDSA][wiki-dsa] with a 256-bit key;
+it is faster than RSA with a comparable strength.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> (default is /home/user/.ssh/id_algorithm): filename to store your
+private key. The public key filename will be identical, with a <code class="docutils literal notranslate"><span class="pre">.pub</span></code>
+extension added.</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-keygen<span class="w"> </span>-a<span class="w"> </span><span class="m">100</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>-t<span class="w"> </span>ed25519
+</pre></div>
+</div>
+<p>When prompted, enter a strong password with the
+above considerations in mind.
+Note that the terminal will not appear to change while you type the password:
+this is deliberate, for your security. You will be prompted to type it again,
+so don’t worry too much about typos.</p>
+<p>Take a look in <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> (use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">~/.ssh</span></code>). You should see two new files:</p>
+<ul class="simple">
+<li><p>your private key (<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code>): <em>do not share with anyone!</em></p></li>
+<li><p>the shareable public key (<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519.pub</span></code>): if a system administrator
+asks for a key, this is the one to send. It is also safe to upload to
+websites such as GitHub: it is meant to be seen.</p></li>
+</ul>
+<div class="admonition-use-rsa-for-older-systems callout admonition" id="callout-1">
+<p class="admonition-title">Use RSA for Older Systems</p>
+<p>If key generation failed because ed25519 is not available, try using the older
+(but still strong and trustworthy) [RSA][wiki-rsa] cryptosystem. Again, first
+check for an existing key:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>~/.ssh/
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa</span></code> already exists, you will need to specify choose a different
+name for the new key-pair. Generate it as above, with the following extra flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> sets the number of bits in the key. The default is 2048.
+EdDSA uses a fixed key length, so this flag would have no effect.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code> (no default): use the OpenSSH key format,
+rather than PEM.</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-keygen<span class="w"> </span>-a<span class="w"> </span><span class="m">100</span><span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>-o<span class="w"> </span>-t<span class="w"> </span>rsa
+</pre></div>
+</div>
+<p>When prompted, enter a strong password with the
+above considerations in mind.
+Take a look in <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> (use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">~/.ssh</span></code>). You should see two new files:</p>
+<ul class="simple">
+<li><p>your private key (<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa</span></code>): <em>do not share with anyone!</em></p></li>
+<li><p>the shareable public key (<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa.pub</span></code>): if a system administrator
+asks for a key, this is the one to send. It is also safe to upload to
+websites such as GitHub: it is meant to be seen.</p></li>
+</ul>
+</div>
+</section>
+<section id="ssh-keys-on-putty">
+<h4>SSH Keys on PuTTY<a class="headerlink" href="#ssh-keys-on-putty" title="Permalink to this heading"></a></h4>
+<p>If you are using PuTTY on Windows, download and use <code class="docutils literal notranslate"><span class="pre">puttygen</span></code> to generate the
+key pair. See the [PuTTY documentation][putty-gen] for details.</p>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">EdDSA</span></code> as the key type.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">255</span></code> as the key size or strength.</p></li>
+<li><p>Click on the “Generate” button.</p></li>
+<li><p>You do not need to enter a comment.</p></li>
+<li><p>When prompted, enter a strong password with the
+above considerations in mind.</p></li>
+<li><p>Save the keys in a folder no other users of the system can read.</p></li>
+</ul>
+<p>Take a look in the folder you specified. You should see two new files:</p>
+<ul class="simple">
+<li><p>your private key (<code class="docutils literal notranslate"><span class="pre">id_ed25519</span></code>): <em>do not share with anyone!</em></p></li>
+<li><p>the shareable public key (<code class="docutils literal notranslate"><span class="pre">id_ed25519.pub</span></code>): if a system administrator
+asks for a key, this is the one to send. It is also safe to upload to
+websites such as GitHub: it is meant to be seen.</p></li>
+</ul>
+</section>
+</section>
+<section id="ssh-agent-for-easier-key-handling">
+<h3>SSH Agent for Easier Key Handling<a class="headerlink" href="#ssh-agent-for-easier-key-handling" title="Permalink to this heading"></a></h3>
+<p>An SSH key is only as strong as the password used to unlock it, but on the
+other hand, typing out a complex password every time you connect to a machine
+is tedious and gets old very fast. This is where the [SSH Agent][ssh-agent]
+comes in.</p>
+<p>Using an SSH Agent, you can type your password for the private key once, then
+have the Agent remember it for some number of hours or until you log off.
+Unless some nefarious actor has physical access to your machine, this keeps the
+password safe, and removes the tedium of entering the password multiple times.</p>
+<p>Just remember your password, because once it expires in the Agent, you have to
+type it in again.</p>
+<section id="ssh-agents-on-linux-macos-and-windows">
+<h4>SSH Agents on Linux, macOS, and Windows<a class="headerlink" href="#ssh-agents-on-linux-macos-and-windows" title="Permalink to this heading"></a></h4>
+<p>Open your terminal application and check if an agent is running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-add<span class="w"> </span>-l
+</pre></div>
+</div>
+<ul>
+<li><p>If you get an error like this one,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Error connecting to agent: No such file or directory</span>
+</pre></div>
+</div>
+<p>… then you need to launch the agent as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">eval</span><span class="w"> </span><span class="k">$(</span>ssh-agent<span class="k">)</span>
+</pre></div>
+</div>
+<div class="admonition-what-s-in-a callout admonition" id="callout-2">
+<p class="admonition-title">What’s in a $(…)?</p>
+<p>The syntax of this SSH Agent command is unusual, based on what we’ve seen
+in the UNIX Shell lesson. This is because the <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> command creates
+opens a connection that only you have access to, and prints a series of
+shell commands that can be used to reach it – but <em>does not execute them!</em></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-agent
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">SSH_AUTH_SOCK=/tmp/ssh-Zvvga2Y8kQZN/agent.131521;</span>
+<span class="go">export SSH_AUTH_SOCK;</span>
+<span class="go">SSH_AGENT_PID=131522;</span>
+<span class="go">export SSH_AGENT_PID;</span>
+<span class="go">echo Agent pid 131522;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">eval</span></code> command interprets this text output as commands and allows you
+to access the SSH Agent connection you just created.
+You could run each line of the <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> output yourself, and
+achieve the same result. Using <code class="docutils literal notranslate"><span class="pre">eval</span></code> just makes this easier.</p>
+</div>
+</li>
+<li><p>Otherwise, your agent is already running: don’t mess with it.</p></li>
+</ul>
+<p>Add your key to the agent, with session expiration after 8 hours:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-add<span class="w"> </span>-t<span class="w"> </span>8h<span class="w"> </span>~/.ssh/id_ed25519
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Enter passphrase for .ssh/id_ed25519: </span>
+<span class="go">Identity added: .ssh/id_ed25519</span>
+<span class="go">Lifetime set to 86400 seconds</span>
+</pre></div>
+</div>
+<p>For the duration (8 hours), whenever you use that key, the SSH Agent will
+provide the key on your behalf without you having to type a single keystroke.</p>
+</section>
+<section id="ssh-agent-on-putty">
+<h4>SSH Agent on PuTTY<a class="headerlink" href="#ssh-agent-on-putty" title="Permalink to this heading"></a></h4>
+<p>If you are using PuTTY on Windows, download and use <code class="docutils literal notranslate"><span class="pre">pageant</span></code> as the SSH agent.
+See the [PuTTY documentation][putty-agent].</p>
+</section>
+</section>
+<section id="transfer-your-public-key">
+<h3>Transfer Your Public Key<a class="headerlink" href="#transfer-your-public-key" title="Permalink to this heading"></a></h3>
+<p>FIXME BEGIN
+{% if site.remote.portal %}
+Visit {{ site.remote.portal }} to upload your SSH public key.
+{% else %}
+Use the <strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y tool to send your public key to the cluster.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>scp<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w"> </span><span class="o">{{</span><span class="w"> </span>site.remote.user<span class="w"> </span><span class="o">}}</span>@<span class="o">{{</span><span class="w"> </span>site.remote.login<span class="w"> </span><span class="o">}}</span>:~/
+</pre></div>
+</div>
+<p>FIXME END</p>
+</section>
+</section>
+<section id="log-in-to-the-cluster">
+<h2>Log In to the Cluster<a class="headerlink" href="#log-in-to-the-cluster" title="Permalink to this heading"></a></h2>
+<p>Go ahead and open your terminal or graphical SSH client, then log in to the
+cluster. Replace <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.remote.user</span> <span class="pre">}}</span></code> with your username or the one
+supplied by the instructors.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh<span class="w"> </span><span class="o">{{</span><span class="w"> </span>site.remote.user<span class="w"> </span><span class="o">}}</span>@<span class="o">{{</span><span class="w"> </span>site.remote.login<span class="w"> </span><span class="o">}}</span>
+</pre></div>
+</div>
+<p>You may be asked for your password. Watch out: the characters you type after
+the password prompt are not displayed on the screen. Normal output will resume
+once you press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
+<p>You may have noticed that the prompt changed when you logged into the remote
+system using the terminal (if you logged in using PuTTY this will not apply
+because it does not offer a local terminal). This change is important because
+it can help you distinguish on which system the commands you type will be run
+when you pass them into the terminal. This change is also a small complication
+that we will need to navigate throughout the workshop. Exactly what is displayed
+as the prompt (which conventionally ends in <code class="docutils literal notranslate"><span class="pre">$</span></code>) in the terminal when it is
+connected to the local system and the remote system will typically be different
+for every user. We still need to indicate which system we are entering commands
+on though so we will adopt the following convention:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.local.prompt</span> <span class="pre">}}</span></code> when the command is to be entered on a terminal
+connected to your local computer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.remote.prompt</span> <span class="pre">}}</span></code> when the command is to be entered on a
+terminal connected to the remote system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span></code> when it really doesn’t matter which system the terminal is connected to.</p></li>
+</ul>
+</section>
+<section id="looking-around-your-remote-home">
+<h2>Looking Around Your Remote Home<a class="headerlink" href="#looking-around-your-remote-home" title="Permalink to this heading"></a></h2>
+<p>Very often, many users are tempted to think of a high-performance computing
+installation as one giant, magical machine. Sometimes, people will assume that
+the computer they’ve logged onto is the entire computing cluster. So what’s
+really happening? What computer have we logged on to? The name of the current
+computer we are logged onto can be checked with the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> command. (You
+may also notice that the current hostname is also part of our prompt!)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>hostname
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">uan01</span>
+</pre></div>
+</div>
+<p>So, we’re definitely on the remote machine. Next, let’s find out where we are
+by running <code class="docutils literal notranslate"><span class="pre">pwd</span></code> to <strong>p</strong>rint the <strong>w</strong>orking <strong>d</strong>irectory.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">pwd</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">/users/USERNAME</span>
+</pre></div>
+</div>
+<p>Great, we know where we are! Let’s see what’s in our current directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">id_ed25519</span><span class="o">.</span><span class="n">pub</span>
+</pre></div>
+</div>
+<p>The system administrators may have configured your home directory with some
+helpful files, folders, and links (shortcuts) to space reserved for you on
+other filesystems. If they did not, your home directory may appear empty. To
+double-check, include hidden files in your directory listing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">ls</span> <span class="o">-</span><span class="n">a</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="o">.</span>            <span class="o">.</span><span class="n">bashrc</span>           <span class="n">id_ed25519</span><span class="o">.</span><span class="n">pub</span>
+  <span class="o">..</span>           <span class="o">.</span><span class="n">ssh</span>
+</pre></div>
+</div>
+<p>In the first column, <code class="docutils literal notranslate"><span class="pre">.</span></code> is a reference to the current directory and <code class="docutils literal notranslate"><span class="pre">..</span></code> a
+reference to its parent (<code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">site.remote.homedir</span> <span class="pre">}}</span></code>). You may or may not see
+the other files, or files like them: <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> is a shell configuration file,
+which you can edit with your preferences; and <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> is a directory storing SSH
+keys and a record of authorized connections.</p>
+<section id="install-your-ssh-key">
+<h3>Install Your SSH Key<a class="headerlink" href="#install-your-ssh-key" title="Permalink to this heading"></a></h3>
+<div class="admonition-there-may-be-a-better-way callout admonition" id="callout-3">
+<p class="admonition-title">There May Be a Better Way</p>
+<p>Policies and practices for handling SSH keys vary between HPC clusters:
+follow any guidance provided by the cluster administrators or
+documentation. In particular, if there is an online portal for managing SSH
+keys, use that instead of the directions outlined here.</p>
+</div>
+<p>If you transferred your SSH public key with <code class="docutils literal notranslate"><span class="pre">scp</span></code>, you should see
+<code class="docutils literal notranslate"><span class="pre">id_ed25519.pub</span></code> in your home directory. To “install” this key, it must be
+listed in a file named <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code> under the <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder was not listed above, then it does not yet
+exist: create it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>~/.ssh
+</pre></div>
+</div>
+<p>Now, use <code class="docutils literal notranslate"><span class="pre">cat</span></code> to print your public key, but redirect the output, appending it
+to the <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>~/id_ed25519.pub<span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.ssh/authorized_keys
+</pre></div>
+</div>
+<p>That’s all! Disconnect, then try to log back into the remote: if your key and
+agent have been configured correctly, you should not be prompted for the
+password for your SSH key.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">logout</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh<span class="w"> </span><span class="o">{{</span><span class="w"> </span>site.remote.user<span class="w"> </span><span class="o">}}</span>@<span class="o">{{</span><span class="w"> </span>site.remote.login<span class="w"> </span><span class="o">}}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bitwarden.com">bitwarden</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">fshs</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">gh-ssh</a></p></li>
+<li><p><a class="reference external" href="https://keepass.info">keepass</a></p></li>
+<li><p><a class="reference external" href="https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter8.html#pubkey-puttygen">putty-gen</a></p></li>
+<li><p><a class="reference external" href="https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter9.html#pageant">putty-agent</a></p></li>
+<li><p><a class="reference external" href="https://www.ssh.com/academy/ssh/agent">ssh-agent</a></p></li>
+<li><p><a class="reference external" href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">ssh-flags</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">wiki-rsa</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/EdDSA">wiki-dsa</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../10-introduction-to-supercomputing-and-lumi/" class="btn btn-neutral float-left" title="Introduction to supercomputing and LUMI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../12-lumi-environment/" class="btn btn-neutral float-right" title="LUMI environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

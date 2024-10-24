@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsibility &mdash; Introduction to LUMI</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Installing own applications" href="../21-installing-own-applications/" />
+    <link rel="prev" title="Managing data" href="../19-managing-data/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Introduction to LUMI
+              <img src="../_static/LUMI_light.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../10-introduction-to-supercomputing-and-lumi/">Introduction to supercomputing and LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-prerequisites/">Prerequisites (accounts, projects and connecting)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-lumi-environment/">LUMI environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13a-exploring-remote-resources/">Exploring Remote Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-lumi-disk-areas/">Where to store files in LUMI computing environment?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-modules-and-software-stacks/">Modules and software stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-software-on-lumi/">Software on LUMI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-scheduler-and-batch-jobs/">Scheduler and batch jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-parallel/">Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-using-resources-efficiently/">Using resources efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19-managing-data/">Managing data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Responsibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#be-kind-to-the-login-nodes">Be Kind to the Login Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-before-scaling">Test Before Scaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#have-a-backup-plan">Have a Backup Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transferring-data">Transferring Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../21-installing-own-applications/">Installing own applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22-working-with-containers/">Working with containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-advanced-topics/">Advanced topics (e.g. high-throughput workflows, CPU-GPU binding)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Introduction to LUMI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Responsibility</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lumi-supercomputer/lumi-self-learning/blob/main/content/20-responsibility.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="responsibility">
+<h1>Responsibility<a class="headerlink" href="#responsibility" title="Permalink to this heading"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>teaching: 45</p></li>
+<li><p>exercises: 30</p></li>
+</ul>
+</div>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can I be a responsible user?</p></li>
+<li><p>How can I protect my data?</p></li>
+<li><p>How can I best get large amounts of data off an HPC system?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Describe how the actions of a single user can affect the experience of others on a shared system.</p></li>
+<li><p>Discuss the behaviour of a considerate shared system citizen.</p></li>
+<li><p>Explain the importance of backing up critical data.</p></li>
+<li><p>Describe the challenges with transferring large amounts of data off HPC systems.</p></li>
+<li><p>Convert many files to a single archive file using tar.</p></li>
+</ul>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Be careful how you use the login node.</p></li>
+<li><p>Your data on the system is your responsibility.</p></li>
+<li><p>Plan and test large data transfers.</p></li>
+<li><p>It is often best to convert many files to a single archive file before transferring.</p></li>
+</ul>
+</div>
+<p>One of the major differences between using remote HPC resources and your own
+system (e.g. your laptop) is that remote resources are shared. How many users
+the resource is shared between at any one time varies from system to system, but
+it is unlikely you will ever be the only user logged into or using such a
+system.</p>
+<p>The widespread usage of scheduling systems where users submit jobs on HPC
+resources is a natural outcome of the shared nature of these resources. There
+are other things you, as an upstanding member of the community, need to
+consider.</p>
+<section id="be-kind-to-the-login-nodes">
+<h2>Be Kind to the Login Nodes<a class="headerlink" href="#be-kind-to-the-login-nodes" title="Permalink to this heading"></a></h2>
+<p>The login node is often busy managing all of the logged in users, creating and
+editing files and compiling software. If the machine runs out of memory or
+processing capacity, it will become very slow and unusable for everyone. While
+the machine is meant to be used, be sure to do so responsibly – in ways
+that will not adversely impact other users’ experience.</p>
+<p>Login nodes are always the right place to launch jobs. Cluster policies vary,
+but they may also be used for proving out workflows, and in some cases, may
+host advanced cluster-specific debugging or development tools. The cluster may
+have modules that need to be loaded, possibly in a certain order, and paths or
+library versions that differ from your laptop, and doing an interactive test
+run on the head node is a quick and reliable way to discover and fix these
+issues.</p>
+<div class="admonition-callout callout admonition" id="callout-0">
+<p class="admonition-title">Callout</p>
+<p>Login Nodes Are a Shared Resource</p>
+<p>Remember, the login node is shared with all other users and your actions
+could cause issues for other people. Think carefully about the potential
+implications of issuing commands that may use large amounts of resource.</p>
+<p>Unsure? Ask your friendly systems administrator (“sysadmin”) if the thing
+you’re contemplating is suitable for the login node, or if there’s another
+mechanism to get it done safely.</p>
+</div>
+<p>You can always use the commands <code class="docutils literal notranslate"><span class="pre">top</span></code> and <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">ux</span></code> to list the processes that
+are running on the login node along with the amount of CPU and memory they are
+using. If this check reveals that the login node is somewhat idle, you can
+safely use it for your non-routine processing task. If something goes wrong
+– the process takes too long, or doesn’t respond – you can use the
+<code class="docutils literal notranslate"><span class="pre">kill</span></code> command along with the <em>PID</em> to terminate the process.</p>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>Login Node Etiquette</p>
+<p>Which of these commands would be a routine task to run on the login node?</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">physics_sim.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_directories.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">molecular_dynamics_2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xzf</span> <span class="pre">R-3.3.0.tar.gz</span></code></p></li>
+</ol>
+<p>Solution</p>
+<p>Building software, creating directories, and unpacking software are common
+and acceptable &gt; tasks for the login node: options #2 (<code class="docutils literal notranslate"><span class="pre">make</span></code>), #3
+(<code class="docutils literal notranslate"><span class="pre">mkdir</span></code>), and #5 (<code class="docutils literal notranslate"><span class="pre">tar</span></code>) are probably OK. Note that script names do not
+always reflect their contents: before launching #3, please
+<code class="docutils literal notranslate"><span class="pre">less</span> <span class="pre">create_directories.sh</span></code> and make sure it’s not a Trojan horse.</p>
+<p>Running resource-intensive applications is frowned upon. Unless you are
+sure it will not affect other users, do not run jobs like #1 (<code class="docutils literal notranslate"><span class="pre">python</span></code>)
+or #4 (custom MD code). If you’re unsure, ask your friendly sysadmin for
+advice.
+{: .solution}</p>
+</div>
+<p>If you experience performance issues with a login node you should report it to
+the system staff (usually via the helpdesk) for them to investigate.</p>
+</section>
+<section id="test-before-scaling">
+<h2>Test Before Scaling<a class="headerlink" href="#test-before-scaling" title="Permalink to this heading"></a></h2>
+<p>Remember that you are generally charged for usage on shared systems. A simple
+mistake in a job script can end up costing a large amount of resource budget.
+Imagine a job script with a mistake that makes it sit doing nothing for 24
+hours on 1000 cores or one where you have requested 2000 cores by mistake and
+only use 100 of them! This problem can be compounded when people write scripts
+that automate job submission (for example, when running the same calculation or
+analysis over lots of different parameters or files). When this happens it
+hurts both you (as you waste lots of charged resource) and other users (who are
+blocked from accessing the idle compute nodes). On very busy resources you may
+wait many days in a queue for your job to fail within 10 seconds of starting due
+to a trivial typo in the job script. This is extremely frustrating!</p>
+<p>Most systems provide dedicated resources for testing that have short wait times
+to help you avoid this issue.</p>
+<div class="admonition-callout callout admonition" id="callout-1">
+<p class="admonition-title">Callout</p>
+<p>Test Job Submission Scripts That Use Large Amounts of Resources</p>
+<p>Before submitting a large run of jobs, submit one as a test first to make
+sure everything works as expected.</p>
+<p>Before submitting a very large or very long job submit a short truncated test
+to ensure that the job starts as expected.</p>
+</div>
+</section>
+<section id="have-a-backup-plan">
+<h2>Have a Backup Plan<a class="headerlink" href="#have-a-backup-plan" title="Permalink to this heading"></a></h2>
+<p>Although many HPC systems keep backups, it does not always cover all the file
+systems available and may only be for disaster recovery purposes (i.e. for
+restoring the whole file system if lost rather than an individual file or
+directory you have deleted by mistake). Protecting critical data from
+corruption or deletion is primarily your responsibility: keep your own backup
+copies.</p>
+<p>Version control systems (such as Git) often have free, cloud-based offerings
+(e.g., GitHub and GitLab) that are generally used for storing source code. Even
+if you are not writing your own programs, these can be very useful for storing
+job scripts, analysis scripts and small input files.</p>
+<p>If you are building software, you may have a large amount of source code
+that you compile to build your executable. Since this data can generally
+be recovered by re-downloading the code, or re-running the checkout
+operation from the source code repository, this data is also less
+critical to protect.</p>
+<p>For larger amounts of data, especially important results from your runs,
+which may be irreplaceable, you should make sure you have a robust system in
+place for taking copies of data off the HPC system wherever possible
+to backed-up storage. Tools such as <code class="docutils literal notranslate"><span class="pre">rsync</span></code> can be very useful for this.</p>
+<p>Your access to the shared HPC system will generally be time-limited so you
+should ensure you have a plan for transferring your data off the system before
+your access finishes. The time required to transfer large amounts of data
+should not be underestimated and you should ensure you have planned for this
+early enough (ideally, before you even start using the system for your
+research).</p>
+<p>In all these cases, the helpdesk of the system you are using should be able to
+provide useful guidance on your options for data transfer for the volumes of
+data you will be using.</p>
+<div class="admonition-callout callout admonition" id="callout-2">
+<p class="admonition-title">Callout</p>
+<p>Your Data Is Your Responsibility</p>
+<p>Make sure you understand what the backup policy is on the file systems on the
+system you are using and what implications this has for your work if you lose
+your data on the system. Plan your backups of critical data and how you will
+transfer data off the system throughout the project.</p>
+</div>
+</section>
+<section id="transferring-data">
+<h2>Transferring Data<a class="headerlink" href="#transferring-data" title="Permalink to this heading"></a></h2>
+<p>As mentioned above, many users run into the challenge of transferring large
+amounts of data off HPC systems at some point (this is more often in
+transferring data off than onto systems but the advice below applies in either
+case). Data transfer speed may be limited by many different factors so the best
+data transfer mechanism to use depends on the type of data being transferred
+and where the data is going.</p>
+<p>The components between your data’s source and destination have
+varying levels of performance, and in particular, may have
+different capabilities with respect to <strong>bandwidth</strong> and <strong>latency</strong>.</p>
+<p><strong>Bandwidth</strong> is generally the raw amount of data per unit time a
+device is capable of transmitting or receiving. It’s a common
+and generally well-understood metric.</p>
+<p><strong>Latency</strong> is a bit more subtle. For data transfers, it may be thought
+of as the amount of time it takes to get data out of storage and into
+a transmittable form. Latency issues are the reason it’s advisable
+to execute data transfers by moving a small number of large
+files, rather than the converse.</p>
+<p>Some of the key components and their associated issues are:</p>
+<ul class="simple">
+<li><p><strong>Disk speed</strong>: File systems on HPC systems are often highly parallel,
+consisting of a very large number of high performance disk drives. This
+allows them to support a very high data bandwidth. Unless the remote system
+has a similar parallel file system you may find your transfer speed limited
+by disk performance at that end.</p></li>
+<li><p><strong>Meta-data performance</strong>: <em>Meta-data operations</em> such as opening and closing
+files or listing the owner or size of a file are much less parallel than
+read/write operations. If your data consists of a very large number of small
+files you may find your transfer speed is limited by meta-data operations.
+Meta-data operations performed by other users of the system can also interact
+strongly with those you perform so reducing the number of such operations you
+use (by combining multiple files into a single file) may reduce variability
+in your transfer rates and increase transfer speeds.</p></li>
+<li><p><strong>Network speed</strong>: Data transfer performance can be limited by network speed.
+More importantly it is limited by the slowest section of the network between
+source and destination. If you are transferring to your laptop/workstation,
+this is likely to be its connection (either via LAN or WiFi).</p></li>
+<li><p><strong>Firewall speed</strong>: Most modern networks are protected by some form of
+firewall that filters out malicious traffic. This filtering has some overhead
+and can result in a reduction in data transfer performance. The needs of a
+general purpose network that hosts email/web-servers and desktop machines are
+quite different from a research network that needs to support high volume
+data transfers. If you are trying to transfer data to or from a host on a
+general purpose network you may find the firewall for that network will limit
+the transfer rate you can achieve.</p></li>
+</ul>
+<p>As mentioned above, if you have related data that consists of a large number of
+small files it is strongly recommended to pack the files into a larger
+<em>archive</em> file for long term storage and transfer. A single large file makes
+more efficient use of the file system and is easier to move, copy and transfer
+because significantly fewer metadata operations are required. Archive files can
+be created using tools like <code class="docutils literal notranslate"><span class="pre">tar</span></code> and <code class="docutils literal notranslate"><span class="pre">zip</span></code>. We have already met <code class="docutils literal notranslate"><span class="pre">tar</span></code> when we
+talked about data transfer earlier.</p>
+<p>{% include figure.html url=”” max-width=”90%”
+file=”/fig/responsibility-bandwidth.svg”
+alt=”Schematic of network bandwidth”
+caption=”<i>Schematic diagram of bandwidth and latency for disk and network
+I/O. Each of the components on the figure is connected by a blue line of
+width proportional to the interface bandwidth. The small mazes at the
+link points illustrate the latency of the link, with more tortuous
+mazes indicating higher latency.</i>” %}</p>
+<div class="admonition-exercise exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise</p>
+<p>Consider the Best Way to Transfer Data</p>
+<p>If you are transferring large amounts of data you will need to think about
+what may affect your transfer performance. It is always useful to run some
+tests that you can use to extrapolate how long it will take to transfer your
+data.</p>
+<p>Say you have a “data” folder containing 10,000 or so files, a healthy mix of
+small and large ASCII and binary data. Which of the following would be the
+best way to transfer them to {{ site.remote.name }}?</p>
+<ol class="arabic">
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">data</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<ol class="arabic" start="2">
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">ra</span> <span class="n">data</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">raz</span> <span class="n">data</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">tar</span> <span class="o">-</span><span class="n">cvf</span> <span class="n">data</span><span class="o">.</span><span class="n">tar</span> <span class="n">data</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">raz</span> <span class="n">data</span><span class="o">.</span><span class="n">tar</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">tar</span> <span class="o">-</span><span class="n">cvzf</span> <span class="n">data</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="n">data</span>
+<span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">prompt</span> <span class="p">}}</span> <span class="n">rsync</span> <span class="o">-</span><span class="n">ra</span> <span class="n">data</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">user</span> <span class="p">}}</span><span class="o">@</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">login</span> <span class="p">}}:</span><span class="o">~/</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Solution</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scp</span></code> will recursively copy the directory. This works, but without
+compression.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-ra</span></code> works like <code class="docutils literal notranslate"><span class="pre">scp</span> <span class="pre">-r</span></code>, but preserves file information like
+creation times. This is marginally better.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-raz</span></code> adds compression, which will save some bandwidth. If you
+have a strong CPU at both ends of the line, and you’re on a slow
+network, this is a good choice.</p></li>
+<li><p>This command first uses <code class="docutils literal notranslate"><span class="pre">tar</span></code> to merge everything into a single file,
+then <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-z</span></code> to transfer it with compression. With this large
+<em>number</em> of files, metadata overhead can hamper your transfer, so this
+is a good idea.</p></li>
+<li><p>This command uses <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-z</span></code> to compress the archive, then <code class="docutils literal notranslate"><span class="pre">rsync</span></code> to
+transfer it. This may perform similarly to #4, but in most cases (for
+large datasets), it’s the best combination of high throughput and low
+latency (making the most of your time and network connection).
+{: .solution}</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../19-managing-data/" class="btn btn-neutral float-left" title="Managing data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../21-installing-own-applications/" class="btn btn-neutral float-right" title="Installing own applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
