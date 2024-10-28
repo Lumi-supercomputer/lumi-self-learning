@@ -1,15 +1,19 @@
 # Using LUMI-O object storage 
 
-All your data doesn't fit to the filesystem on LUMI? You don't actively need it, but would like to keep it somewhere close and easy to access? Or you would like to have a backup of the data that you have in the file system of LUMI in your /project or /scratch folders that would be also accessible during (most of) the LUMI maintenance breaks? Are you looking for a way to share data from your project to others, either to a specific audience via a link or managing the access rights, or publicly to anyone who knows where to look for it? The answer to all these questions/needs is LUMI-O! 
-
 LUMI-O is a S3 compatible object storage, based on Ceph Reef (v18.2.2). 
+
+If you answer 'yes' to some of these questions, using LUMI-O might be a good option for you:
+  - All your data doesn't fit to the filesystem on LUMI. You don't actively need the data, but would like to keep it somewhere close and easy to access
+  - You would like to have a backup of your data somewhere separate than in the file system of LUMI
+  - You would like to have your data somewhere accessible during (most of) the LUMI maintenance breaks
+  - You are looking for a way to share data outside your project, but still keep the access private, and only give access to the selected people
+  - You would like to share a public link to your data to anyone who has the link
+  
 
 Some features of LUMI-O:
 - Space for 150 TB of your project data
 - Separate from the Lustre filesystem of LUMI, with a fast connection for data transfer between LUMI filesystem and LUMI-O
-- The available storage space in LUMI-O can also be used as an easily reachable location to backup your data that you have on LUMI
 - Accessible also without connecting to LUMI - in most cases available also during service breaks of LUMI
-- Can be used to share data outside your project (publicly or privately)
 - Data lifetime in LUMI-O is the same as your project lifetime
 
 Guide for LUMI-O in the LUMI documentation: https://docs.lumi-supercomputer.eu/storage/lumio/
