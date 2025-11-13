@@ -1,5 +1,5 @@
 # Introduction to LUMI – self-learning materials
 
-:construction: Work in progress :construction:
+:file_folder: This repository has been archived. :file_folder:
 
-This is the _source_ repository for training materials for the Introduction to LUMI self-learning course. We welcome contributions!
+The work will be continued by the LUMI AI factory. 
