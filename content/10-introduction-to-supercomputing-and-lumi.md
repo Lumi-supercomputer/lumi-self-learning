@@ -1,4 +1,4 @@
-# Introduction to supercomputing and LUMI
+# Introduction to supercomputing
 
 Frequently, research problems that use computing can outgrow the capabilities
 of the desktop or laptop computer where they started:

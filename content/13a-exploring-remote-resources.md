@@ -1,5 +1,7 @@
 # Exploring Remote Resources
 
+(This page contains nice information. Parts of this page could be either combined with the 'LUMI disk areas' page, or this could be kept as a separate page about introduction to the system, with some modifications.)
+
 ```{instructor-note}
 - teaching: 30
 - exercises: 15

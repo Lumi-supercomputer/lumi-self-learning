@@ -1,10 +1,5 @@
 # Scheduler and batch jobs
 
-```{instructor-note}
-- teaching: 45
-- exercises: 30
-```
-
 ```{questions}
 - What is a scheduler and why does a cluster need one?
 - How do I capture the output of a program that is run on a node in the cluster?
@@ -329,6 +324,98 @@ genome index for alignment with a tool like [HISAT2][hisat]. Fortunately, we
 can run these types of tasks as a one-off with `{{ site.sched.interactive }}`.
 
 {% include {{ site.snippets }}/scheduler/using-nodes-interactively.snip %}
+
+
+## Tutorial: Serial jobs
+
+> In this tutorial we'll get familiar with the basic usage of the Slurm batch queue system on LUMI. 
+- The goal is to learn how to request resources that **match** the needs of a job
+
+💬 A batch job consists of two parts: resource requests and the job step(s)
+
+☝🏻 Examples are done on LUMI. If using the web interface, open a login node shell.
+
+## Serial jobs
+
+💬 A serial program can only use one core (CPU)
+
+- One should request only a single core from Slurm
+- The job does not benefit from additional cores
+- Excess cores are wasted since they will not be available to other users
+
+💬 Within the job (or allocation), the actual program is launched using the command `srun`
+
+☝🏻 If you use a software that is available in the LUMI software stack, please check the [software library page](https://lumi-supercomputer.github.io/LUMI-EasyBuild-docs/); it might have a batch job example with useful default settings.
+In case you are using an installation by a local organization (e.g. CSC), [check the documentation pages](https://docs.lumi-supercomputer.eu/software/local/csc/) there. 
+
+### Launching a serial job
+
+1. Go to the `/scratch` directory of your project:
+
+```bash
+cd /scratch/<project>      # replace <project> with your LUMI project, e.g. project_465000000
+```
+
+- Now your input (and output) will be on a shared disk that is accessible to the compute nodes.
+
+💡 You can list your projects with `lumi-workspaces`
+
+💡 Note! If you're using a project with other members (like the course project), first make a subdirectory for yourself (e.g. `mkdir $USER` and then move there (`cd $USER`) to not clutter the `/scratch` root of your project)
+
+{:style="counter-reset:step-counter 1"}
+2. Create a file called `my_serial.bash` e.g. with the `nano` text editor:
+
+```bash
+nano my_serial.bash
+```
+
+{:style="counter-reset:step-counter 2"}
+3. Copy the following **batch script** there and change `<project>` to the LUMI project you actually want to use:
+
+```bash
+#!/bin/bash
+#SBATCH --account=<project>      # Choose the billing project. Has to be defined!
+#SBATCH --time=00:02:00          # Maximum duration of the job. Upper limit depends on the partition. 
+#SBATCH --partition=debug        # Job queues: debug, interactive, small, standard, small-g, standard-g, largemem, lumid, ..
+#SBATCH --ntasks=1               # Number of tasks. Upper limit depends on partition. For a serial job this should be set 1!
+
+srun hostname                    # Run hostname-command
+srun sleep 60                    # Run sleep-command
+```
+
+{:style="counter-reset:step-counter 3"}
+4. Submit the job to the batch queue and check its status with the commands:
+
+```bash
+sbatch my_serial.bash
+squeue -u $USER
+```
+
+💬 In the batch job example above we are requesting
+
+- one core (`--ntasks=1`)
+- for two minutes (`--time=00:02:00`)
+- from the test queue (`--partition=debug`)  
+
+💬 We want to run the program `hostname` that will print the name of the LUMI compute node that has been allocated for this particular job
+
+💬 In addition, we are running the `sleep` program to keep the job running for an additional 60 seconds, in order to have time to monitor the job
+
+#### Checking the output
+
+- By default, the output is written to a file named `slurm-<jobid>.out` where `<jobid>` is a unique job ID assigned to the job by Slurm
+
+💭 You can get a list of all your jobs that are running or queuing with the command `squeue -u $USER`
+
+🗯 A submitted job can be cancelled using the command `scancel <jobid>`
+
+## More information
+
+💡 [Batch jobs](https://docs.lumi-supercomputer.eu/runjobs/scheduled-jobs/slurm-quickstart/) in LUMI documentation
+
+
+
+
 
 {% include links.md %}
 

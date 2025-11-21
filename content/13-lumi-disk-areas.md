@@ -1,33 +1,31 @@
 
-# Where to store files in LUMI computing environment?
+# Using the LUMI filesystem
 
-> In this tutorial you
+> In this tutorial you will
    - Familiarize yourself with personal and project-specific disk areas and their quotas on the LUMI supercomputer.
    - Learn how to share your files, such as software installations and data, to other members of your LUMI project.
    - Get to try out the disk area for I/O intensive workflows, i.e. frequent read and write operations
 
 💬 Each user of LUMI supercomputer has access to different disk areas (or directories) for managing their data. Each disk area has its own specific purpose.
 
-💬 Active data files needed for computational simulations and analyses should be stored and shared in directories under `/scratch`. For I/O heavy operations use `/flash` instead, which is a high performance variant of /scratch. Any software installations and binaries should be shared under the `/projappl` directory.
+💬 Active data files needed for computational simulations and analyses should be stored and shared in directories under `/scratch`. For I/O heavy operations use `/flash` instead, which is a high performance variant of /scratch. Any software installations and binaries should be shared under the `/project` directory.
 
 ## Identify your personal and project-specific directories on LUMI supercomputer
 
 1. First login to LUMI using SSH (or by opening a login node shell in the [LUMI web interface](https://www.lumi.csc.fi)):
   
 ```bash
-ssh -i <path-to-private-key> <username>@lumi.csc.fi    # replace <username> with your LUMI username, e.g. myname@lumi.csc.fi
+ssh -i <path-to-private-key> <username>@lumi.csc.fi    # replace <username> with your LUMI username
                                                        # replace <path-to-private-key> with the path to your private key file, e.g. 
                                                        # ./.ssh/id_ed25519 or /home/user/.ssh/id_ed25519
 ```
 
-{:style="counter-reset:step-counter 1"}
 2. Get an overview of your projects and directories by running the following command on the login node:
 
 ```bash
 lumi-workspaces
 ```
 
-{:style="counter-reset:step-counter 2"}
 3. Inspect the output information summarizing your directories and their current quotas.
 4. Visit your project's `/scratch` directory and list its contents:
 
@@ -36,11 +34,10 @@ cd /scratch/<project>/   # replace <project> with your LUMI project, e.g. projec
 ls
 ```
 
-{:style="counter-reset:step-counter 4"}
-5. Visit your project's `/projappl` directory and list its contents:
+5. Visit your project's `/project` directory and list its contents:
 
 ```bash
-cd /projappl/<project>/   # replace <project> with your LUMI project, e.g. project_465000123
+cd /project/<project>/   # replace <project> with your LUMI project, e.g. project_465000123
 ls
 ```
 
@@ -51,15 +48,17 @@ ls
    - The default directory when you login to LUMI
    - You can store configuration files and other minor data for personal use
 - Project-specific directories:
-   - The project's `/scratch`, `/flash` and `/projappl` directories
-   - Each project has its own `/scratch` disk space where most computational tasks are performed. The `/scratch` area is a temporary space not intended for long-term data storage! Please move inactive data to e.g. [LUMI-O](https://docs.lumi-supercomputer.eu/storage/lumio/).
+   - The project's `/scratch`, `/flash` and `/project` directories
+   - Each project has its own `/scratch` disk space. This is the main storage space one should use for the active input and output data of their application. The `/scratch` area is a temporary space not intended for long-term data storage! Please move inactive data to e.g. [LUMI-O](https://docs.lumi-supercomputer.eu/storage/lumio/).
    - The `/flash` area is like /scratch, but meant to only be used shortly for I/O heavy tasks. Using /flash consumes 10x the billing units compared to using /scratch.
-   - `/projappl` directory on the other hand is mainly for storing and sharing compiled applications and libraries etc. with other members of the project.
+   - `/project` directory on the other hand is mainly for storing and sharing compiled applications and libraries etc. with other members of the project.
 - Read more of the file system locations on LUMI from [LUMI user documentation](https://docs.lumi-supercomputer.eu/storage/)
 
-!!! Warning
-    Notice that there are no backups for any of the file system locations on LUMI. Make sure to move your important data or back it up e.g. to your local machine. 
 
+> ## There are no backups for data on LUMI
+> Notice that there are no backups for any of the file system locations on LUMI. 
+> Make sure to move your important data or back it up e.g. to your local machine.
+{: .callout}
 
 ## Sharing binaries and data files
 
@@ -77,7 +76,6 @@ cd
 
 💡 If you know the files are large, you should consider downloading them directly to `/scratch`.
 
-{:style="counter-reset:step-counter 1"}
 2. Download an example program package (`ggplot2_3.3.3_Rprogramme.tar.gz`) and a data file (`Merged.fasta`) from the Allas object storage
   
 ```bash
@@ -91,23 +89,21 @@ Let's assume that
 - `Merged.fasta` is a data file intended for computational use
 - `ggplot2_3.3.3_Rprogramme.tar.gz` is a software tool needed for the analysis.
 
-### Move the files to LUMI `/scratch` and `/projappl`
+### Move the files to LUMI `/scratch` and `/project`
 
-1. Create folders with your username (using environment variable `$USER`) in your project directories under `/scratch` and `/projappl` on LUMI.
+1. Create folders with your username (using environment variable `$USER`) in your project directories under `/scratch` and `/project` on LUMI.
 
 ```bash
-mkdir -p /projappl/<project>/$USER   # replace <project> with your LUMI project, e.g. project_465000123
+mkdir -p /project/<project>/$USER   # replace <project> with your LUMI project, e.g. project_465000123
 mkdir -p /scratch/<project>/$USER    # replace <project> with your LUMI project, e.g. project_465000123
 ```
 
-{:style="counter-reset:step-counter 1"}
-2. Copy your `ggplot2_3.3.3_Rprogramme.tar.gz` file to the `/projappl` directory
+2. Copy your `ggplot2_3.3.3_Rprogramme.tar.gz` file to the `/project` directory
 
 ```bash
-cp ggplot2_3.3.3_Rprogramme.tar.gz  /projappl/<project>/$USER/   # replace <project> with your LUMI project, e.g. project_465000123
+cp ggplot2_3.3.3_Rprogramme.tar.gz  /project/<project>/$USER/   # replace <project> with your LUMI project, e.g. project_465000123
 ```
 
-{:style="counter-reset:step-counter 2"}
 3. Copy the `Merged.fasta` file to the `/scratch` directory
 
 ```bash
@@ -116,7 +112,6 @@ cp Merged.fasta /scratch/<project>/$USER/    # replace <project> with your LUMI 
 
 - Note that all new files and directories are also fully accessible to other members of the project (including read and write permissions).
 
-{:style="counter-reset:step-counter 3"}
 4. Set read-only permissions for your project members for the file `Merged.fasta`:
 
 ```bash
@@ -130,10 +125,9 @@ chmod g-w Merged.fasta          # g-w means that we "subtract" write permissions
 2. Open a new terminal window that is not connected to LUMI. Create a suitable location where you want to copy your data. To copy `Merged.fasta` file from LUMI to your current location ` . ` on your local machine:
 
 ```bash
-rsync -P <username>@lumi.csc.fi:/scratch/<project>/$USER/Merged.fasta .  # replace <username> with your LUMI username and <project> with your LUMI project, e.g. project_465000123
+rsync -P <username>@lumi.csc.fi:/scratch/<project>/<username>/Merged.fasta .  # replace <username> with your LUMI username and <project> with your LUMI project, e.g. project_465000123
 ```
 
-{:style="counter-reset:step-counter 2"}
 3. For the exercise, copy the `Merged.fasta` file now from your local machine to your home directory on LUMI:
 
 ```bash
@@ -157,7 +151,6 @@ cd /flash/<project>/$USER/   # replace <username> with your LUMI username and <p
 wget https://a3s.fi/CSC_training/Individual_files.tar.gz
 ```
 
-{:style="counter-reset:step-counter 1"}
 2. Unpack the downloaded tar file:
 
 ```bash
@@ -165,7 +158,6 @@ tar -xavf Individual_files.tar.gz
 cd Individual_files
 ```
 
-{:style="counter-reset:step-counter 2"}
 3. Merge each small file into a larger one and remove all small files
 
 ```bash
@@ -177,14 +169,12 @@ In general it is a good idea to move any data away from the /flash disk space wh
 
 ### Move your pre-processed data to the project-specific `/scratch` area
 
-{:style="counter-reset:step-counter 1"}
 1. Move your pre-processed data from the previous step (i.e., the `Merged.fasta` file) from `/flash` to `/scratch`:
 
 ```bash
 mv Merged.fasta /scratch/<project>/$USER
 ```
 
-{:style="counter-reset:step-counter 2"}
 3. You have now successfully moved the data to the `/scratch` area and can start performing an analysis using batch job scripts.
 
 - More about batch jobs in later tutorials.
@@ -194,9 +184,9 @@ mv Merged.fasta /scratch/<project>/$USER
 
 💡 Hint: You can use your folder under `/scratch` for the rest of the tutorials. You can save the path using an [alias](https://www.shell-tips.com/bash/alias/) (with `cd` or `echo`) or somewhere in your notes.
 
-💡 It is sometimes required to export the paths of the `/scratch` or `/projappl` directories in environmental variables (until logout). This can be done with the following commands:
+💡 It is sometimes required to export the paths of the `/scratch` or `/project` directories in environmental variables (until logout). This can be done with the following commands:
 
 ```bash
-export PROJAPPL=/projappl/<project>/   # replace <project> with your LUMI project, e.g. project_465000123
+export PROJECT=/project/<project>/   # replace <project> with your LUMI project, e.g. project_465000123
 export SCRATCH=/scratch/<project>/   # replace <project> with your LUMI project, e.g. project_465000123
 ```
